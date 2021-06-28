@@ -7,3 +7,14 @@ D:\Chat2021\Chat\Chat2021\Chat2021\obj\Debug\Chat2021.csproj.GenerateResource.ca
 D:\Chat2021\Chat\Chat2021\Chat2021\obj\Debug\Chat2021.csproj.CoreCompileInputs.cache
 D:\Chat2021\Chat\Chat2021\Chat2021\obj\Debug\Chat2021.exe
 D:\Chat2021\Chat\Chat2021\Chat2021\obj\Debug\Chat2021.pdb
+D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.csprojAssemblyReference.cache
+D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.Properties.Resources.resources
+D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.csproj.GenerateResource.cache
+D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.csproj.CoreCompileInputs.cache
+D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.exe
+D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.pdb
+D:\repos\Chat2021\Chat2021\bin\Debug\Chat2021.exe.config
+D:\repos\Chat2021\Chat2021\bin\Debug\Chat2021.exe
+D:\repos\Chat2021\Chat2021\bin\Debug\Chat2021.pdb
+D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.ChatFrm.ChatFrm.resources
+D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.ChatFrm.Resource.resources

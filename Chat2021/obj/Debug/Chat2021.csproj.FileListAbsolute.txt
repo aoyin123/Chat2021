@@ -1,0 +1,9 @@
+D:\Chat2021\Chat\Chat2021\Chat2021\bin\Debug\Chat2021.exe.config
+D:\Chat2021\Chat\Chat2021\Chat2021\bin\Debug\Chat2021.exe
+D:\Chat2021\Chat\Chat2021\Chat2021\bin\Debug\Chat2021.pdb
+D:\Chat2021\Chat\Chat2021\Chat2021\obj\Debug\Chat2021.csprojAssemblyReference.cache
+D:\Chat2021\Chat\Chat2021\Chat2021\obj\Debug\Chat2021.Properties.Resources.resources
+D:\Chat2021\Chat\Chat2021\Chat2021\obj\Debug\Chat2021.csproj.GenerateResource.cache
+D:\Chat2021\Chat\Chat2021\Chat2021\obj\Debug\Chat2021.csproj.CoreCompileInputs.cache
+D:\Chat2021\Chat\Chat2021\Chat2021\obj\Debug\Chat2021.exe
+D:\Chat2021\Chat\Chat2021\Chat2021\obj\Debug\Chat2021.pdb

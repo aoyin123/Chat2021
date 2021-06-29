@@ -73,6 +73,16 @@ namespace Chat2021.ChatFrm {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap Curtain {
+            get {
+                object obj = ResourceManager.GetObject("Curtain", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 上传文件 {
             get {
                 object obj = ResourceManager.GetObject("上传文件", resourceCulture);

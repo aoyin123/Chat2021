@@ -56,7 +56,7 @@
             this.toolStripMenuItem8});
             this.menuStrip1.Location = new System.Drawing.Point(9, 331);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1536, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1384, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -117,6 +117,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ChatFrm";
             this.Text = "ChatForm";
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChatFrm_MouseDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

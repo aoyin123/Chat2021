@@ -18,3 +18,5 @@ D:\repos\Chat2021\Chat2021\bin\Debug\Chat2021.exe
 D:\repos\Chat2021\Chat2021\bin\Debug\Chat2021.pdb
 D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.ChatFrm.ChatFrm.resources
 D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.ChatFrm.Resource.resources
+D:\repos\Chat2021\Chat2021\obj\Debug\Interop.Office.dll
+D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.csproj.ResolveComReference.cache

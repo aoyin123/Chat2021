@@ -15,7 +15,6 @@ namespace Chat2021
     public partial class MoreContentForm : Form
     {
         #region 变量
-        Point basePos;
         ItemShadow itemShadow;
         #endregion
 
@@ -108,7 +107,6 @@ namespace Chat2021
             Point textPos = new Point(15, 15);
             StringFormat sf = new StringFormat();
             sf.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
-            int count = 0;
             for (int i = 0; i < chooses.Length; i++)
             {
                 Font font = new Font("宋体", 10);

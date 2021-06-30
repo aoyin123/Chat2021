@@ -20,3 +20,5 @@ D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.ChatFrm.ChatFrm.resources
 D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.ChatFrm.Resource.resources
 D:\repos\Chat2021\Chat2021\obj\Debug\Interop.Office.dll
 D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.csproj.ResolveComReference.cache
+D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.LogFrm.LogFrm.resources
+D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.csproj.CopyComplete

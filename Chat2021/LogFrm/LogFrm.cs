@@ -21,9 +21,9 @@ namespace Chat2021.LogFrm
         tstRtmp rtmp = new tstRtmp();
         Button closeBtn = new Button();
         PictureBox pic = new PictureBox();
-        Rectangle minBtnRect = new Rectangle(new Point(1705, 0), new Size(135, 300));
-        Rectangle closeBtnRect = new Rectangle(new Point(1840, 0), new Size(135,  200));
-        Rectangle setBtnRect = new Rectangle(new Point(1570, 0), new Size(135, 300));
+        Rectangle minBtnRect = new Rectangle(new Point(1653, 0), new Size(132, 300));
+        Rectangle closeBtnRect = new Rectangle(new Point(1785, 0), new Size(135, 300));
+        Rectangle setBtnRect = new Rectangle(new Point(1518, 0), new Size(135, 300));
         //Rectangle minBtnRect , setBtnRect;
         private Rectangle minRect = new Rectangle(new Point(0, 0), new Size(20, 20));
         private Rectangle closeRect = new Rectangle();
@@ -48,10 +48,10 @@ namespace Chat2021.LogFrm
 
         private void FrmInit()
         {
-            this.Size = new Size(538, 330);
+            this.Size = new Size(554, 458);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.None;
-            this.BackColor = Color.White;
+            this.BackColor = Color.Red;
             this.ShowInTaskbar = false;
             System.IntPtr iconHandle = Resource1.Chat2021.GetHicon();
             System.Drawing.Icon icon = Icon.FromHandle(iconHandle);
@@ -72,6 +72,11 @@ namespace Chat2021.LogFrm
             PlayVedioPic.MouseDown += MouseDonwMinBtn;
 
             //设置关闭按钮事件
+            PlayVedioPic.MouseDown += MouseDownCloseBtn;
+            PlayVedioPic.MouseMove += MouseMoveCloseBtn;
+            
+
+            //设置关闭按钮事件
             //PlayVedioPic.MouseMove += MouseMoveCloseBtn;
             //PlayVedioPic.MouseDown += MouseDownCloseBtn;
 
@@ -81,10 +86,75 @@ namespace Chat2021.LogFrm
             //PlayVedioPic.MouseDown += MouseDownSetBtn;
         }
 
+        private void MouseDownCloseBtn(object sender, MouseEventArgs e)
+        {
+            Point p = e.Location;
+            if(CloseBtnRectGraphics.Contains(p))
+            {
+                this.Close();
+            }
+        }
+
+        bool IsDrawCloseBtnShadow = false;
+        
+        private void DrawCloseBtnShadow(Bitmap bitmap)
+        {
+            for(int i = closeBtnRect.X; i < closeBtnRect.X + closeBtnRect.Width;i++)
+            {
+                for(int j = closeBtnRect.Y; j < closeBtnRect.Y + closeBtnRect.Height;j++)
+                {
+                    Color color = bitmap.GetPixel(i, j);
+                    int R = color.R + 70;
+                    if (R > 255) R = 255;
+
+                    int G = color.G + 70;
+                    if (G > 255) G = 255;
+
+                    int B = color.B + 70;
+                    if (B > 255) B = 255;
+
+                    bitmap.SetPixel(i, j, Color.FromArgb(R, G, B));
+                }    
+            }   
+
+        }
+
+
+        private void MouseMoveCloseBtn(object sender, MouseEventArgs e)
+        {
+            Point p = e.Location;
+            if(CloseBtnRectGraphics.Contains(p))
+            {
+                if (IsDrawCloseBtnShadow == true) return;
+                handlePicture += DrawCloseBtnShadow;
+                IsDrawCloseBtnShadow = true;
+            }
+            else
+            {
+                if (IsDrawCloseBtnShadow == false) return;
+                handlePicture -= DrawCloseBtnShadow;
+                IsDrawCloseBtnShadow = false;
+            }
+        }
+
+        private void DrawLine(Bitmap bitmap)
+        {
+            Graphics g = Graphics.FromImage(bitmap);
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            //g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            //g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+            Pen pen = new Pen(Color.Black, 15);
+            g.DrawLine(pen, new Point(0, 0), new Point(bitmap.Width, bitmap.Height));
+
+            //g.FillRectangle(Brushes.Black, minBtnRect);
+            //g.FillRectangle(Brushes.Black, closeBtnRect);
+            //g.FillRectangle(Brushes.Black, setBtnRect);
+        }
+
         private void ControlInit()
         {
             PlayVedioPic.Width = this.Width;
-            PlayVedioPic.Height = 125;
+            PlayVedioPic.Height = 158;
         }
 
         private void InitVar()
@@ -201,7 +271,7 @@ namespace Chat2021.LogFrm
         }
         #endregion
         Rectangle MinBtnRectGraphics = new Rectangle(new Point(462, 0), new Size(34, 34));
-
+        Rectangle CloseBtnRectGraphics = new Rectangle(new Point(496, 0), new Size(34, 34));
         #region 鼠标点击最小按钮事件
         private void MouseDonwMinBtn(object sender, MouseEventArgs e)
         {
@@ -216,36 +286,14 @@ namespace Chat2021.LogFrm
         #region 画关闭按钮 
         private void DrawCloseBtn(Bitmap bitmap)
         {
-            //int middleY = (closeBtnRect.Y + closeBtnRect.Height) / 2;
-            //Point p1 = new Point(closeBtnRect.X, middleY);
-            //Point p2 = new Point(closeBtnRect.X + closeBtnRect.Width, middleY);
-
-            //for(int i = p1.X; i< p2.X; i++)
-            //{
-            //    for (int j = middleY; j < middleY + 50; j++)
-            //    {
-            //        bitmap.SetPixel(i, j, Color.FromArgb(0, 0, 0));
-            //    }
-            //}
-
-            //for(int i = 0; i < 300; i++)
-            //{
-            //    for(int j = 0; j < 300; j++)
-            //    {
-            //        Color color = bitmap.GetPixel(i, j);
-            //        int R = color.R + 70;
-            //        if (R > 255) R = 255;
-
-            //        int G = color.G + 70;
-            //        if (G > 255) G = 255;
-
-            //        int B = color.B + 70;
-            //        if (B > 255) B = 255;
-
-            //        bitmap.SetPixel(i, j, Color.FromArgb(R, G, B));
-                //}
-            //}
-            
+            Graphics g = Graphics.FromImage(bitmap);
+            Point p1 = new Point(closeBtnRect.X + 20, closeBtnRect.Y +  75);
+            Point p2 = new Point(closeBtnRect.X + closeBtnRect.Width - 20,
+                                 closeBtnRect.Y + closeBtnRect.Height - 75);
+            Point p3 = new Point(closeBtnRect.X + closeBtnRect.Width -20 , 75);
+            Point p4 = new Point(closeBtnRect.X + 20, closeBtnRect.Height - 75);
+            g.DrawLine(new Pen(Brushes.White, 7), p1, p2);
+            g.DrawLine(new Pen(Brushes.White, 7), p3, p4);
         }
         #endregion
 

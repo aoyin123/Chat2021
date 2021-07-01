@@ -19,6 +19,17 @@ namespace Chat2021.LogFrm
         #region value
         Thread thPlayer;
         tstRtmp rtmp = new tstRtmp();
+        Button closeBtn = new Button();
+        PictureBox pic = new PictureBox();
+        Rectangle minBtnRect = new Rectangle(new Point(1705, 0), new Size(135, 300));
+        Rectangle closeBtnRect = new Rectangle(new Point(1840, 0), new Size(80,  200));
+        Rectangle setBtnRect = new Rectangle(new Point(1570, 0), new Size(135, 300));
+        //Rectangle minBtnRect , setBtnRect;
+        private Rectangle minRect = new Rectangle(new Point(0, 0), new Size(20, 20));
+        private Rectangle closeRect = new Rectangle();
+        private Rectangle setRect = new Rectangle();
+        delegate void HandlePicture(Bitmap bitmap);
+        HandlePicture handlePicture;
         #endregion
 
         #region Init
@@ -28,6 +39,7 @@ namespace Chat2021.LogFrm
             FrmInit();
             ControlInit();
             InitVar();
+            InitEventHandler();
         }
 
         private void FrmInit()
@@ -36,6 +48,16 @@ namespace Chat2021.LogFrm
             this.BackColor = Color.White;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.None;
+        }
+
+        private void InitEventHandler()
+        {
+            handlePicture += DrawMinBtn;
+            handlePicture += DrawCloseBtn;
+            handlePicture += DrawSetBtn;
+            PlayVedioPic.MouseMove += MouseMoveMinBtn;
+            PlayVedioPic.MouseDown += MouseDonwMinBtn;
+            
         }
 
         private void ControlInit()
@@ -54,7 +76,6 @@ namespace Chat2021.LogFrm
         }
 
         #endregion
-
 
         #region PlayVedio
         private unsafe void DeCoding()
@@ -81,6 +102,7 @@ namespace Chat2021.LogFrm
                         //        bmp.SetPixel(x, y, newColor);
                         //    }
                         //}
+                        handlePicture(bmp);
                         g.DrawImage(bmp, 0, 0, this.PlayVedioPic.Width, this.PlayVedioPic.Height);
                         
                         
@@ -106,6 +128,68 @@ namespace Chat2021.LogFrm
                 rtmp.Stop();
 
                 thPlayer = null;
+            }
+        }
+        #endregion
+
+        #region 最小按钮的绘画
+        private void DrawMinBtn(Bitmap bitmap)
+        {
+            for(int i = minBtnRect.X; i < minBtnRect.Width + minBtnRect.X; i++)
+            {
+                for(int j = minBtnRect.Y; j < minBtnRect.Height + minBtnRect.Y; j++)
+                {
+                    bitmap.SetPixel(i, j, Color.FromArgb(0, 0, 0));
+                }
+            }
+        }
+        #endregion
+
+        #region 鼠标划过最小按钮的事件
+        private void MouseMoveMinBtn(object sender, MouseEventArgs e)
+        {
+            Point p = e.Location;
+            if(minBtnRect.Contains(p))
+            {
+
+            }
+        }
+        #endregion
+
+        #region 鼠标点击最小按钮事件
+        private void MouseDonwMinBtn(object sender, MouseEventArgs e)
+        {
+            Point p = e.Location;
+            if(minBtnRect.Contains(p))
+            {
+                this.Hide();
+            }
+        }
+        #endregion
+
+        #region 画关闭按钮 
+        private void DrawCloseBtn(Bitmap bitmap)
+        {
+            for(int i = closeBtnRect.X; i < closeBtnRect.X + closeBtnRect.Width; i++)
+            {
+                for(int j = closeBtnRect.Y; j < closeBtnRect.Y + closeBtnRect.Height; j++)
+                {
+                    bitmap.SetPixel(i, j, Color.FromArgb(0, 0, 0));
+                }
+            }
+        }
+        #endregion
+
+
+        #region 画设置按钮
+        private void DrawSetBtn(Bitmap bitmap)
+        {
+            for (int i = closeBtnRect.X; i < setBtnRect.X + closeBtnRect.Width; i++)
+            {
+                for (int j = closeBtnRect.Y; j < setBtnRect.Y + closeBtnRect.Height; j++)
+                {
+                    bitmap.SetPixel(i, j, Color.FromArgb(0, 0, 0));
+                }
             }
         }
         #endregion

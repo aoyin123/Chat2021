@@ -92,6 +92,12 @@
     <Compile Include="DealImage.cs" />
     <Compile Include="DealVedio\FFmpegBinariesHelper.cs" />
     <Compile Include="DealVedio\tstRtmp.cs" />
+    <Compile Include="LogFrm\ControlBtn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogFrm\ControlBtn.Designer.cs">
+      <DependentUpon>ControlBtn.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogFrm\LogFrm.cs">
       <SubType>Form</SubType>
     </Compile>

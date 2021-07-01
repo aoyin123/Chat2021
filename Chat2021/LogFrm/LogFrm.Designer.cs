@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.PlayVedioPic = new System.Windows.Forms.PictureBox();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.PlayVedioPic)).BeginInit();
             this.SuspendLayout();
             // 
@@ -39,6 +41,11 @@
             this.PlayVedioPic.Size = new System.Drawing.Size(100, 50);
             this.PlayVedioPic.TabIndex = 0;
             this.PlayVedioPic.TabStop = false;
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
             // 
             // LogFrm
             // 
@@ -56,5 +63,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox PlayVedioPic;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }

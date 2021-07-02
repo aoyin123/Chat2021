@@ -51,8 +51,8 @@ namespace Chat2021.LogFrm
             this.Size = new Size(554, 458);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.None;
-            this.BackColor = Color.Red;
             this.ShowInTaskbar = false;
+            this.BackColor = Color.White;
             System.IntPtr iconHandle = Resource1.Chat2021.GetHicon();
             System.Drawing.Icon icon = Icon.FromHandle(iconHandle);
             this.notifyIcon1.Icon = icon;
@@ -82,8 +82,46 @@ namespace Chat2021.LogFrm
 
 
             //设置设置按钮事件
-            //PlayVedioPic.MouseMove += MouseMoveSetBtn;
+            PlayVedioPic.MouseMove += MouseMoveSetBtn;
             //PlayVedioPic.MouseDown += MouseDownSetBtn;
+        }
+
+        bool IsDrawSetBtnShaodw = false;
+        private void MouseMoveSetBtn(object sender, MouseEventArgs e)
+        {
+            Point p = e.Location;
+            if(SetBtnRectGraphics.Contains(p))
+            {
+                if (IsDrawCloseBtnShadow == true) return;
+                handlePicture += DrawSetBtnShadow;
+                IsDrawCloseBtnShadow = true;
+            }
+            else
+            {
+                if (IsDrawCloseBtnShadow == false) return;
+                handlePicture -= DrawSetBtnShadow;
+                IsDrawCloseBtnShadow = false;
+            }
+        }
+
+        private void DrawSetBtnShadow(Bitmap bitmap)
+        {
+            for(int i = setBtnRect.X; i < setBtnRect.X + Width; i++)
+            {
+                for(int j = setBtnRect.Y; j < setBtnRect.Y + Height; j++)
+                {
+                    Color color = bitmap.GetPixel(i, j);
+                    int R = color.R + 70;
+                    if (R > 255) R = 255;
+
+                    int G = color.G + 70;
+                    if (G > 255) G = 255;
+
+                    int B = color.B + 70;
+                    if (B > 255) B = 255;
+
+                }
+            }
         }
 
         private void MouseDownCloseBtn(object sender, MouseEventArgs e)
@@ -144,8 +182,7 @@ namespace Chat2021.LogFrm
             //g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
             //g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
             Pen pen = new Pen(Color.Black, 15);
-            g.DrawLine(pen, new Point(0, 0), new Point(bitmap.Width, bitmap.Height));
-
+            
             //g.FillRectangle(Brushes.Black, minBtnRect);
             //g.FillRectangle(Brushes.Black, closeBtnRect);
             //g.FillRectangle(Brushes.Black, setBtnRect);
@@ -155,6 +192,9 @@ namespace Chat2021.LogFrm
         {
             PlayVedioPic.Width = this.Width;
             PlayVedioPic.Height = 158;
+            elementHost1.Width = this.Width;
+            elementHost1.Height = this.Height - PlayVedioPic.Height;
+            elementHost1.Location = new Point(0, PlayVedioPic.Height);
         }
 
         private void InitVar()
@@ -272,6 +312,7 @@ namespace Chat2021.LogFrm
         #endregion
         Rectangle MinBtnRectGraphics = new Rectangle(new Point(462, 0), new Size(34, 34));
         Rectangle CloseBtnRectGraphics = new Rectangle(new Point(496, 0), new Size(34, 34));
+        Rectangle SetBtnRectGraphics = new Rectangle(new Point(462, 0), new Size(34, 34));
         #region 鼠标点击最小按钮事件
         private void MouseDonwMinBtn(object sender, MouseEventArgs e)
         {
@@ -297,7 +338,6 @@ namespace Chat2021.LogFrm
         }
         #endregion
 
-
         #region 画设置按钮
         private void DrawSetBtn(Bitmap bitmap)
         {
@@ -310,8 +350,6 @@ namespace Chat2021.LogFrm
             //}
         }
         #endregion
-
-        
 
     }
 }

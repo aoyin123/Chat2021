@@ -7,7 +7,6 @@ D:\Chat2021\Chat\Chat2021\Chat2021\obj\Debug\Chat2021.csproj.GenerateResource.ca
 D:\Chat2021\Chat\Chat2021\Chat2021\obj\Debug\Chat2021.csproj.CoreCompileInputs.cache
 D:\Chat2021\Chat\Chat2021\Chat2021\obj\Debug\Chat2021.exe
 D:\Chat2021\Chat\Chat2021\Chat2021\obj\Debug\Chat2021.pdb
-D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.csprojAssemblyReference.cache
 D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.Properties.Resources.resources
 D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.csproj.GenerateResource.cache
 D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.csproj.CoreCompileInputs.cache
@@ -23,3 +22,10 @@ D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.csproj.ResolveComReference.cache
 D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.LogFrm.LogFrm.resources
 D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.csproj.CopyComplete
 D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.LogFrm.Resource1.resources
+D:\repos\Chat2021\Chat2021\obj\Debug\LogFrm\AccountInputBox.g.cs
+D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021_MarkupCompile.cache
+D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021_MarkupCompile.lref
+D:\repos\Chat2021\Chat2021\obj\Debug\LogFrm\AccountInputBox.baml
+D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.g.resources
+D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.csprojAssemblyReference.cache
+D:\repos\Chat2021\Chat2021\obj\Debug\GeneratedInternalTypeHelper.g.cs

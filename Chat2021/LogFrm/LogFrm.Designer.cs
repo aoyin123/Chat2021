@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.PlayVedioPic = new System.Windows.Forms.PictureBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
+            this.userControl11 = new Chat2021.LogFrm.UserControl1();
             ((System.ComponentModel.ISupportInitialize)(this.PlayVedioPic)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,11 +49,21 @@
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
             // 
+            // elementHost1
+            // 
+            this.elementHost1.Location = new System.Drawing.Point(56, 256);
+            this.elementHost1.Name = "elementHost1";
+            this.elementHost1.Size = new System.Drawing.Size(200, 100);
+            this.elementHost1.TabIndex = 1;
+            this.elementHost1.Text = "elementHost1";
+            this.elementHost1.Child = this.userControl11;
+            // 
             // LogFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.elementHost1);
             this.Controls.Add(this.PlayVedioPic);
             this.Name = "LogFrm";
             this.Text = "LogFrm";
@@ -64,5 +76,7 @@
 
         private System.Windows.Forms.PictureBox PlayVedioPic;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.Integration.ElementHost elementHost1;
+        private UserControl1 userControl11;
     }
 }

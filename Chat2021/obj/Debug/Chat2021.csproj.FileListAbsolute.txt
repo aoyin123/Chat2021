@@ -28,4 +28,3 @@ D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021_MarkupCompile.lref
 D:\repos\Chat2021\Chat2021\obj\Debug\LogFrm\AccountInputBox.baml
 D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.g.resources
 D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.csprojAssemblyReference.cache
-D:\repos\Chat2021\Chat2021\obj\Debug\GeneratedInternalTypeHelper.g.cs

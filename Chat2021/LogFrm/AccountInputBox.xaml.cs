@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,15 +23,48 @@ namespace Chat2021.LogFrm
     public partial class UserControl1 : UserControl
     {
 
-        string str = "123";
-        List<string> stringList = new List<string>() { "", "", "" };
+        private string str = "123";
+        private List<string> stringList = new List<string>() { "", "", "" };
+        private Color color = Color.FromRgb(0x0a,0xC0,0xFF);
+        private System.Windows.Media.SolidColorBrush rr = new System.Windows.Media.SolidColorBrush(Colors.Blue);
+        private SolidColorBrush red;
+        //private bool IsMemPwd = true;   
+        //private bool IsAutoLog = true;
+        CIsMenPwd cIsMenPwd = new CIsMenPwd() { IsMemPwd = true };
+        CAutoLogin cAutoLogin = new CAutoLogin() { IsAutoLogin = true };
+        TestData testData = new TestData() { Numbers = false };
+
+        Color colors = Colors.Black;
         public UserControl1()
         {
             InitializeComponent();
-            SetSelectionAllOnGotFocus(pwdTextBox);
+            SetSelectionAllOnGotFocus(userNameTextBox);
+            red = new SolidColorBrush(color);
+            autoLogCheckBox.DataContext = testData;
+            memPwdCheckBox.DataContext = testData;
+            pwdTbx.DataContext = testData;
+            //this.Background = red;
+
             //pwdTextBox.SetBinding(TextBox.TextProperty, new Binding("/") { Source = stringList });
-            //userNameTextBox.SetBinding(TextBox.TextProperty, new Binding("/Length") { Source = stringList, Mode = BindingMode.OneWay });
-            //textBox.SetBinding(TextBox.TextProperty, new Binding("/[2]") { Source = stringList, Mode = BindingMode.OneWay });
+            //userNameTextBox.SetBinding(TextBox.TextProperty, new Binding("/Length") { Source = stringList, Mode = Bindi         .OneWay });            
+            //textBox.SetBinding(TextBox.TextProperty, new Binding("/[2]") { Source = stringList, Mode = BindingMode.OneWay });         
+            //logBtn.SetBinding(logBtn.Background, new Binding() {Path = .,ElementName
+            Binding binding = new Binding();//创建Binding实例
+            binding.Source = red;//指定数据源
+            binding.Path = new PropertyPath(".");//指定访问路径 })
+            logBtn.SetBinding(Button.BackgroundProperty, binding);
+            logBtn.SetBinding(Button.BorderBrushProperty, binding);
+
+            //Binding bind2 = new Binding();
+            //bind2.Source = IsMemPwd;
+            //bind2.Path = new PropertyPath(".");
+            //memPwdCheckBox.SetBinding(CheckBox.IsCheckedProperty, bind2);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+            //Binding bind3 = new Binding();
+            //bind3.Source = IsAutoLog;
+            //bind3.Path = new PropertyPath(".");
+            //autoLogCheckBox.SetBinding(CheckBox.IsCheckedProperty, bind3);
+
         }
 
         private void QQIconMouseDown(object sender, MouseButtonEventArgs e)
@@ -38,7 +72,7 @@ namespace Chat2021.LogFrm
 
         }
 
-        private void DownIconMouseDown(object sender, MouseButtonEventArgs e)
+        private void DownIconMouseDown(object sender, MouseButtonEventArgs e)        
         {
 
         }
@@ -64,7 +98,7 @@ namespace Chat2021.LogFrm
 
         private void userNameTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            userNameTextBox.Clear();
+
 
         }
         public void SetSelectionAllOnGotFocus(TextBox textbox)
@@ -92,6 +126,29 @@ namespace Chat2021.LogFrm
             textbox.GotFocus += _OnGotFocus;
         }
 
+        private void VisualBrush_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            VisualBrush visualBrush = (VisualBrush)sender;
+            
+        }
+
+        private void pwdTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            userNameTextBox.Background = Brushes.White;
+            
+        }
+
+        
+        private void memPwdCheckBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        
+        private void autoLogCheckBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 
     /// <summary>
@@ -159,4 +216,68 @@ namespace Chat2021.LogFrm
 
         }
     }
+
+    public class CIsMenPwd : INotifyPropertyChanged
+    {
+        private bool _IsMemPwd;
+        public bool IsMemPwd
+        {
+            get
+            {
+                return _IsMemPwd;
+            }
+            set
+            {
+                _IsMemPwd = value;
+                if (this.PropertyChanged != null)
+                {
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("IsMemPwd"));
+                }
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
+
+    public class CAutoLogin : INotifyPropertyChanged
+    {
+        private bool _IsAutoLogin;
+        public bool IsAutoLogin
+        {
+            get
+            {
+                return _IsAutoLogin;
+            }
+            set
+            {
+                _IsAutoLogin = value;
+                if (this.PropertyChanged != null)
+                {
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("IsAutoLogin"));
+                }
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
+
+    public class TestData : INotifyPropertyChanged
+    {
+        private bool _Number;
+        public bool Numbers
+        {
+            get
+            {
+                return _Number;
+            }
+            set
+            {
+                _Number = value;
+                if (this.PropertyChanged != null)
+                {
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Numbers"));
+                }
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
+
 }

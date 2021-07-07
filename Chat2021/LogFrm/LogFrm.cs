@@ -351,5 +351,11 @@ namespace Chat2021.LogFrm
         }
         #endregion
 
+        KeyboardFrm keyboardFrm;
+        private void button1_Click(object sender, EventArgs e)
+        {
+            keyboardFrm = new KeyboardFrm();
+            keyboardFrm.Show();
+        }
     }
 }

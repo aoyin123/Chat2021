@@ -20,7 +20,7 @@ namespace Chat2021.LogFrm
     /// <summary>
     /// UserControl1.xaml 的交互逻辑
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class UserControl1 : System.Windows.Controls.UserControl
     {
 
         private string str = "123";
@@ -33,6 +33,7 @@ namespace Chat2021.LogFrm
         CIsMenPwd cIsMenPwd = new CIsMenPwd() { IsMemPwd = true };
         CAutoLogin cAutoLogin = new CAutoLogin() { IsAutoLogin = true };
         TestData testData = new TestData() { Numbers = false };
+        
 
         Color colors = Colors.Black;
         public UserControl1()
@@ -49,11 +50,11 @@ namespace Chat2021.LogFrm
             //userNameTextBox.SetBinding(TextBox.TextProperty, new Binding("/Length") { Source = stringList, Mode = Bindi         .OneWay });            
             //textBox.SetBinding(TextBox.TextProperty, new Binding("/[2]") { Source = stringList, Mode = BindingMode.OneWay });         
             //logBtn.SetBinding(logBtn.Background, new Binding() {Path = .,ElementName
-            Binding binding = new Binding();//创建Binding实例
+            System.Windows.Data.Binding binding = new System.Windows.Data.Binding();//创建Binding实例
             binding.Source = red;//指定数据源
             binding.Path = new PropertyPath(".");//指定访问路径 })
-            logBtn.SetBinding(Button.BackgroundProperty, binding);
-            logBtn.SetBinding(Button.BorderBrushProperty, binding);
+            logBtn.SetBinding(System.Windows.Controls.Button.BackgroundProperty, binding);
+            logBtn.SetBinding(System.Windows.Controls.Button.BorderBrushProperty, binding);
 
             //Binding bind2 = new Binding();
             //bind2.Source = IsMemPwd;
@@ -101,22 +102,22 @@ namespace Chat2021.LogFrm
 
 
         }
-        public void SetSelectionAllOnGotFocus(TextBox textbox)
+        public void SetSelectionAllOnGotFocus(System.Windows.Controls.TextBox textbox)
         {
             MouseButtonEventHandler _OnPreviewMouseDown = (sender, e) =>
             {
-                TextBox box = e.Source as TextBox;
+                System.Windows.Controls.TextBox box = e.Source as System.Windows.Controls.TextBox;
                 box.Focus();
                 e.Handled = true;
             };
             RoutedEventHandler _OnLostFocus = (sender, e) =>
             {
-                TextBox box = e.Source as TextBox;
+                System.Windows.Controls.TextBox box = e.Source as System.Windows.Controls.TextBox;
                 box.PreviewMouseDown += _OnPreviewMouseDown;
             };
             RoutedEventHandler _OnGotFocus = (sender, e) =>
             {
-                TextBox box = e.Source as TextBox;
+                System.Windows.Controls.TextBox box = e.Source as System.Windows.Controls.TextBox;
                 box.SelectAll();
                 box.PreviewMouseDown -= _OnPreviewMouseDown;
             };
@@ -149,6 +150,11 @@ namespace Chat2021.LogFrm
         {
 
         }
+
+        public static explicit operator System.Windows.Forms.Control(UserControl1 v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <summary>
@@ -160,18 +166,18 @@ namespace Chat2021.LogFrm
                             typeof(bool), typeof(TextBoxAutoSelectHelper),
                             new FrameworkPropertyMetadata((bool)false, new PropertyChangedCallback(OnSelectAllWhenGotFocusChanged)));
 
-        public static bool GetSelectAllWhenGotFocus(TextBoxBase d)
+        public static bool GetSelectAllWhenGotFocus(System.Windows.Controls.Primitives.TextBoxBase d)
         {
             return (bool)d.GetValue(SelectAllWhenGotFocusProperty);
         }
-        public static void SetSelectAllWhenGotFocus(TextBoxBase d, bool value)
+        public static void SetSelectAllWhenGotFocus(System.Windows.Controls.Primitives.TextBoxBase d, bool value)
         {
             d.SetValue(SelectAllWhenGotFocusProperty, value);
         }
 
         private static void OnSelectAllWhenGotFocusChanged(DependencyObject dependency, DependencyPropertyChangedEventArgs e)
         {
-            if (dependency is TextBoxBase tBox)
+            if (dependency is System.Windows.Controls.Primitives.TextBoxBase tBox)
             {
                 var isSelectedAllWhenGotFocus = (bool)e.NewValue;
                 if (isSelectedAllWhenGotFocus)
@@ -190,7 +196,7 @@ namespace Chat2021.LogFrm
         }
         private static void TextBoxOnGotFocus(object sender, RoutedEventArgs e)
         {
-            if (sender is TextBoxBase tBox)
+            if (sender is System.Windows.Controls.Primitives.TextBoxBase tBox)
             {
                 tBox.SelectAll();
                 tBox.PreviewMouseDown -= TextBoxPreviewMouseDown;
@@ -199,7 +205,7 @@ namespace Chat2021.LogFrm
         }
         private static void TextBoxPreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (sender is TextBoxBase tBox)
+            if (sender is System.Windows.Controls.Primitives.TextBoxBase tBox)
             {
                 tBox.Focus();
                 e.Handled = true;
@@ -209,7 +215,7 @@ namespace Chat2021.LogFrm
         private static void TextBoxOnLostFocus(object sender, RoutedEventArgs e)
         {
 
-            if (sender is TextBoxBase tBox)
+            if (sender is System.Windows.Controls.Primitives.TextBoxBase tBox)
             {
                 tBox.PreviewMouseDown += TextBoxPreviewMouseDown;
             }
@@ -271,6 +277,27 @@ namespace Chat2021.LogFrm
             set
             {
                 _Number = value;
+                if (this.PropertyChanged != null)
+                {
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Numbers"));
+                }
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
+
+    public class test1 : INotifyPropertyChanged
+    {
+        private bool _test;
+        public bool Test
+        {
+            get
+            {
+                return _test;
+            }
+            set
+            {
+                _test = value;
                 if (this.PropertyChanged != null)
                 {
                     this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Numbers"));

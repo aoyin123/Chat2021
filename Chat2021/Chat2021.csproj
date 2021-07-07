@@ -104,6 +104,15 @@
     <Compile Include="LogFrm\ControlBtn.Designer.cs">
       <DependentUpon>ControlBtn.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogFrm\KeyboardBtn1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LogFrm\KeyboardFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogFrm\KeyboardFrm.Designer.cs">
+      <DependentUpon>KeyboardFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogFrm\LogFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,6 +126,12 @@
     </Compile>
     <Compile Include="LogFrm\AccountInputBox.xaml.cs">
       <DependentUpon>AccountInputBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LogFrm\keyboardControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LogFrm\keyboardControl.designer.cs">
+      <DependentUpon>keyboardControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -134,12 +149,18 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="LogFrm\KeyboardFrm.resx">
+      <DependentUpon>KeyboardFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LogFrm\LogFrm.resx">
       <DependentUpon>LogFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogFrm\Resource1.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogFrm\keyboardControl.resx">
+      <DependentUpon>keyboardControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

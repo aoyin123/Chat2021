@@ -104,6 +104,12 @@
     <Compile Include="LogFrm\ControlBtn.Designer.cs">
       <DependentUpon>ControlBtn.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogFrm\Icon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogFrm\Icon.Designer.cs">
+      <DependentUpon>Icon.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogFrm\KeyboardBtn1.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -119,6 +125,12 @@
     <Compile Include="LogFrm\LogFrm.Designer.cs">
       <DependentUpon>LogFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogFrm\PulseButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LogFrm\PulseButton.Designer.cs">
+      <DependentUpon>PulseButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogFrm\Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -132,6 +144,15 @@
     </Compile>
     <Compile Include="LogFrm\keyboardControl.designer.cs">
       <DependentUpon>keyboardControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogFrm\RoundButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LogFrm\RoundButtonCopy.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LogFrm\RoundButtonCopy.designer.cs">
+      <DependentUpon>RoundButtonCopy.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

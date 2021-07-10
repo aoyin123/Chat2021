@@ -44,6 +44,10 @@ namespace Chat2021.LogFrm
             this.Show();
             controlBtn = new ControlBtn(this.Location, this.Size);
             controlBtn.Show();
+            PlayVedioPic.BackColor = Color.Black;
+            this.roundButtonCopy1.FlatStyle = FlatStyle.Flat;
+            this.roundButtonCopy1.FlatAppearance.BorderSize = 0; 
+            this.roundButtonCopy1.BackColor = Color.Transparent;
         }
 
         private void FrmInit()
@@ -53,11 +57,12 @@ namespace Chat2021.LogFrm
             this.FormBorderStyle = FormBorderStyle.None;
             this.ShowInTaskbar = false;
             this.BackColor = Color.White;
-            System.IntPtr iconHandle = Resource1.Chat2021.GetHicon();
-            System.Drawing.Icon icon = Icon.FromHandle(iconHandle);
-            this.notifyIcon1.Icon = icon;
+            //System.IntPtr iconHandle = Resource1.Chat2021.GetHicon();
+            //System.Drawing.Icon icon = Icon.FromHandle(iconHandle);
+            //this.notifyIcon1.Icon = icon;
             this.notifyIcon1.Text = "Chat2021";
             this.notifyIcon1.Visible = true;
+            
         }
 
         private void InitEventHandler()
@@ -354,8 +359,7 @@ namespace Chat2021.LogFrm
         KeyboardFrm keyboardFrm;
         private void button1_Click(object sender, EventArgs e)
         {
-            keyboardFrm = new KeyboardFrm();
-            keyboardFrm.Show();
+
         }
     }
 }

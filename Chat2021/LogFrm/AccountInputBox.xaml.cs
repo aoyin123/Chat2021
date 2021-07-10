@@ -33,8 +33,8 @@ namespace Chat2021.LogFrm
         CIsMenPwd cIsMenPwd = new CIsMenPwd() { IsMemPwd = true };
         CAutoLogin cAutoLogin = new CAutoLogin() { IsAutoLogin = true };
         TestData testData = new TestData() { Numbers = false };
-        
 
+        KeyboardFrm KeyboardFrm;
         Color colors = Colors.Black;
         public UserControl1()
         {
@@ -85,7 +85,8 @@ namespace Chat2021.LogFrm
 
         private void KeyBoardIconMouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            KeyboardFrm = new KeyboardFrm(pwdTbx);
+            KeyboardFrm.Show();
         }
 
         private void userNameLine_TargetUpdated(object sender, DataTransferEventArgs e)

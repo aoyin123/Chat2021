@@ -88,6 +88,29 @@ namespace keyboard
             }
         }
 
+        private void AddEventHandler()
+        {
+            for(int i = 0; i < 13; i++)
+            {
+                row3[i].MouseDown += addLetter;
+            }
+        }
+
+        private void addLetter(object sender, MouseEventArgs e)
+        {
+            //加字符到TextBox
+
+
+            //减字符到TextBox
+        }
+
+        private void AddStrToTextBox(TextBox textBox)
+        {
+            textBox.Text = "A";
+        
+        }
+
+
         public UserControl1()
         {
             InitializeComponent();

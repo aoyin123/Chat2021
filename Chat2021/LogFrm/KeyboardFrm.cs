@@ -12,9 +12,10 @@ namespace Chat2021.LogFrm
 {
     public partial class KeyboardFrm : Form
     {
-        public KeyboardFrm()
+        public KeyboardFrm(System.Windows.Controls.TextBox textBox)
         {
             InitializeComponent();
+            textBox.Text = "123";
             this.FormBorderStyle = FormBorderStyle.None;
             userControl11.Location = new Point(0, 0);
             userControl11.BackColor = Color.FromArgb(27, 147, 217);

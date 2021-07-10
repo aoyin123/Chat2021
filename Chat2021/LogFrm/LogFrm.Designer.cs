@@ -32,15 +32,18 @@
             this.PlayVedioPic = new System.Windows.Forms.PictureBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.button1 = new System.Windows.Forms.Button();
+            this.roundButton1 = new Chat2021.LogFrm.RoundButton();
+            this.roundButtonCopy1 = new PulseButtonTest.RoundButtonCopy();
             this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
             this.userControl11 = new Chat2021.LogFrm.UserControl1();
+            this.pulseButton1 = new PulseButton.PulseButton();
             ((System.ComponentModel.ISupportInitialize)(this.PlayVedioPic)).BeginInit();
             this.SuspendLayout();
             // 
             // PlayVedioPic
             // 
             this.PlayVedioPic.Location = new System.Drawing.Point(0, 0);
-            this.PlayVedioPic.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PlayVedioPic.Margin = new System.Windows.Forms.Padding(2);
             this.PlayVedioPic.Name = "PlayVedioPic";
             this.PlayVedioPic.Size = new System.Drawing.Size(75, 40);
             this.PlayVedioPic.TabIndex = 0;
@@ -61,6 +64,32 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // roundButton1
+            // 
+            this.roundButton1.ControlState = Chat2021.LogFrm.ControlState.Normal;
+            this.roundButton1.FlatAppearance.BorderSize = 0;
+            this.roundButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.roundButton1.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(0)))), ((int)(((byte)(224)))));
+            this.roundButton1.Location = new System.Drawing.Point(218, 112);
+            this.roundButton1.Name = "roundButton1";
+            this.roundButton1.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(161)))), ((int)(((byte)(224)))));
+            this.roundButton1.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(161)))), ((int)(((byte)(0)))));
+            this.roundButton1.Radius = 15;
+            this.roundButton1.Size = new System.Drawing.Size(75, 23);
+            this.roundButton1.TabIndex = 4;
+            this.roundButton1.Text = "roundButton1";
+            this.roundButton1.UseVisualStyleBackColor = true;
+            // 
+            // roundButtonCopy1
+            // 
+            this.roundButtonCopy1.BackColor = System.Drawing.Color.Blue;
+            this.roundButtonCopy1.Location = new System.Drawing.Point(361, 112);
+            this.roundButtonCopy1.Name = "roundButtonCopy1";
+            this.roundButtonCopy1.Size = new System.Drawing.Size(75, 37);
+            this.roundButtonCopy1.TabIndex = 3;
+            this.roundButtonCopy1.Text = "123";
+            this.roundButtonCopy1.UseVisualStyleBackColor = false;
+            // 
             // elementHost1
             // 
             this.elementHost1.Location = new System.Drawing.Point(42, 205);
@@ -71,15 +100,29 @@
             this.elementHost1.Text = "elementHost1";
             this.elementHost1.Child = this.userControl11;
             // 
+            // pulseButton1
+            // 
+            this.pulseButton1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.pulseButton1.Location = new System.Drawing.Point(76, 99);
+            this.pulseButton1.Name = "pulseButton1";
+            this.pulseButton1.PulseSpeed = 0.3F;
+            this.pulseButton1.Size = new System.Drawing.Size(40, 40);
+            this.pulseButton1.TabIndex = 5;
+            this.pulseButton1.Text = "pulseButton1";
+            this.pulseButton1.UseVisualStyleBackColor = true;
+            // 
             // LogFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 360);
+            this.Controls.Add(this.pulseButton1);
+            this.Controls.Add(this.roundButton1);
+            this.Controls.Add(this.roundButtonCopy1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.elementHost1);
             this.Controls.Add(this.PlayVedioPic);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "LogFrm";
             this.Text = "LogFrm";
             ((System.ComponentModel.ISupportInitialize)(this.PlayVedioPic)).EndInit();
@@ -94,5 +137,8 @@
         private System.Windows.Forms.Integration.ElementHost elementHost1;
         private UserControl1 userControl11;
         private System.Windows.Forms.Button button1;
+        private PulseButtonTest.RoundButtonCopy roundButtonCopy1;
+        private RoundButton roundButton1;
+        private PulseButton.PulseButton pulseButton1;
     }
 }

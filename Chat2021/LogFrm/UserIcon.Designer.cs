@@ -1,6 +1,6 @@
 ﻿namespace Chat2021.LogFrm
 {
-    partial class Icon
+    partial class UserIcon
     {
         /// <summary>
         /// Required designer variable.

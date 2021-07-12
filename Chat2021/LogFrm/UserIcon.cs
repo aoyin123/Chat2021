@@ -17,10 +17,10 @@ using Chat2021.pool;
 
 namespace Chat2021.LogFrm
 {
-    public partial class Icon : Form
+    public partial class UserIcon : Form
     {
         #region Init
-        public Icon()
+        public UserIcon()
         {
             InitializeComponent();
             this.TopMost = true;
@@ -120,17 +120,12 @@ namespace Chat2021.LogFrm
         }
         #endregion
 
-        private void Icon_MouseHover(object sender, EventArgs e)
-        {
-            if (mouseModel.Equals(MouseModel.leave))
-            {
-                mouseModel = MouseModel.Hover;
-                PoolItem poolItem = new PoolItem();
-                poolItem.PoolWork = Close;
-                ThreadPoolWork.ADD(poolItem);
-            }
-        }
 
+        #region Event
+        /// <summary>
+        /// 当鼠标悬停在用户图标上，添加用户的图标从用户图标下面水平滑出
+        /// </summary>
+        /// <param name="item"></param>
         private void Close(object item)
         {
             DateTime tiggerTime = DateTime.UtcNow;
@@ -144,6 +139,20 @@ namespace Chat2021.LogFrm
             }
         }
 
+        /// <summary>
+        /// 当鼠标离开用户图标后，添加用户的图标滑向用户图标下面
+        /// </summary>
+        /// <param name="item"></param>
+        private void Away(object item)
+        {
+            for (; posX >= 153; posX--)
+            {
+                posX = posX - 2;
+                InvalidateImage();
+            }
+        }
+
+
         private void Icon_MouseLeave(object sender, EventArgs e)
         {
             if (mouseModel.Equals(MouseModel.Hover))
@@ -155,13 +164,18 @@ namespace Chat2021.LogFrm
             }
         }
 
-        private void Away(object item)
+        private void Icon_MouseHover(object sender, EventArgs e)
         {
-            for (; posX >= 153; posX--)
+            if (mouseModel.Equals(MouseModel.leave))
             {
-                posX = posX - 2;
-                InvalidateImage();
+                mouseModel = MouseModel.Hover;
+                PoolItem poolItem = new PoolItem();
+                poolItem.PoolWork = Close;
+                ThreadPoolWork.ADD(poolItem);
             }
         }
+
+        #endregion
+
     }
 }

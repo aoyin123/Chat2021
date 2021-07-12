@@ -120,11 +120,11 @@
     <Compile Include="LogFrm\ControlBtn.Designer.cs">
       <DependentUpon>ControlBtn.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogFrm\Icon.cs">
+    <Compile Include="LogFrm\UserIcon.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LogFrm\Icon.Designer.cs">
-      <DependentUpon>Icon.cs</DependentUpon>
+    <Compile Include="LogFrm\UserIcon.Designer.cs">
+      <DependentUpon>UserIcon.cs</DependentUpon>
     </Compile>
     <Compile Include="LogFrm\KeyboardBtn1.cs">
       <SubType>Component</SubType>
@@ -187,8 +187,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="LogFrm\Icon.resx">
-      <DependentUpon>Icon.cs</DependentUpon>
+    <EmbeddedResource Include="LogFrm\UserIcon.resx">
+      <DependentUpon>UserIcon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LogFrm\KeyboardFrm.resx">
       <DependentUpon>KeyboardFrm.cs</DependentUpon>

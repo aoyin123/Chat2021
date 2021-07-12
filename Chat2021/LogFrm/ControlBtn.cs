@@ -24,9 +24,9 @@ namespace Chat2021.LogFrm
             button.BackColor = Color.White;
             //this.Controls.Add(button);
 
-            uint ExdStyle = win32.GetWindowLong(this.Handle, win32.GWL_EXSTYLE);
-            win32.SetWindowLong(this.Handle, win32.GWL_EXSTYLE, win32.WS_EX_TRANSPARENT | win32.WS_EX_LAYERED);
-            win32.SetLayeredWindowAttributes(this.Handle, 0X000000, 125, 3);
+            uint ExdStyle = Win32.GetWindowLong(this.Handle, Win32.GWL_EXSTYLE);
+            Win32.SetWindowLong(this.Handle, Win32.GWL_EXSTYLE, Win32.WS_EX_TRANSPARENT | Win32.WS_EX_LAYERED);
+            Win32.SetLayeredWindowAttributes(this.Handle, 0X000000, 125, 3);
         }
 
         private void SetFromStyle(Point point, Size size)

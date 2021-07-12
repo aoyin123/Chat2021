@@ -1,29 +1,50 @@
-﻿using System;
+﻿/************************************************************************************
+*源码来自(C#源码世界)  www.HelloCsharp.com
+*如果对该源码有问题可以直接点击下方的提问按钮进行提问哦
+*站长将亲自帮你解决问题
+*C#源码世界-找到你需要的C#源码，交流和学习
+************************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using Chat2021.win32api;
+using Chat2021.pool;
 
 namespace Chat2021.LogFrm
 {
     public partial class Icon : Form
     {
-        Bitmap cirBtn;
+        #region Init
         public Icon()
         {
             InitializeComponent();
-            Bitmap icon = Resource1.Chat2021;
-            cirBtn = (Bitmap)CutEllipse((Image)icon, new Rectangle(0, 0, icon.Width, icon.Height), new Size(50, 50));
-            SetBits(cirBtn);
-            this.Location = new Point(200, 200);
+            this.TopMost = true;
 
+            CheckForIllegalCrossThreadCalls = false;
+            ThreadPoolWork.Start(1, 3000);
+            InvalidateImage();
 
         }
+
+        #endregion
+        #region value
+        enum MouseModel
+        {
+            Hover,
+            leave,
+        }
+
+        MouseModel mouseModel = MouseModel.leave;
+        private ThreadPoolWork ThreadPoolWork = new ThreadPoolWork();
+        int posX = 153;
+
+        #endregion
+
 
         #region 调用UpdateLayeredWindow函数
 
@@ -34,83 +55,14 @@ namespace Chat2021.LogFrm
                 const int WS_MINIMIZEBOX = 0x00020000;  // Winuser.h中定义   
                 CreateParams cp = base.CreateParams;
                 cp.Style = cp.Style | WS_MINIMIZEBOX;   // 允许最小化操作
-                cp.ExStyle |= 0x00080000; // WS_EX_LAYERED
+                cp.ExStyle |= 0x00080000;
                 return cp;
             }
         }
 
-        #region Win32 API声明
-        class Win32
-        {
-            [StructLayout(LayoutKind.Sequential)]
-            public struct Size
-            {
-                public Int32 cx;
-                public Int32 cy;
-
-                public Size(Int32 x, Int32 y)
-                {
-                    cx = x;
-                    cy = y;
-                }
-            }
-
-            [StructLayout(LayoutKind.Sequential, Pack = 1)]
-            public struct BLENDFUNCTION
-            {
-                public byte BlendOp;
-                public byte BlendFlags;
-                public byte SourceConstantAlpha;
-                public byte AlphaFormat;
-            }
-
-            [StructLayout(LayoutKind.Sequential)]
-            public struct Point
-            {
-                public Int32 x;
-                public Int32 y;
-
-                public Point(Int32 x, Int32 y)
-                {
-                    this.x = x;
-                    this.y = y;
-                }
-            }
-
-            public const byte AC_SRC_OVER = 0;
-            public const Int32 ULW_ALPHA = 2;
-            public const byte AC_SRC_ALPHA = 1;
-
-            [DllImport("gdi32.dll", ExactSpelling = true, SetLastError = true)]
-            public static extern IntPtr CreateCompatibleDC(IntPtr hDC);
-
-            [DllImport("user32.dll", ExactSpelling = true, SetLastError = true)]
-            public static extern IntPtr GetDC(IntPtr hWnd);
-
-            [DllImport("gdi32.dll", ExactSpelling = true)]
-            public static extern IntPtr SelectObject(IntPtr hDC, IntPtr hObj);
-
-            [DllImport("user32.dll", ExactSpelling = true)]
-            public static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
-
-            [DllImport("gdi32.dll", ExactSpelling = true, SetLastError = true)]
-            public static extern int DeleteDC(IntPtr hDC);
-
-            [DllImport("gdi32.dll", ExactSpelling = true, SetLastError = true)]
-            public static extern int DeleteObject(IntPtr hObj);
-
-            [DllImport("user32.dll", ExactSpelling = true, SetLastError = true)]
-            public static extern int UpdateLayeredWindow(IntPtr hwnd, IntPtr hdcDst, ref Point pptDst, ref Size psize, IntPtr hdcSrc, ref Point pptSrc, Int32 crKey, ref BLENDFUNCTION pblend, Int32 dwFlags);
-
-            [DllImport("gdi32.dll", ExactSpelling = true, SetLastError = true)]
-            public static extern IntPtr ExtCreateRegion(IntPtr lpXform, uint nCount, IntPtr rgnData);
-        }
-        #endregion
-
         public void SetBits(Bitmap bitmap)//调用UpdateLayeredWindow（）方法。this.BackgroundImage为你事先准备的带透明图片。
         {
-            //if (!haveHandle) return;
-
+         
             if (!Bitmap.IsCanonicalPixelFormat(bitmap.PixelFormat) || !Bitmap.IsAlphaPixelFormat(bitmap.PixelFormat))
                 throw new ApplicationException("图片必须是32位带Alhpa通道的图片。");
 
@@ -150,28 +102,66 @@ namespace Chat2021.LogFrm
 
         #endregion
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="img">源图像</param>
-        /// <param name="rec">源图像缩小后的尺寸</param>
-        /// <param name="size"></param>
-        /// <returns></returns>
-        private Image CutEllipse(Image img, Rectangle rec, Size size)
+
+        #region 图片绘制
+        private void InvalidateImage()
         {
-            Bitmap bitmap = new Bitmap(size.Width, size.Height);
-            using (Graphics g = Graphics.FromImage(bitmap))
+            Bitmap newImage = new Bitmap(this.Width, this.Height);
+            Graphics g1 = Graphics.FromImage(newImage);
+            g1.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            g1.DrawImage(Resource1.hh, new Point(posX, 27));
+            g1.DrawImage(Resource1.ff, new Point(130, 15));
+            g1.FillEllipse(new SolidBrush(Color.FromArgb(242, 167, 40)), new Rectangle(195, 75, 15, 15));
+            g1.DrawLine(new Pen(Color.FromArgb(255, 243, 176)), new Point(198, 81), new Point(207, 81));
+            g1.DrawLine(new Pen(Color.FromArgb(255, 243, 176)), new Point(198, 84), new Point(207, 84));
+            SetBits(newImage);
+            newImage.Dispose();
+            GC.Collect();
+        }
+        #endregion
+
+        private void Icon_MouseHover(object sender, EventArgs e)
+        {
+            if (mouseModel.Equals(MouseModel.leave))
             {
-                using (TextureBrush br = new TextureBrush(img, System.Drawing.Drawing2D.WrapMode.Clamp, rec))
-                {
-                    br.ScaleTransform(bitmap.Width / (float)rec.Width, bitmap.Height / (float)rec.Height);
-                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                    g.FillEllipse(br, new Rectangle(Point.Empty, size));
-                }
+                mouseModel = MouseModel.Hover;
+                PoolItem poolItem = new PoolItem();
+                poolItem.PoolWork = Close;
+                ThreadPoolWork.ADD(poolItem);
             }
-            return bitmap;
         }
 
+        private void Close(object item)
+        {
+            DateTime tiggerTime = DateTime.UtcNow;
+            DateTime now = DateTime.UtcNow;
+            TimeSpan ts = now.Subtract(tiggerTime);
+            int sec = (int)ts.TotalSeconds;
+            for (; posX < 253; posX++)
+            {
+                posX = posX + 2;
+                InvalidateImage();
+            }
+        }
 
+        private void Icon_MouseLeave(object sender, EventArgs e)
+        {
+            if (mouseModel.Equals(MouseModel.Hover))
+            {
+                mouseModel = MouseModel.leave;
+                PoolItem poolItem = new PoolItem();
+                poolItem.PoolWork = Away;
+                ThreadPoolWork.ADD(poolItem);
+            }
+        }
+
+        private void Away(object item)
+        {
+            for (; posX >= 153; posX--)
+            {
+                posX = posX - 2;
+                InvalidateImage();
+            }
+        }
     }
 }

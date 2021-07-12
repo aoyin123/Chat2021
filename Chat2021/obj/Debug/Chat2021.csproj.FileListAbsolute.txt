@@ -30,3 +30,4 @@ D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.g.resources
 D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.csprojAssemblyReference.cache
 D:\repos\Chat2021\Chat2021\obj\Debug\keyboard.UserControl1.resources
 D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.LogFrm.KeyboardFrm.resources
+D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.LogFrm.Icon.resources

@@ -39,9 +39,9 @@ namespace Chat2021
             SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
 
             this.ShowInTaskbar = false;
-            uint ExdStyle = win32.GetWindowLong(this.Handle, win32.GWL_EXSTYLE);
-            win32.SetWindowLong(this.Handle, win32.GWL_EXSTYLE, win32.WS_EX_TRANSPARENT | win32.WS_EX_LAYERED);
-            win32.SetLayeredWindowAttributes(this.Handle, 0XFFFFFF, 255, 3);
+            uint ExdStyle = Win32.GetWindowLong(this.Handle, Win32.GWL_EXSTYLE);
+            Win32.SetWindowLong(this.Handle, Win32.GWL_EXSTYLE, Win32.WS_EX_TRANSPARENT | Win32.WS_EX_LAYERED);
+            Win32.SetLayeredWindowAttributes(this.Handle, 0XFFFFFF, 255, 3);
             this.Location = pForm.Location;
             this.TopMost = true;
         }
@@ -152,9 +152,9 @@ namespace Chat2021
             Graphics g = e.Graphics;
             Rectangle rect = new Rectangle(new Point(0, 100), new Size(50, 50));
             g.FillRectangle(new SolidBrush(Color.FromArgb(2,Color.LightGreen)), rect);
-            uint ExdStyle = win32.GetWindowLong(this.Handle, win32.GWL_EXSTYLE);
-            win32.SetWindowLong(this.Handle, win32.GWL_EXSTYLE, win32.WS_EX_TRANSPARENT | win32.WS_EX_LAYERED);
-            win32.SetLayeredWindowAttributes(this.Handle, 0XFFFFFF, 255, 3);
+            uint ExdStyle = Win32.GetWindowLong(this.Handle, Win32.GWL_EXSTYLE);
+            Win32.SetWindowLong(this.Handle, Win32.GWL_EXSTYLE, Win32.WS_EX_TRANSPARENT | Win32.WS_EX_LAYERED);
+            Win32.SetLayeredWindowAttributes(this.Handle, 0XFFFFFF, 255, 3);
         }
 
         public void SetVisible()

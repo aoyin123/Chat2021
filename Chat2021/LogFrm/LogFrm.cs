@@ -31,6 +31,7 @@ namespace Chat2021.LogFrm
         delegate void HandlePicture(Bitmap bitmap);
         HandlePicture handlePicture;
         ControlBtn controlBtn;
+        Icon icon;
         #endregion
 
         #region Init
@@ -45,9 +46,11 @@ namespace Chat2021.LogFrm
             controlBtn = new ControlBtn(this.Location, this.Size);
             controlBtn.Show();
             PlayVedioPic.BackColor = Color.Black;
-            this.roundButtonCopy1.FlatStyle = FlatStyle.Flat;
-            this.roundButtonCopy1.FlatAppearance.BorderSize = 0; 
-            this.roundButtonCopy1.BackColor = Color.Transparent;
+            icon = new Icon();
+            icon.Show();
+            icon.TopMost = true;
+            icon.Location = new Point(800, 400);
+            
         }
 
         private void FrmInit()

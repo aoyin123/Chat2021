@@ -47,9 +47,9 @@ namespace Chat2021
             this.Size = new Size(130, 250);
             this.BackColor = Color.FromArgb(119, 136, 153);
             this.ShowInTaskbar = false;
-            uint ExdStyle = win32.GetWindowLong(this.Handle, win32.GWL_EXSTYLE);
-            win32.SetWindowLong(this.Handle, win32.GWL_EXSTYLE, win32.WS_EX_TRANSPARENT | win32.WS_EX_LAYERED);
-            win32.SetLayeredWindowAttributes(this.Handle, 0x000000, 120, 3);
+            uint ExdStyle = Win32.GetWindowLong(this.Handle, Win32.GWL_EXSTYLE);
+            Win32.SetWindowLong(this.Handle, Win32.GWL_EXSTYLE, Win32.WS_EX_TRANSPARENT | Win32.WS_EX_LAYERED);
+            Win32.SetLayeredWindowAttributes(this.Handle, 0x000000, 120, 3);
 
             
             this.Location = new Point(1137, 259);

@@ -19,19 +19,6 @@ namespace Chat2021.LogFrm
 {
     public partial class UserIcon : Form
     {
-        #region Init
-        public UserIcon()
-        {
-            InitializeComponent();
-            this.TopMost = true;
-
-            CheckForIllegalCrossThreadCalls = false;
-            ThreadPoolWork.Start(1, 3000);
-            InvalidateImage();
-
-        }
-
-        #endregion
         #region value
         enum MouseModel
         {
@@ -45,6 +32,19 @@ namespace Chat2021.LogFrm
 
         #endregion
 
+        #region Init
+        public UserIcon()
+        {
+            InitializeComponent();
+            this.TopMost = true;
+
+            CheckForIllegalCrossThreadCalls = false;
+            ThreadPoolWork.Start(1, 3000);
+            InvalidateImage();
+
+        }
+
+        #endregion
 
         #region 调用UpdateLayeredWindow函数
 
@@ -102,7 +102,6 @@ namespace Chat2021.LogFrm
 
         #endregion
 
-
         #region 图片绘制
         private void InvalidateImage()
         {
@@ -119,7 +118,6 @@ namespace Chat2021.LogFrm
             GC.Collect();
         }
         #endregion
-
 
         #region Event
         /// <summary>
@@ -176,6 +174,5 @@ namespace Chat2021.LogFrm
         }
 
         #endregion
-
     }
 }

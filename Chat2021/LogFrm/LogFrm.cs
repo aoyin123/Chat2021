@@ -200,9 +200,9 @@ namespace Chat2021.LogFrm
         {
             PlayVedioPic.Width = this.Width;
             PlayVedioPic.Height = 158;
-            elementHost1.Width = this.Width;
+            elementHost1.Width = this.Width - 235;
             elementHost1.Height = this.Height - PlayVedioPic.Height;
-            elementHost1.Location = new Point(0, PlayVedioPic.Height);
+            elementHost1.Location = new Point(100, PlayVedioPic.Height + 50);
         }
 
         private void InitVar()

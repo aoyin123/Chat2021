@@ -95,6 +95,5 @@
         private System.Windows.Forms.Integration.ElementHost elementHost1;
         private UserControl1 userControl11;
         private System.Windows.Forms.Button button1;
-        private PulseButton.PulseButton pulseButton1;
     }
 }

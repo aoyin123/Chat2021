@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.userControl11 = new keyboard.UserControl1();
+            this.keyboard = new keyboard.KeyboardUserControl();
             this.roundButton1 = new Chat2021.LogFrm.RoundButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // userControl11
             // 
-            this.userControl11.Location = new System.Drawing.Point(286, 161);
-            this.userControl11.Margin = new System.Windows.Forms.Padding(2);
-            this.userControl11.Name = "userControl11";
-            this.userControl11.Size = new System.Drawing.Size(455, 192);
-            this.userControl11.TabIndex = 1;
+            this.keyboard.Location = new System.Drawing.Point(286, 161);
+            this.keyboard.Margin = new System.Windows.Forms.Padding(2);
+            this.keyboard.Name = "userControl11";
+            this.keyboard.Size = new System.Drawing.Size(455, 192);
+            this.keyboard.TabIndex = 1;
             // 
             // roundButton1
             // 
@@ -75,7 +75,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.roundButton1);
-            this.Controls.Add(this.userControl11);
+            this.Controls.Add(this.keyboard);
             this.Name = "KeyboardFrm";
             this.Text = "KeyboardFrm";
             this.ResumeLayout(false);
@@ -84,7 +84,7 @@
         }
 
         #endregion
-        private keyboard.UserControl1 userControl11;
+        private keyboard.KeyboardUserControl keyboard;
         private RoundButton roundButton1;
         private System.Windows.Forms.RadioButton radioButton1;
     }

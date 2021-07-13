@@ -1,6 +1,6 @@
 ﻿namespace keyboard
 {
-    partial class UserControl1
+    partial class KeyboardUserControl
     {
         /// <summary> 
         /// 必需的设计器变量。

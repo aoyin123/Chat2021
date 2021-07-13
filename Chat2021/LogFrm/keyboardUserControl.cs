@@ -11,7 +11,7 @@ using System.Drawing.Drawing2D;
 
 namespace keyboard
 {
-    public partial class UserControl1 : UserControl
+    public partial class KeyboardUserControl : UserControl
     {
         string strRow3 = "hijklmabcdefg";
         string strRow4 = "qrstuvwxyznop";
@@ -111,7 +111,7 @@ namespace keyboard
         }
 
 
-        public UserControl1()
+        public KeyboardUserControl()
         {
             InitializeComponent();
             //this.Size = new Size(448, 137);

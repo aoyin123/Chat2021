@@ -30,20 +30,31 @@ namespace Chat2021.LogFrm
         private SolidColorBrush red;
         //private bool IsMemPwd = true;   
         //private bool IsAutoLog = true;
-        CIsMenPwd cIsMenPwd = new CIsMenPwd() { IsMemPwd = true };
-        CAutoLogin cAutoLogin = new CAutoLogin() { IsAutoLogin = true };
-        TestData testData = new TestData() { Numbers = false };
+        //CIsMenPwd cIsMenPwd = new CIsMenPwd() { IsMemPwd = true };
+        //CAutoLogin cAutoLogin = new CAutoLogin() { IsAutoLogin = true };
+        IsRememberPwdData testData = new IsRememberPwdData() { Remember = false };
+        WidthData widthData = new WidthData() { Width = "hello", H = 200.0 };
+        CheckBoxData checkBoxData = new CheckBoxData() { AutoLog = false , Remember = false};
+
+        double underLineWidth = 0;
 
         KeyboardFrm KeyboardFrm;
         Color colors = Colors.Black;
         public UserControl1()
         {
             InitializeComponent();
+
+
             SetSelectionAllOnGotFocus(userNameTextBox);
             red = new SolidColorBrush(color);
-            autoLogCheckBox.DataContext = testData;
-            memPwdCheckBox.DataContext = testData;
+            autoLogCheckBox.DataContext = checkBoxData;
+            memPwdCheckBox.DataContext = checkBoxData;
             pwdTbx.DataContext = testData;
+            //line1.DataContext = widthData;
+            //line1.Width = 200;
+            
+            //pp.Width = this.ActualWidth;
+            //pp.X2 = this.ActualWidth;
             //this.Background = red;
 
             //pwdTextBox.SetBinding(TextBox.TextProperty, new Binding("/") { Source = stringList });
@@ -56,53 +67,33 @@ namespace Chat2021.LogFrm
             logBtn.SetBinding(System.Windows.Controls.Button.BackgroundProperty, binding);
             logBtn.SetBinding(System.Windows.Controls.Button.BorderBrushProperty, binding);
 
+            Binding bind = new Binding();
+            bind.Source = widthData;
+            bind.Path = new PropertyPath("_Width");
+
             //Binding bind2 = new Binding();
             //bind2.Source = IsMemPwd;
             //bind2.Path = new PropertyPath(".");
             //memPwdCheckBox.SetBinding(CheckBox.IsCheckedProperty, bind2);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+
             //Binding bind3 = new Binding();
             //bind3.Source = IsAutoLog;
             //bind3.Path = new PropertyPath(".");
             //autoLogCheckBox.SetBinding(CheckBox.IsCheckedProperty, bind3);
 
+            
         }
 
-        private void QQIconMouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void DownIconMouseDown(object sender, MouseButtonEventArgs e)        
-        {
-
-        }
-
-        private void LockIconMouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
+        
+        
+        
         private void KeyBoardIconMouseDown(object sender, MouseButtonEventArgs e)
         {
             KeyboardFrm = new KeyboardFrm(pwdTbx);
             KeyboardFrm.Show();
         }
 
-        private void userNameLine_TargetUpdated(object sender, DataTransferEventArgs e)
-        {
-
-        }
-
-        private void userNameTextBox_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-        }
-
-        private void userNameTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-
-        }
+       
         public void SetSelectionAllOnGotFocus(System.Windows.Controls.TextBox textbox)
         {
             MouseButtonEventHandler _OnPreviewMouseDown = (sender, e) =>
@@ -139,22 +130,20 @@ namespace Chat2021.LogFrm
             userNameTextBox.Background = Brushes.White;
             
         }
-
-        
-        private void memPwdCheckBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        
-        private void autoLogCheckBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
+  
         public static explicit operator System.Windows.Forms.Control(UserControl1 v)
         {
             throw new NotImplementedException();
+        }
+
+        private void InputBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            underLineWidth = this.ActualWidth;
+            BindingOperations.SetBinding(pwdUnderLine, Line.X2Property, new Binding { Source = underLineWidth, Path = new PropertyPath(".")});
+            BindingOperations.SetBinding(pwdUnderLine, Line.WidthProperty, new Binding { Source = underLineWidth, Path = new PropertyPath(".") });
+            BindingOperations.SetBinding(userNameUnderLine, Line.X2Property, new Binding { Source = underLineWidth, Path = new PropertyPath(".") });
+            BindingOperations.SetBinding(userNameUnderLine, Line.WidthProperty, new Binding { Source = underLineWidth, Path = new PropertyPath(".") });
+            BindingOperations.SetBinding(logBtn, Button.WidthProperty, new Binding { Source = underLineWidth, Path = new PropertyPath(".") });
         }
     }
 
@@ -224,88 +213,157 @@ namespace Chat2021.LogFrm
         }
     }
 
-    public class CIsMenPwd : INotifyPropertyChanged
+    //public class CIsMenPwd : INotifyPropertyChanged
+    //{
+    //    private bool _IsMemPwd;
+    //    public bool IsMemPwd
+    //    {
+    //        get
+    //        {
+    //            return _IsMemPwd;
+    //        }
+    //        set
+    //        {
+    //            _IsMemPwd = value;
+    //            if (this.PropertyChanged != null)
+    //            {
+    //                this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("IsMemPwd"));
+    //            }
+    //        }
+    //    }
+    //    public event PropertyChangedEventHandler PropertyChanged;
+    //}
+
+    //public class CAutoLogin : INotifyPropertyChanged
+    //{
+    //    private bool _IsAutoLogin;
+    //    public bool IsAutoLogin
+    //    {
+    //        get
+    //        {
+    //            return _IsAutoLogin;
+    //        }
+    //        set
+    //        {
+    //            _IsAutoLogin = value;
+    //            if (this.PropertyChanged != null)
+    //            {
+    //                this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("IsAutoLogin"));
+    //            }
+    //        }
+    //    }
+    //    public event PropertyChangedEventHandler PropertyChanged;
+    //}
+
+    public class IsRememberPwdData : INotifyPropertyChanged
     {
-        private bool _IsMemPwd;
-        public bool IsMemPwd
+        private bool remember;
+        public bool Remember
         {
             get
             {
-                return _IsMemPwd;
+                return remember;
             }
             set
             {
-                _IsMemPwd = value;
+                remember = value;
                 if (this.PropertyChanged != null)
                 {
-                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("IsMemPwd"));
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Remember"));
                 }
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
     }
 
-    public class CAutoLogin : INotifyPropertyChanged
+    public class CheckBoxData : INotifyPropertyChanged
     {
-        private bool _IsAutoLogin;
-        public bool IsAutoLogin
+        private bool autoLog;
+        public bool AutoLog
         {
             get
             {
-                return _IsAutoLogin;
+                return autoLog;
             }
             set
             {
-                _IsAutoLogin = value;
+                autoLog = value;
+                if(value == true)
+                {
+                    Remember = true;   
+                }
+
                 if (this.PropertyChanged != null)
                 {
-                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("IsAutoLogin"));
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("AutoLog"));
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Remember"));
+                }
+            }
+        }
+
+        private bool remember;
+        public bool Remember
+        {
+            get
+            {
+                return remember;
+            }
+            set
+            {
+                remember = value;
+                if(value == false)
+                {
+                    AutoLog = false;
+                }
+                if(this.PropertyChanged != null)
+                {
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Remember"));
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("AutoLog"));
                 }
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
     }
 
-    public class TestData : INotifyPropertyChanged
+    public class WidthData : INotifyPropertyChanged
     {
-        private bool _Number;
-        public bool Numbers
+        private string width;
+        private double h;
+
+        public double H
         {
             get
             {
-                return _Number;
+                return h;
             }
             set
             {
-                _Number = value;
+                h = value;
                 if (this.PropertyChanged != null)
                 {
-                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Numbers"));
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("H"));
+                }
+            }
+        }
+
+        public string Width
+        {
+            get
+            {
+                return width;
+            }
+            set
+            {
+                width = value;
+                if (this.PropertyChanged != null)
+                {
+                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Width"));
                 }
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
     }
 
-    public class test1 : INotifyPropertyChanged
-    {
-        private bool _test;
-        public bool Test
-        {
-            get
-            {
-                return _test;
-            }
-            set
-            {
-                _test = value;
-                if (this.PropertyChanged != null)
-                {
-                    this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Numbers"));
-                }
-            }
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-    }
+    
 
 }

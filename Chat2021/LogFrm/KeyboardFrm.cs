@@ -17,10 +17,10 @@ namespace Chat2021.LogFrm
             InitializeComponent();
             textBox.Text = "123";
             this.FormBorderStyle = FormBorderStyle.None;
-            userControl11.Location = new Point(0, 0);
-            userControl11.BackColor = Color.FromArgb(27, 147, 217);
-            userControl11.Size = new Size(448, 138);
-            this.Size = userControl11.Size;
+            keyboard.Location = new Point(0, 0);
+            keyboard.BackColor = Color.FromArgb(27, 147, 217);
+            keyboard.Size = new Size(448, 138);
+            this.Size = keyboard.Size;
 
         }
     }

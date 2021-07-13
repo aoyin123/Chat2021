@@ -120,14 +120,23 @@
     <Compile Include="LogFrm\ControlBtn.Designer.cs">
       <DependentUpon>ControlBtn.cs</DependentUpon>
     </Compile>
+    <Compile Include="LogFrm\KeyboardBtn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LogFrm\keyboardUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LogFrm\keyboardUserControl.designer.cs">
+      <DependentUpon>keyboardUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogFrm\RoundButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="LogFrm\UserIcon.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LogFrm\UserIcon.Designer.cs">
       <DependentUpon>UserIcon.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LogFrm\KeyboardBtn1.cs">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="LogFrm\KeyboardFrm.cs">
       <SubType>Form</SubType>
@@ -141,12 +150,6 @@
     <Compile Include="LogFrm\LogFrm.Designer.cs">
       <DependentUpon>LogFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogFrm\PulseButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="LogFrm\PulseButton.Designer.cs">
-      <DependentUpon>PulseButton.cs</DependentUpon>
-    </Compile>
     <Compile Include="LogFrm\Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -154,21 +157,6 @@
     </Compile>
     <Compile Include="LogFrm\AccountInputBox.xaml.cs">
       <DependentUpon>AccountInputBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LogFrm\keyboardControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="LogFrm\keyboardControl.designer.cs">
-      <DependentUpon>keyboardControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LogFrm\RoundButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="LogFrm\RoundButtonCopy.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="LogFrm\RoundButtonCopy.designer.cs">
-      <DependentUpon>RoundButtonCopy.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -187,6 +175,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="LogFrm\keyboardUserControl.resx">
+      <DependentUpon>keyboardUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LogFrm\UserIcon.resx">
       <DependentUpon>UserIcon.cs</DependentUpon>
     </EmbeddedResource>
@@ -199,9 +190,6 @@
     <EmbeddedResource Include="LogFrm\Resource1.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LogFrm\keyboardControl.resx">
-      <DependentUpon>keyboardControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

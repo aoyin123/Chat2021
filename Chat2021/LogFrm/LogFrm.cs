@@ -61,9 +61,9 @@ namespace Chat2021.LogFrm
             this.FormBorderStyle = FormBorderStyle.None;
             this.ShowInTaskbar = false;
             this.BackColor = Color.White;
-            //System.IntPtr iconHandle = Resource1.Chat2021.GetHicon();
-            //System.Drawing.Icon icon = Icon.FromHandle(iconHandle);
-            //this.notifyIcon1.Icon = icon;
+            System.IntPtr iconHandle = Resource1.Chat2021.GetHicon();
+            System.Drawing.Icon icon = Icon.FromHandle(iconHandle);
+            this.notifyIcon1.Icon = icon;
             this.notifyIcon1.Text = "Chat2021";
             this.notifyIcon1.Visible = true;
             
@@ -364,6 +364,11 @@ namespace Chat2021.LogFrm
         private void button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void LogFrm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.notifyIcon1.Dispose();
         }
     }
 }

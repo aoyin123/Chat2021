@@ -54,7 +54,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(532, 256);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(207, 78);
             this.button1.TabIndex = 2;
@@ -83,6 +83,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "LogFrm";
             this.Text = "LogFrm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LogFrm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.PlayVedioPic)).EndInit();
             this.ResumeLayout(false);
 

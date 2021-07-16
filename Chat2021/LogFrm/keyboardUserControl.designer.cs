@@ -28,68 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.jBtn = new keyboard.KeyboardBtn1();
-            this.iBtn = new keyboard.KeyboardBtn1();
-            this.hBtn = new keyboard.KeyboardBtn1();
             this.SuspendLayout();
             // 
-            // jBtn
+            // KeyboardUserControl
             // 
-            this.jBtn.DownRegionColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(163)))), ((int)(((byte)(231)))));
-            this.jBtn.Location = new System.Drawing.Point(94, 91);
-            this.jBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.jBtn.Name = "jBtn";
-            this.jBtn.Size = new System.Drawing.Size(31, 30);
-            this.jBtn.StrPos = new System.Drawing.Point(10, 9);
-            this.jBtn.TabIndex = 2;
-            this.jBtn.Text = "keyboardBtn11";
-            this.jBtn.UpRegionColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(187)))), ((int)(((byte)(239)))));
-            this.jBtn.UseVisualStyleBackColor = true;
-            // 
-            // iBtn
-            // 
-            this.iBtn.DownRegionColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(163)))), ((int)(((byte)(231)))));
-            this.iBtn.Location = new System.Drawing.Point(59, 91);
-            this.iBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.iBtn.Name = "iBtn";
-            this.iBtn.Size = new System.Drawing.Size(31, 30);
-            this.iBtn.StrPos = new System.Drawing.Point(10, 9);
-            this.iBtn.TabIndex = 1;
-            this.iBtn.Text = "keyboardBtn11";
-            this.iBtn.UpRegionColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(187)))), ((int)(((byte)(239)))));
-            this.iBtn.UseVisualStyleBackColor = true;
-            // 
-            // hBtn
-            // 
-            this.hBtn.DownRegionColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(163)))), ((int)(((byte)(231)))));
-            this.hBtn.Location = new System.Drawing.Point(22, 91);
-            this.hBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.hBtn.Name = "hBtn";
-            this.hBtn.Size = new System.Drawing.Size(31, 30);
-            this.hBtn.StrPos = new System.Drawing.Point(10, 9);
-            this.hBtn.TabIndex = 0;
-            this.hBtn.Text = "keyboardBtn11";
-            this.hBtn.UpRegionColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(187)))), ((int)(((byte)(239)))));
-            this.hBtn.UseVisualStyleBackColor = true;
-            // 
-            // UserControl1
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.jBtn);
-            this.Controls.Add(this.iBtn);
-            this.Controls.Add(this.hBtn);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.Name = "UserControl1";
-            this.Size = new System.Drawing.Size(391, 192);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Name = "KeyboardUserControl";
+            this.Size = new System.Drawing.Size(521, 240);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private KeyboardBtn1 hBtn;
-        private KeyboardBtn1 iBtn;
-        private KeyboardBtn1 jBtn;
     }
 }

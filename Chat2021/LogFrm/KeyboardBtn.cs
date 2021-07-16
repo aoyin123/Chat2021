@@ -13,7 +13,13 @@ namespace keyboard
 {
     class KeyboardBtn1 : Button
     {
-        #region value
+        #region 变量
+        enum MouseModel
+        {
+            mouseDown,
+            mouseLeave,
+            mouseHover,
+        }
         private MouseModel mouseModel = MouseModel.mouseLeave;
         private SolidBrush upRegionSolidBrush = new SolidBrush(Color.FromArgb(57, 187, 239));
         private SolidBrush downRegionSolidBrush = new SolidBrush(Color.FromArgb(39, 163, 231));
@@ -23,7 +29,7 @@ namespace keyboard
         private Point p2 = new Point(29, 28);
         #endregion
 
-        #region properties
+        #region 界面属性
         private Color _upRegionColor;
         /// <summary>
         /// 按钮上半区域的颜色
@@ -94,19 +100,38 @@ namespace keyboard
             set { strFont = value; }
         }
 
-        private string text;
+        private string text1;
         /// <summary>
         /// 设置按钮上显示的文本
         /// </summary>
-        public string Text
+        public string Text1
         {
-            set { text = value; }
+            set { text1 = value; }
+            get { return text1; }
+        }
+
+        private string text2;
+
+        public string Text2
+        {
+            set { text2 = value; }
+            get { return text2; }
+        }
+
+        private bool isUpper = false;
+        public bool IsUpper
+        {
+            set { 
+                isUpper = value;
+                this.Invalidate();
+            }
+            get { return isUpper; }
         }
 
         
         #endregion
 
-        #region function
+        #region 初始化
         public KeyboardBtn1()
         {
             SetDefaultColor();
@@ -125,7 +150,6 @@ namespace keyboard
             this.Paint += DrawMousePressEventHandler;
             this.Paint += DrawMouseHoverEventHandler;
             this.Paint += DrawStr;
-            this.Paint += DrawHashTable;
             
             
             this.MouseMove += BtnMouseMove;
@@ -135,32 +159,7 @@ namespace keyboard
         }
         #endregion
 
-        #region EventHandler
-
-        private void DrawHashTable(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            Font font = new Font("宋体", 12);
-            foreach(string str in strToPos.Keys)
-            {
-                if(str.Equals("箭头"))
-                {
-                    Pen p = new Pen(Color.Black, 1);
-                    p.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
-                    p.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
-                    g.DrawLine(p, 36, 14, 16, 14);
-                    return;
-                }
-                if(str.Equals("Caps Lock"))
-                {
-                    g.DrawString(str, new Font("宋体", 8), Brushes.Black, (Point)strToPos[str]);
-                    return;
-                }
-                
-                g.DrawString(str, font, Brushes.Black, (Point)strToPos[str]);
-            }
-        }
+        #region 消息句柄
 
         private void DrawCustomerEventHandler(object sender, PaintEventArgs e)
         {
@@ -181,8 +180,45 @@ namespace keyboard
 
         private void DrawStr(object sender, PaintEventArgs e)
         {
-            
-            e.Graphics.DrawString(text, strFont, Brushes.Black, strPos);
+            if (null == text2)
+            {
+                if (isUpper == true)
+                {
+                    e.Graphics.DrawString(text1.ToUpper(), strFont, Brushes.Black, new Point(2, 9));
+                    return;
+                }
+                else
+                {
+                    e.Graphics.DrawString(text1, strFont, Brushes.Black, new Point(2, 9));
+                }
+            }
+            else
+            {
+
+                if (text2.Equals("箭头"))
+                {
+                    Pen p = new Pen(Color.Black, 1);
+                    p.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+                    p.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
+                    e.Graphics.DrawLine(p, 36, 14, 16, 14);
+                    return;
+                }
+                else if (text2.Equals("Caps Lock"))
+                {
+                    e.Graphics.DrawString("Caps Lock", new Font("宋体", 8), Brushes.Black, new Point(0, 10));
+                    return;
+                }
+                else if(text2.Equals("Shift"))
+                {
+                    e.Graphics.DrawString("Shift", new Font("宋体", 8), Brushes.Black, new Point(0, 10));
+                    return;
+                }
+                else
+                {
+                    e.Graphics.DrawString(text1, strFont, Brushes.Black, new Point(0, 10));
+                    e.Graphics.DrawString(text2, strFont, Brushes.Black, new Point(10, 3));
+                }
+            }
         }
 
         private void DrawMousePressEventHandler(object sender, PaintEventArgs e)
@@ -242,10 +278,5 @@ namespace keyboard
 
     }
 
-    enum MouseModel
-    {
-        mouseDown,
-        mouseLeave,
-        mouseHover,
-    }
+    
 }

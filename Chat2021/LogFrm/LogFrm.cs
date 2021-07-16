@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using FFmpegDemo;
 using System.Threading;
+using Chat2021.Mysql;
 
 namespace Chat2021.LogFrm
 {
@@ -50,7 +51,7 @@ namespace Chat2021.LogFrm
             icon.Show();
             icon.TopMost = true;
             icon.Location = new Point(800, 400);
-            
+            bool isOk = MysqlOperation.Connect();
         }
 
         private void FrmInit()

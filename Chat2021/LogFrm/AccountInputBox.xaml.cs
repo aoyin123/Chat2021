@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Chat2021.Mysql;
 
 namespace Chat2021.LogFrm
 {
@@ -35,6 +36,7 @@ namespace Chat2021.LogFrm
         IsRememberPwdData testData = new IsRememberPwdData() { Remember = false };
         WidthData widthData = new WidthData() { Width = "hello", H = 200.0 };
         CheckBoxData checkBoxData = new CheckBoxData() { AutoLog = false , Remember = false};
+        KeyboardFrm keyboardFrm;
 
         double underLineWidth = 0;
 
@@ -144,6 +146,27 @@ namespace Chat2021.LogFrm
             BindingOperations.SetBinding(userNameUnderLine, Line.X2Property, new Binding { Source = underLineWidth, Path = new PropertyPath(".") });
             BindingOperations.SetBinding(userNameUnderLine, Line.WidthProperty, new Binding { Source = underLineWidth, Path = new PropertyPath(".") });
             BindingOperations.SetBinding(logBtn, Button.WidthProperty, new Binding { Source = underLineWidth, Path = new PropertyPath(".") });
+            keyboardFrm = new KeyboardFrm(this.userNameTextBox);
+            keyboardFrm.Location = new System.Drawing.Point(720, 590);
+        }
+
+        private void logBtn_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            string userName = userNameTextBox.Text;
+            string pwd = pwdTbx.Text;
+            MysqlOperation.Query(userName, pwd);
+        }
+
+        private void keyboardIcon_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(false == keyboardFrm.Visible)
+            {
+                keyboardFrm.Show();
+            }
+            else
+            {
+                keyboardFrm.Hide();
+            }
         }
     }
 

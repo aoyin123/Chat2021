@@ -71,7 +71,7 @@
             <Image Name="chatPic" Stretch="None" Margin="0, 0" Height="20" Source="D:\repos\Chat2021\Chat2021\bin\Debug\ui.jpg"/>
             <Image Name="arrayPic" Stretch="None" Canvas.Right="0" Canvas.Top="0" Source="D:\repos\Chat2021\Chat2021\bin\Debug\array1.jpg" />
             <Image Name="lockIcon" Stretch="None" Margin="0, 30" Source="D:\repos\Chat2021\Chat2021\bin\Debug\lock.jpg"/>
-            <Image Name="keyboardIcon" Stretch="None" Canvas.Right="0" Canvas.Top="30" Source="D:\repos\Chat2021\Chat2021\bin\Debug\keyboard.jpg"/>
+            <Image Name="keyboardIcon" Stretch="None" Canvas.Right="0" Canvas.Top="30" Source="D:\repos\Chat2021\Chat2021\bin\Debug\keyboard.jpg" PreviewMouseDown="keyboardIcon_PreviewMouseDown"/>
             <TextBox Name="userNameTextBox" Focusable="True" Margin="17,0" Width="200" Height="20" BorderBrush="{x:Null}" BorderThickness="0">
                 <TextBox.Resources>
                     <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left" >
@@ -155,7 +155,7 @@
             <CheckBox Name="autoLogCheckBox" Margin="0, 65" Foreground="Gray" IsChecked="{Binding Path=AutoLog,Mode=TwoWay}">自动登陆</CheckBox>
             <CheckBox Name="memPwdCheckBox" Margin="99, 65" Foreground="Gray" IsChecked="{Binding Path=Remember,Mode=TwoWay}">记住密码</CheckBox>
             <Label Name="findPwdLabel" Margin="193, 64" Padding="0" Foreground="Gray">找回密码</Label>
-            <Button Name="logBtn" Width="200" Height="35" Style="{DynamicResource ButtonStyle1}" Canvas.Left="0" Canvas.Top="95">
+            <Button Name="logBtn" Width="200" Height="35" Style="{DynamicResource ButtonStyle1}" Canvas.Left="0" Canvas.Top="95" PreviewMouseDown="logBtn_PreviewMouseDown">
                 <TextBlock Text="登陆" Foreground="White" Opacity="0.8"/>
             </Button>
         </Canvas>

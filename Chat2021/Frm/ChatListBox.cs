@@ -11,7 +11,7 @@ namespace Chat2021.Frm
     class ChatListBox : Control
     {
         #region 变量
-        private ChatIemCollection chatIemCollection = null;
+        private ChatIemCollection chatItemCollection = null;
         private int sliderVal = 0;
         private Slider slider;
         private TextBox textBox;
@@ -20,7 +20,7 @@ namespace Chat2021.Frm
         #region 初始化
         public ChatListBox(TextBox textBox)
         {
-            chatIemCollection = new ChatIemCollection();
+            chatItemCollection = new ChatIemCollection();
             this.BackColor = Color.White;
             this.textBox = textBox;
             ChatItem.Width = this.Width;
@@ -29,34 +29,71 @@ namespace Chat2021.Frm
             ChatItem.ExtraMsgPos = new Point(30, 15);
             ChatItem chatItem = new ChatItem("niao",Resource1._11,"hello", "ff");
             ChatItem.UserNameFont = new Font("宋体", 10);
-            chatIemCollection[0] = chatItem;
+            chatItemCollection[0] = chatItem;
 
             ChatItem chatItem_1 = new ChatItem("niao", Resource1._11, "hello", "ff");
-            chatIemCollection[1] = chatItem_1;
+            chatItemCollection[1] = chatItem_1;
 
             ChatItem chatItem_2 = new ChatItem("niao", Resource1._11, "hello", "ff");
-            chatIemCollection[2] = chatItem_2;
+            chatItemCollection[2] = chatItem_2;
 
             for(int i = 3; i < 40; i++)
             {
-                chatIemCollection[i] = new ChatItem("niao", Resource1._11, "hello", "ff");
+                chatItemCollection[i] = new ChatItem("niao", Resource1._11, "hello", "ff");
             }
 
             ChatItem.Height = 30;
 
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.FormMouseWheel);
-            this.MouseDown += SliderMouseDown;
-            this.MouseMove += SliderMouseMove;
-            this.MouseUp += SliderMouseUp;
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(SliderMouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(SliderMouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(SliderMouseUp);
+
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(ItemMouseMove);
+            this.MouseLeave += new EventHandler(ItemMouseLeave);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(ItemMouseDown);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(ItemMouseUp);
 
             this.DoubleBuffered = true;//设置本窗体
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
+        }
 
+        private int mouseMoveItemIndex = 0;
+        private int mouseDownItemIndex = 0;
 
+        private void ItemMouseMove(object sender, MouseEventArgs e)
+        {
+            Point mousePos = e.Location;
+            int index = (mousePos.Y + sliderVal) / ChatItem.Height;
+            chatItemCollection[mouseMoveItemIndex].IsMouseHover = false;
+            chatItemCollection[index].IsMouseHover = true;
+            mouseMoveItemIndex = index;
+            this.Invalidate();
+        }
+
+        private void ItemMouseLeave(object sender, EventArgs e)
+        {
 
         }
+
+        private void ItemMouseDown(object sender, MouseEventArgs e)
+        {
+            Point mousePos = e.Location;
+            int index = (mousePos.Y + sliderVal) / ChatItem.Height;
+            chatItemCollection[index].IsPressed = true;
+            chatItemCollection[mouseDownItemIndex].IsPressed = false;
+            mouseDownItemIndex = index;
+            this.Invalidate();
+        }
+
+        private void ItemMouseUp(object sender, MouseEventArgs e)
+        {
+            //chatItemCollection[mouseDownItemIndex].IsPressed = false;
+        }
+
+
 
         bool isMouseDownOnSlider = false;
         Point mousePos;
@@ -73,13 +110,14 @@ namespace Chat2021.Frm
 
         private void SliderMouseMove(object sender, MouseEventArgs e)
         {
+            double diffY, slideSpace, distance;
             if (isMouseDownOnSlider == true)
             {
-                double diffY = mousePos.Y - e.Location.Y;
+                diffY = mousePos.Y - e.Location.Y;
                 mousePos = e.Location;
 
-                double slideSpace = this.Height - slider.Height;
-                double distance = (1200 - this.Height) / slideSpace * diffY;
+                slideSpace = this.Height - slider.Height;
+                distance = (1200 - this.Height) / slideSpace * diffY;
                 
                 sliderVal -= (int)distance;
                 if(sliderVal < 0)
@@ -100,16 +138,9 @@ namespace Chat2021.Frm
                 {
                     slider.Pos = new Point(slider.Pos.X, sliderVal + this.Height - slider.Height);
                 }
-
                 this.Invalidate(slider.SliderWay);
                 this.Invalidate();
-                
             }
-            else
-            {
-
-            }
-
         }
 
         private void SliderMouseUp(object sender, MouseEventArgs e)
@@ -135,21 +166,25 @@ namespace Chat2021.Frm
             int baseY;
             for(int i = 0; i < 40;i++)
             {
-                if(i == 39)
-                {
-
-                }
                 baseY = i * ChatItem.Height;
-                g.DrawImage(chatIemCollection[i].Icon, GetPointByModifyHeight(ChatItem.IconPos, baseY));
-                g.DrawString(chatIemCollection[i].UserName, ChatItem.UserNameFont,Brushes.Black, GetPointByModifyHeight(ChatItem.UserNamePos, baseY));
-                g.DrawString(chatIemCollection[i].ExtraMsg, ChatItem.UserNameFont, Brushes.Black, GetPointByModifyHeight(ChatItem.ExtraMsgPos, baseY));
+                if(true == chatItemCollection[i].IsMouseHover)
+                {
+                    SolidBrush solidBrush = new SolidBrush(chatItemCollection[i].MouseHoverBackColor);
+                    g.FillRectangle(solidBrush, new Rectangle(0, baseY, this.Width, ChatItem.Height));
+                }
+                if(true == chatItemCollection[i].IsPressed)
+                {
+                    SolidBrush solidBrush = new SolidBrush(chatItemCollection[i].MousePressedColor);
+                    g.FillRectangle(solidBrush, new Rectangle(0, baseY, this.Width, ChatItem.Height));
+                }
+
+                g.DrawImage(chatItemCollection[i].Icon, GetPointByModifyHeight(ChatItem.IconPos, baseY));
+                g.DrawString(chatItemCollection[i].UserName, ChatItem.UserNameFont,Brushes.Black, GetPointByModifyHeight(ChatItem.UserNamePos, baseY));
+                g.DrawString(chatItemCollection[i].ExtraMsg, ChatItem.UserNameFont, Brushes.Black, GetPointByModifyHeight(ChatItem.ExtraMsgPos, baseY));
                 g.DrawString(i.ToString(), ChatItem.UserNameFont, Brushes.Black, GetPointByModifyHeight(ChatItem.ExtraMsgPos, baseY));
                 g.DrawString(sliderVal.ToString(), new Font("宋体", 10), Brushes.Black, new Point(0, 0));
-                //g.DrawPath(new Pen(Brushes.Black), slider.Path);
-                
                 g.FillPath(new SolidBrush(slider.BackColor), slider.Path);
             }
-            //g.DrawString("a", new Font("宋体", 10), Brushes.Black, new Point(0, 1200));
         }
 
         
@@ -179,7 +214,6 @@ namespace Chat2021.Frm
                 slider.Pos = new Point(this.Width - 10, sliderY + sliderVal);
             }
             this.Invalidate();
-
         }
 
 

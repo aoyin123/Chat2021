@@ -220,6 +220,120 @@ namespace Chat2021.Frm
                 extraMsg = value;
             }
         }
+
+        private Color customerBackColor;
+        /// <summary>
+        /// 子项无任何事件响应时的背景颜色
+        /// </summary>
+        public Color CustomerBackColor
+        {
+            get
+            {
+                return customerBackColor;
+            }
+            set
+            {
+                customerBackColor = value;
+            }
+        }
+
+        private bool isPressed;
+        /// <summary>
+        /// 子项是否被点击
+        /// </summary>
+        public bool IsPressed
+        {
+            get
+            {
+                return isPressed;
+            }
+            set
+            {
+                isPressed = value;
+            }
+        }
+
+        private Color pressedBackColor;
+        /// <summary>
+        /// 鼠标点击在子项上子项的背景颜色
+        /// </summary>
+        public Color PressedBackColor
+        {
+            get
+            {
+                return pressedBackColor;
+            }
+            set
+            {
+                pressedBackColor = value;
+            }
+        }
+
+        private bool isMouseHover;
+        /// <summary>
+        /// 鼠标是否停留在子项上
+        /// </summary>
+        public bool IsMouseHover
+        {
+            get
+            {
+                return isMouseHover;
+            }
+            set
+            {
+                isMouseHover = value;
+            }
+        }
+
+        private Color mouseHoverBackColor;
+        /// <summary>
+        /// 鼠标停留在子项上子项的背景颜色1
+        /// </summary>
+        public Color MouseHoverBackColor
+        {
+            get
+            {
+                return mouseHoverBackColor;
+            }
+            set
+            {
+                mouseHoverBackColor = value;
+            }
+        }
+
+        private Color mousePressedColor;
+        /// <summary>
+        /// 鼠标点击在子项上时子项的颜色
+        /// </summary>
+        public Color MousePressedColor
+        {
+            get
+            {
+                return mousePressedColor;
+            }
+            set
+            {
+                mousePressedColor = value;
+            }
+        }
+
+        private Point itemPos;
+        /// <summary>
+        /// 获取或设置子项的位置
+        /// </summary>
+        public Point ItemPos
+        {
+            get
+            {
+                return itemPos;
+            }
+            set
+            {
+                itemPos = value;
+            }
+        }
+
+
         #endregion
 
         #region 初始化控件
@@ -233,7 +347,11 @@ namespace Chat2021.Frm
             this.userName = userName;
             this.icon = bitmap;
             this.extraMsg = extraMsg;
+            this.MouseHoverBackColor = Color.FromArgb(242, 242, 242);
+            this.mousePressedColor = Color.FromArgb(235, 235, 235);
         }
         #endregion
+
+        
     }
 }

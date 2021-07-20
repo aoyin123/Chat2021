@@ -14,15 +14,13 @@ namespace Chat2021.Frm
         private ChatIemCollection chatItemCollection = null;
         private int sliderVal = 0;
         private Slider slider;
-        private TextBox textBox;
         #endregion
 
         #region 初始化
-        public ChatListBox(TextBox textBox)
+        public ChatListBox()
         {
             chatItemCollection = new ChatIemCollection();
             this.BackColor = Color.White;
-            this.textBox = textBox;
             ChatItem.Width = this.Width;
             ChatItem.Height = 50;
             ChatItem.UserNamePos = new Point(30, 0);
@@ -90,7 +88,7 @@ namespace Chat2021.Frm
 
         private void ItemMouseUp(object sender, MouseEventArgs e)
         {
-            //chatItemCollection[mouseDownItemIndex].IsPressed = false;
+            
         }
 
 
@@ -129,7 +127,6 @@ namespace Chat2021.Frm
                     sliderVal = 1200;
                 }
                 slider.Pos = new Point(slider.Pos.X, (int)(slider.Pos.Y - diffY - distance));//sliderPos决定了滑块的位置，sliderValue决定了ITem以及滑块的位置
-                textBox.Text = distance.ToString();
                 if(slider.Pos.Y - diffY < sliderVal)
                 {
                     slider.Pos = new Point(slider.Pos.X, sliderVal);

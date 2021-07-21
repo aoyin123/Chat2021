@@ -168,6 +168,12 @@
     <Compile Include="Frm\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Frm\FrmSwitchUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Frm\FrmSwitchUserControl.Designer.cs">
+      <DependentUpon>FrmSwitchUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Frm\Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -238,6 +244,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Frm\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\FrmSwitchUserControl.resx">
+      <DependentUpon>FrmSwitchUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm\Resource1.resx">
       <Generator>ResXFileCodeGenerator</Generator>

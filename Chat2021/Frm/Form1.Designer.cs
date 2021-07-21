@@ -30,6 +30,7 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.chatListBox1 = new Chat2021.Frm.ChatListBox();
+            this.frmSwitchUserControl1 = new Chat2021.Frm.FrmSwitchUserControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -57,11 +58,20 @@
             this.chatListBox1.TabIndex = 0;
             this.chatListBox1.Text = "chatListBox1";
             // 
+            // frmSwitchUserControl1
+            // 
+            this.frmSwitchUserControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.frmSwitchUserControl1.Location = new System.Drawing.Point(0, 0);
+            this.frmSwitchUserControl1.Name = "frmSwitchUserControl1";
+            this.frmSwitchUserControl1.Size = new System.Drawing.Size(342, 41);
+            this.frmSwitchUserControl1.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(342, 689);
+            this.Controls.Add(this.frmSwitchUserControl1);
             this.Controls.Add(this.splitContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
@@ -77,5 +87,6 @@
         #endregion
         private ChatListBox chatListBox1;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private FrmSwitchUserControl frmSwitchUserControl1;
     }
 }

@@ -31,6 +31,8 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.chatListBox1 = new Chat2021.Frm.ChatListBox();
             this.frmSwitchUserControl1 = new Chat2021.Frm.FrmSwitchUserControl();
+            this.searchBoxUserControl11 = new Chat2021.Frm.searchBoxUserControl1();
+            this.userControl11 = new Chat2021.Frm.UserControl1();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -60,17 +62,33 @@
             // 
             // frmSwitchUserControl1
             // 
-            this.frmSwitchUserControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.frmSwitchUserControl1.Location = new System.Drawing.Point(0, 0);
+            this.frmSwitchUserControl1.Location = new System.Drawing.Point(0, 199);
             this.frmSwitchUserControl1.Name = "frmSwitchUserControl1";
             this.frmSwitchUserControl1.Size = new System.Drawing.Size(342, 41);
             this.frmSwitchUserControl1.TabIndex = 4;
+            // 
+            // searchBoxUserControl11
+            // 
+            this.searchBoxUserControl11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(157)))), ((int)(((byte)(212)))));
+            this.searchBoxUserControl11.Location = new System.Drawing.Point(0, 0);
+            this.searchBoxUserControl11.Name = "searchBoxUserControl11";
+            this.searchBoxUserControl11.Size = new System.Drawing.Size(341, 41);
+            this.searchBoxUserControl11.TabIndex = 5;
+            // 
+            // userControl11
+            // 
+            this.userControl11.Location = new System.Drawing.Point(13, 47);
+            this.userControl11.Name = "userControl11";
+            this.userControl11.Size = new System.Drawing.Size(233, 150);
+            this.userControl11.TabIndex = 6;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(342, 689);
+            this.Controls.Add(this.userControl11);
+            this.Controls.Add(this.searchBoxUserControl11);
             this.Controls.Add(this.frmSwitchUserControl1);
             this.Controls.Add(this.splitContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -88,5 +106,7 @@
         private ChatListBox chatListBox1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private FrmSwitchUserControl frmSwitchUserControl1;
+        private searchBoxUserControl1 searchBoxUserControl11;
+        private UserControl1 userControl11;
     }
 }

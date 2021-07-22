@@ -18,6 +18,13 @@ namespace Chat2021.Frm
         private Font font = new Font("思源宋体", 10);
         private String mouseMoveBtnName;
         private string mouseDownBtnName;
+        public string MouseDownBtnName
+        {
+            get
+            {
+                return mouseMoveBtnName;
+            }
+        }
 
         public FrmSwitchUserControl()
         {

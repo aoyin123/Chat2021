@@ -24,5 +24,23 @@ namespace Chat2021.Frm
             this.chatListBox1.Width = this.Width;
             this.chatListBox1.Location = new Point(0, 0);
         }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+        }
+
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            base.OnSizeChanged(e);
+            this.frmSwitchUserControl1.Size = new Size(this.Width, 41);
+            this.frmSwitchUserControl1.Location = new Point(0, this.splitContainer1.Location.Y - 41);
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            
+            
+        }
     }
 }

@@ -179,7 +179,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
+    <Compile Include="Frm\searchBoxUserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Frm\searchBoxUserControl1.Designer.cs">
+      <DependentUpon>searchBoxUserControl1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Frm\Slider.cs" />
+    <Compile Include="Frm\UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Frm\UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogFrm\ControlBtn.cs">
       <SubType>Form</SubType>
     </Compile>

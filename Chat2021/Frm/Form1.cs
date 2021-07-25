@@ -42,6 +42,7 @@ namespace Chat2021.Frm
             this.label1.BackColor = Color.Transparent;
             this.textBox1.Location = this.label1.Location;
             this.miniFrmBtn = new MiniFrmBtn();
+            this.LocationChanged += MoveMiniFrmBtn;
             
             Thread t = new Thread(SetWindowTopMost);
             t.IsBackground = true;
@@ -60,6 +61,12 @@ namespace Chat2021.Frm
                 this.TopMost = true;
                 this.miniFrmBtn.TopMost = true;
             }
+        }
+
+        private void MoveMiniFrmBtn(object sender, EventArgs e)
+        {
+            Point p = this.Location;
+            miniFrmBtn.Location = new Point(this.Location.X, this.Location.Y + 20);
         }
 
         int n = 0;

@@ -174,6 +174,12 @@
     <Compile Include="Frm\FrmSwitchUserControl.Designer.cs">
       <DependentUpon>FrmSwitchUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Frm\MiniFrmBtn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\MiniFrmBtn.Designer.cs">
+      <DependentUpon>MiniFrmBtn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Frm\Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -416,6 +422,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\background.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ff1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ss1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\circle-cropped.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MiniBtn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\123.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

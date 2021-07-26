@@ -19,7 +19,14 @@ namespace Chat2021.Frm
   
         [DllImport("user32.dll")]
         public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
- 
+        private const int CS_DropSHADOW = 0x20000;
+        private const int GCL_STYLE = (-26);
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern int SetClassLong(IntPtr hwnd, int nIndex, int dwNewLong);
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern int GetClassLong(IntPtr hwnd, int nIndex);
+
+
         private const int VM_NCLBUTTONDOWN = 0XA1;//定义鼠标左键按下
         private const int HTCAPTION = 2;
         private MiniFrmBtn miniFrmBtn;
@@ -98,7 +105,7 @@ namespace Chat2021.Frm
         private void MoveMiniFrmBtn(object sender, EventArgs e)
         {
             Point p = this.Location;
-            miniFrmBtn.Location = new Point(this.Location.X, this.Location.Y + 20);
+            miniFrmBtn.Location = new Point(this.Location.X + 200, this.Location.Y + 20);
         }
 
         /// <summary>
@@ -151,13 +158,13 @@ namespace Chat2021.Frm
             base.OnLoad(e);
             this.searchBoxUserControl11.Location = new Point(0, this.frmSwitchUserControl1.Location.Y - this.searchBoxUserControl11.Size.Height);
             this.miniFrmBtn.Location = new Point(this.Location.X, this.Location.Y + 20);
-            //this.miniFrmBtn.Show(this);//不加this,miniFrmBtn所呈现的图像会频闪
+            this.miniFrmBtn.Show(this);//不加this,miniFrmBtn所呈现的图像会频闪
             
             SetWindowPos(this.Handle, this.miniFrmBtn.Handle, 0, 0, 0, 0, 0x0001 | 0x0002 | 0x0010 | 0x0080); 
             Thread t = new Thread(SetWindowTopMost);
             t.IsBackground = true;
             t.Start();
-
+            SetClassLong(this.Handle, GCL_STYLE, GetClassLong(this.Handle, GCL_STYLE) | CS_DropSHADOW);
             this.Invalidate();
         }
 

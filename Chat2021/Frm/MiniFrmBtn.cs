@@ -19,14 +19,16 @@ namespace Chat2021.Frm
             InitializeComponent();
             this.TopMost = true;
             this.MouseDown += panel1_MouseDown;
-            SetBits(Resource1.ff1);
+            this.MouseMove += ShowWhiteShadow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            SetBits(Resource1.MiniBtn);
         }
 
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            SetBits(Resource1.ff1);
+            SetBits(Resource1.MiniBtn);
         }
 
         [DllImport("user32.dll")]
@@ -44,6 +46,12 @@ namespace Chat2021.Frm
             ReleaseCapture();
             //发送消息 让系统误以为在标题栏上按下鼠标
             SendMessage((IntPtr)this.Handle, VM_NCLBUTTONDOWN, HTCAPTION, 0);
+        }
+
+
+        private void ShowWhiteShadow(object sender, MouseEventArgs e)
+        {
+
         }
 
         protected override CreateParams CreateParams
@@ -137,8 +145,5 @@ namespace Chat2021.Frm
                 Win32.DeleteDC(memDc);
             }
         }
-
-
-
-}
+    }
 }

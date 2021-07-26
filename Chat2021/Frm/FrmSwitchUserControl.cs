@@ -17,7 +17,7 @@ namespace Chat2021.Frm
         private Hashtable nameToSize = new Hashtable();
         private Font font = new Font("思源宋体", 10);
         private String mouseMoveBtnName;
-        private string mouseDownBtnName;
+        private string mouseDownBtnName = "消息";
         public string MouseDownBtnName
         {
             get
@@ -77,21 +77,6 @@ namespace Chat2021.Frm
             mouseMoveBtnName = "";
         }
 
-        private void DrawUnderLine(object sender,  PaintEventArgs e)
-        {
-            Button btn = (Button)sender;
-            Graphics g = e.Graphics;
-            SolidBrush solidBrush = new SolidBrush(Color.FromArgb(103, 120, 138));
-            Pen pen = new Pen(solidBrush);
-            Point startPos = new Point(btn.Width / 14, btn.Height);
-            Point endPos = new Point(btn.Width - btn.Width / 14, btn.Height);
-
-            g.SmoothingMode = SmoothingMode.HighQuality;
-            g.DrawLine(pen, new Point(0, 0), new Point(btn.Width , btn.Height));
-
-            btn.Paint -= DrawUnderLine;
-        }
-
         private void DrawString(object sender, PaintEventArgs e)
         {
             Button btn = (Button)sender;
@@ -141,10 +126,6 @@ namespace Chat2021.Frm
             g.PageUnit = GraphicsUnit.Pixel;
             g.SmoothingMode = SmoothingMode.HighQuality;
             sf.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
-            //foreach(var name in nameToSize.ToArray())
-            //{
-            //    nameToSize[name] = g.MeasureString(name, font, 500, sf);
-            //}
             ArrayList akeys = new ArrayList(nameToSize.Keys);
             foreach(string name in akeys)
             {

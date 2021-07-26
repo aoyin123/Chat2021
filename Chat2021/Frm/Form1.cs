@@ -41,11 +41,23 @@ namespace Chat2021.Frm
             this.textBox1.Location = this.label1.Location;
             this.miniFrmBtn = new MiniFrmBtn();
             this.LocationChanged += MoveMiniFrmBtn;
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
+            SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
         }
 
+        private void DrawAperture()
+        {
+            Graphics g = this.CreateGraphics();
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            g.DrawEllipse(new Pen(Color.FromArgb(124, 139, 160), 2), new Rectangle(14, 43, 70, 70));
+        }
+
+        bool isCursorsStyleIsHand = false;
         private void ChangeMouseStyle(object sender, MouseEventArgs e)
         {
             Point p = e.Location;
+            bool isRecover = false;
             Point center = new Point(iconRect.Location.X + iconRect.Width / 2,
                                      iconRect.Location.Y + iconRect.Height / 2);
             int r = iconRect.Width;
@@ -54,11 +66,18 @@ namespace Chat2021.Frm
             {
                 Type t = Type.GetType(sender.GetType().AssemblyQualifiedName);
                 t.GetProperty("Cursor").SetValue(sender, System.Windows.Forms.Cursors.Hand);
+                DrawAperture();
+                isCursorsStyleIsHand = true;
             }
             else
             {
-                Type t = Type.GetType(sender.GetType().AssemblyQualifiedName);
-                t.GetProperty("Cursor").SetValue(sender, System.Windows.Forms.Cursors.Default);
+                if (isCursorsStyleIsHand == true)
+                {
+                    Type t = Type.GetType(sender.GetType().AssemblyQualifiedName);
+                    t.GetProperty("Cursor").SetValue(sender, System.Windows.Forms.Cursors.Default);
+                    Invalidate(new Rectangle(14, 43, 80, 80));
+                    isCursorsStyleIsHand = false;
+                }
             }
 
         }
@@ -180,6 +199,7 @@ namespace Chat2021.Frm
 
             g.DrawString("IIIIIIIIIIII", new Font("宋体", 12), Brushes.White, new Point(102, 58));
             g.DrawString("Lv57", new Font("宋体", 8, FontStyle.Bold), new SolidBrush(Color.Red), new Point(234, 65));
+            
         }
 
         private void label1_Click(object sender, EventArgs e)

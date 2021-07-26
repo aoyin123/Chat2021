@@ -29,25 +29,15 @@ namespace Chat2021.Frm
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
             this.splitContainer1.Panel1.Controls.Add(this.chatListBox1);
-            this.splitContainer1.SplitterDistance = this.Width;
             this.splitContainer1.Panel2Collapsed = true;
-            this.splitContainer1.Panel1.BackColor = Color.Red;
-            this.splitContainer1.Panel2.BackColor = Color.Black;
-            this.splitContainer1.SplitterDistance = this.Width;
             this.chatListBox1.Width = this.Width;
             this.chatListBox1.Location = new Point(0, 0);
-            this.MouseDown += panel1_MouseDown;
-            //this.pictureBox1.MouseDown += panel1_MouseDown;
+            this.MouseDown += MoveFrm;
             this.label1.Location = new Point(102, 85);
             this.label1.BackColor = Color.Transparent;
             this.textBox1.Location = this.label1.Location;
             this.miniFrmBtn = new MiniFrmBtn();
             this.LocationChanged += MoveMiniFrmBtn;
-
-            
-            
-
-
         }
 
         private void SetWindowTopMost()
@@ -69,28 +59,18 @@ namespace Chat2021.Frm
             miniFrmBtn.Location = new Point(this.Location.X, this.Location.Y + 20);
         }
 
-        int n = 0;
         /// <summary>
         /// 鼠标按下
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        private void MoveFrm(object sender, MouseEventArgs e)
         {
-            //为当前应用程序释放鼠标捕获
             ReleaseCapture();
-            //发送消息 让系统误以为在标题栏上按下鼠标
             SendMessage((IntPtr)this.Handle, VM_NCLBUTTONDOWN, HTCAPTION, 0);
-            this.miniFrmBtn.Location = new Point(this.miniFrmBtn.Location.X + 2, this.miniFrmBtn.Location.Y + 2);
-            n = n + 1;
-            label1.Text = n.ToString();
-            this.miniFrmBtn.TopMost = true;
         }
 
-        private void mouseUp(object sender, MouseEventArgs e)
-        {
-
-        }
+        
 
         [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
         public static extern int SetWindowPos(IntPtr hwnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, int wFlags);
@@ -129,22 +109,14 @@ namespace Chat2021.Frm
             base.OnLoad(e);
             this.searchBoxUserControl11.Location = new Point(0, this.frmSwitchUserControl1.Location.Y - this.searchBoxUserControl11.Size.Height);
             this.miniFrmBtn.Location = new Point(this.Location.X, this.Location.Y + 20);
-            this.Show();
-            this.miniFrmBtn.Show(this);
-            //this.miniFrmBtn.TopMost = true;
-            //this.pictureBox1.Location = new Point(0, 0);
-            //this.pictureBox1.Size = new Size(this.Width, this.searchBoxUserControl11.Location.Y);
-            //this.miniFrmBtn.TopLevel = false;
+            this.miniFrmBtn.Show(this);//不加this,miniFrmBtn所呈现的图像会频闪
             
-            //this.miniFrmBtn.Parent = this;
-            SetWindowPos(this.Handle, this.miniFrmBtn.Handle, 0, 0, 0, 0, 0x0001 | 0x0002 | 0x0010 | 0x0080);
-            this.Invalidate();
+            SetWindowPos(this.Handle, this.miniFrmBtn.Handle, 0, 0, 0, 0, 0x0001 | 0x0002 | 0x0010 | 0x0080); 
             Thread t = new Thread(SetWindowTopMost);
             t.IsBackground = true;
             t.Start();
-            //int order1, order2;
-            //GetWindowZOrder(this.Handle);
-            //GetWindowZOrder(this.miniFrmBtn.Handle);
+
+            this.Invalidate();
         }
 
         protected override void OnSizeChanged(EventArgs e)

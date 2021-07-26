@@ -184,7 +184,7 @@ namespace Chat2021.Frm
             g.DrawImage(Resource1.mm, new Rectangle(14, 43, 70, 70));
 
             g.DrawString("IIIIIIIIIIII", new Font("宋体", 12), Brushes.White, new Point(102, 58));
-            g.DrawString("Lv57", new Font("宋体", 7), new SolidBrush(Color.Red), new Point(234, 65));
+            g.DrawString("Lv57", new Font("宋体", 8, FontStyle.Bold), new SolidBrush(Color.Red), new Point(234, 65));
         }
 
         private void label1_Click(object sender, EventArgs e)

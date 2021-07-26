@@ -77,6 +77,38 @@ namespace Chat2021.Frm
             }
         }
 
+        private static Font extraMsgFont;
+        /// <summary>
+        /// 设置或获取额外信息的字体
+        /// </summary>
+        public static Font ExtraMsgFont
+        {
+            get
+            {
+                return extraMsgFont;
+            }
+            set
+            {
+                extraMsgFont = value;
+            }
+        }
+
+        private static SolidBrush extraMsgSb;
+        /// <summary>
+        /// 获取或设置额外信息的画笔
+        /// </summary>
+        public static SolidBrush ExtraMsgSb
+        {
+            get
+            {
+                return extraMsgSb;
+            }
+            set
+            {
+                extraMsgSb = value;
+            }
+        }
+
         private Bitmap icon;
         /// <summary>
         /// 设置或获取用户图标

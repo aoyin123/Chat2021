@@ -450,5 +450,8 @@
   <ItemGroup>
     <None Include="Resources\123.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MouseStyle%28已去底%29.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

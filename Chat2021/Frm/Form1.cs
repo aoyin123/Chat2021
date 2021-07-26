@@ -24,6 +24,8 @@ namespace Chat2021.Frm
         private const int HTCAPTION = 2;
         private MiniFrmBtn miniFrmBtn;
         public delegate void myDelegate();
+        private Rectangle iconRect = new Rectangle(14, 43, 70, 70);
+
         public Form1()
         {
             InitializeComponent();
@@ -33,11 +35,32 @@ namespace Chat2021.Frm
             this.chatListBox1.Width = this.Width;
             this.chatListBox1.Location = new Point(0, 0);
             this.MouseDown += MoveFrm;
+            this.MouseMove += ChangeMouseStyle;
             this.label1.Location = new Point(102, 85);
             this.label1.BackColor = Color.Transparent;
             this.textBox1.Location = this.label1.Location;
             this.miniFrmBtn = new MiniFrmBtn();
             this.LocationChanged += MoveMiniFrmBtn;
+        }
+
+        private void ChangeMouseStyle(object sender, MouseEventArgs e)
+        {
+            Point p = e.Location;
+            Point center = new Point(iconRect.Location.X + iconRect.Width / 2,
+                                     iconRect.Location.Y + iconRect.Height / 2);
+            int r = iconRect.Width;
+            double distance = Math.Sqrt(Math.Pow(p.X - center.X, 2) + Math.Pow(p.Y - center.Y, 2));
+            if(distance < r)
+            {
+                Type t = Type.GetType(sender.GetType().AssemblyQualifiedName);
+                t.GetProperty("Cursor").SetValue(sender, System.Windows.Forms.Cursors.Hand);
+            }
+            else
+            {
+                Type t = Type.GetType(sender.GetType().AssemblyQualifiedName);
+                t.GetProperty("Cursor").SetValue(sender, System.Windows.Forms.Cursors.Default);
+            }
+
         }
 
         private void SetWindowTopMost()
@@ -109,7 +132,7 @@ namespace Chat2021.Frm
             base.OnLoad(e);
             this.searchBoxUserControl11.Location = new Point(0, this.frmSwitchUserControl1.Location.Y - this.searchBoxUserControl11.Size.Height);
             this.miniFrmBtn.Location = new Point(this.Location.X, this.Location.Y + 20);
-            this.miniFrmBtn.Show(this);//不加this,miniFrmBtn所呈现的图像会频闪
+            //this.miniFrmBtn.Show(this);//不加this,miniFrmBtn所呈现的图像会频闪
             
             SetWindowPos(this.Handle, this.miniFrmBtn.Handle, 0, 0, 0, 0, 0x0001 | 0x0002 | 0x0010 | 0x0080); 
             Thread t = new Thread(SetWindowTopMost);
@@ -153,7 +176,7 @@ namespace Chat2021.Frm
             //这个时候裁剪区域图片就被填充进result对象中去了，可以对其进行保存
             g.DrawImage(result, new Point(0, 0));
 
-            g.DrawImage(Resource1.mm, new Rectangle(14, 43, 70, 70));
+            g.DrawImage(Resource1.mm, iconRect);
 
             g.DrawString("IIIIIIIIIIII", new Font("宋体", 12), Brushes.White, new Point(102, 58));
             g.DrawString("Lv57", new Font("宋体", 8, FontStyle.Bold), new SolidBrush(Color.Red), new Point(234, 65));

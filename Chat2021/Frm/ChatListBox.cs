@@ -24,19 +24,21 @@ namespace Chat2021.Frm
             ChatItem.Width = this.Width;
             ChatItem.UserNamePos = new Point(30, 0);
             ChatItem.ExtraMsgPos = new Point(30, 15);
-            ChatItem chatItem = new ChatItem("niao",Resource1._11,"hello", "ff");
-            ChatItem.UserNameFont = new Font("宋体", 10);
+            ChatItem chatItem = new ChatItem("糖", Resource1.mm,"糖", "糖糖");
+            ChatItem.UserNameFont = new Font("宋体", 12);
+            ChatItem.ExtraMsgFont = new Font("宋体", 9);
+            ChatItem.ExtraMsgSb = new SolidBrush(Color.FromArgb(117, 117, 117));
             chatItemCollection[0] = chatItem;
 
-            ChatItem chatItem_1 = new ChatItem("niao", Resource1._11, "hello", "ff");
+            ChatItem chatItem_1 = new ChatItem("糖糖", Resource1.mm, "糖糖", "ff");
             chatItemCollection[1] = chatItem_1;
 
-            ChatItem chatItem_2 = new ChatItem("niao", Resource1._11, "hello", "ff");
+            ChatItem chatItem_2 = new ChatItem("糖糖", Resource1.mm, "糖糖", "ff");
             chatItemCollection[2] = chatItem_2;
 
             for(int i = 3; i < 40; i++)
             {
-                chatItemCollection[i] = new ChatItem("niao", Resource1._11, "hello", "ff");
+                chatItemCollection[i] = new ChatItem("糖糖", Resource1.mm, "糖糖", "ff");
             }
 
             ChatItem.Height = 75;
@@ -174,11 +176,14 @@ namespace Chat2021.Frm
                     g.FillRectangle(solidBrush, new Rectangle(0, baseY, this.Width, ChatItem.Height));
                 }
 
-                g.DrawImage(chatItemCollection[i].Icon, GetPointByModifyHeight(ChatItem.IconPos, baseY));
-                g.DrawString(chatItemCollection[i].UserName, ChatItem.UserNameFont,Brushes.Black, GetPointByModifyHeight(ChatItem.UserNamePos, baseY));
-                g.DrawString(chatItemCollection[i].ExtraMsg, ChatItem.UserNameFont, Brushes.Black, GetPointByModifyHeight(ChatItem.ExtraMsgPos, baseY));
-                g.DrawString(i.ToString(), ChatItem.UserNameFont, Brushes.Black, GetPointByModifyHeight(ChatItem.ExtraMsgPos, baseY));
-                g.DrawString(sliderVal.ToString(), new Font("宋体", 10), Brushes.Black, new Point(0, 0));
+                Point imagePos = GetPointByModifyHeight(ChatItem.IconPos, baseY);
+                Point userNamePos = GetPointByModifyHeight(ChatItem.UserNamePos, baseY);
+                g.DrawImage(chatItemCollection[i].Icon, new Rectangle(imagePos.X + 20, imagePos.Y + 10, 50, 50));//GetPointByModifyHeight(ChatItem.IconPos, baseY));
+                g.DrawString(chatItemCollection[i].UserName, ChatItem.UserNameFont,Brushes.Black, new Point(userNamePos.X + 50, userNamePos.Y + 15));
+                g.DrawString("不好意思，刚才没看到", ChatItem.ExtraMsgFont, ChatItem.ExtraMsgSb, new Point(userNamePos.X + 50, userNamePos.Y + 44));
+
+                g.DrawString(chatItemCollection[i].LastChattTime, ChatItem.UserNameFont, Brushes.Black, new Point(userNamePos.X + 50, userNamePos.Y + 30));
+                //g.DrawString(i.ToString(), ChatItem.UserNameFont, Brushes.Black, GetPointByModifyHeight(ChatItem.ExtraMsgPos, baseY));
                 g.FillPath(new SolidBrush(slider.BackColor), slider.Path);
             }
         }

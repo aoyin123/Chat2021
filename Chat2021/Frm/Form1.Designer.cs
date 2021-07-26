@@ -29,16 +29,15 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.chatListBox1 = new Chat2021.Frm.ChatListBox();
-            this.searchBoxUserControl11 = new Chat2021.Frm.searchBoxUserControl1();
-            this.frmSwitchUserControl1 = new Chat2021.Frm.FrmSwitchUserControl();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.searchBoxUserControl11 = new Chat2021.Frm.searchBoxUserControl1();
+            this.frmSwitchUserControl1 = new Chat2021.Frm.FrmSwitchUserControl();
+            this.chatListBox1 = new Chat2021.Frm.ChatListBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -53,30 +52,6 @@
             this.splitContainer1.Size = new System.Drawing.Size(342, 447);
             this.splitContainer1.SplitterDistance = 114;
             this.splitContainer1.TabIndex = 3;
-            // 
-            // chatListBox1
-            // 
-            this.chatListBox1.BackColor = System.Drawing.Color.White;
-            this.chatListBox1.Location = new System.Drawing.Point(3, -12);
-            this.chatListBox1.Name = "chatListBox1";
-            this.chatListBox1.Size = new System.Drawing.Size(160, 456);
-            this.chatListBox1.TabIndex = 0;
-            this.chatListBox1.Text = "chatListBox1";
-            // 
-            // searchBoxUserControl11
-            // 
-            this.searchBoxUserControl11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(157)))), ((int)(((byte)(212)))));
-            this.searchBoxUserControl11.Location = new System.Drawing.Point(0, 161);
-            this.searchBoxUserControl11.Name = "searchBoxUserControl11";
-            this.searchBoxUserControl11.Size = new System.Drawing.Size(341, 41);
-            this.searchBoxUserControl11.TabIndex = 5;
-            // 
-            // frmSwitchUserControl1
-            // 
-            this.frmSwitchUserControl1.Location = new System.Drawing.Point(0, 199);
-            this.frmSwitchUserControl1.Name = "frmSwitchUserControl1";
-            this.frmSwitchUserControl1.Size = new System.Drawing.Size(342, 41);
-            this.frmSwitchUserControl1.TabIndex = 4;
             // 
             // label1
             // 
@@ -96,20 +71,46 @@
             this.textBox1.TabIndex = 7;
             this.textBox1.Visible = false;
             // 
-            // pictureBox1
+            // button1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(0, -2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(341, 164);
-            this.pictureBox1.TabIndex = 9;
-            this.pictureBox1.TabStop = false;
+            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // searchBoxUserControl11
+            // 
+            this.searchBoxUserControl11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(157)))), ((int)(((byte)(212)))));
+            this.searchBoxUserControl11.Location = new System.Drawing.Point(0, 161);
+            this.searchBoxUserControl11.Name = "searchBoxUserControl11";
+            this.searchBoxUserControl11.Size = new System.Drawing.Size(341, 41);
+            this.searchBoxUserControl11.TabIndex = 5;
+            // 
+            // frmSwitchUserControl1
+            // 
+            this.frmSwitchUserControl1.Location = new System.Drawing.Point(0, 199);
+            this.frmSwitchUserControl1.Name = "frmSwitchUserControl1";
+            this.frmSwitchUserControl1.Size = new System.Drawing.Size(342, 41);
+            this.frmSwitchUserControl1.TabIndex = 4;
+            // 
+            // chatListBox1
+            // 
+            this.chatListBox1.BackColor = System.Drawing.Color.White;
+            this.chatListBox1.Location = new System.Drawing.Point(3, -12);
+            this.chatListBox1.Name = "chatListBox1";
+            this.chatListBox1.Size = new System.Drawing.Size(160, 456);
+            this.chatListBox1.TabIndex = 0;
+            this.chatListBox1.Text = "chatListBox1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(342, 689);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.searchBoxUserControl11);
@@ -123,7 +124,6 @@
             this.splitContainer1.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,6 +136,6 @@
         private searchBoxUserControl1 searchBoxUserControl11;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button1;
     }
 }

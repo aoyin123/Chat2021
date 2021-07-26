@@ -23,7 +23,7 @@ namespace Chat2021.Frm
         private const int VM_NCLBUTTONDOWN = 0XA1;//定义鼠标左键按下
         private const int HTCAPTION = 2;
         private MiniFrmBtn miniFrmBtn;
-
+        public delegate void myDelegate();
         public Form1()
         {
             InitializeComponent();
@@ -37,17 +37,17 @@ namespace Chat2021.Frm
             this.chatListBox1.Width = this.Width;
             this.chatListBox1.Location = new Point(0, 0);
             this.MouseDown += panel1_MouseDown;
-            this.pictureBox1.MouseDown += panel1_MouseDown;
+            //this.pictureBox1.MouseDown += panel1_MouseDown;
             this.label1.Location = new Point(102, 85);
             this.label1.BackColor = Color.Transparent;
             this.textBox1.Location = this.label1.Location;
             this.miniFrmBtn = new MiniFrmBtn();
             this.LocationChanged += MoveMiniFrmBtn;
+
             
-            Thread t = new Thread(SetWindowTopMost);
-            t.IsBackground = true;
-            t.Start();
             
+
+
         }
 
         private void SetWindowTopMost()
@@ -81,7 +81,6 @@ namespace Chat2021.Frm
             ReleaseCapture();
             //发送消息 让系统误以为在标题栏上按下鼠标
             SendMessage((IntPtr)this.Handle, VM_NCLBUTTONDOWN, HTCAPTION, 0);
-            SendMessage((IntPtr)this.miniFrmBtn.Handle, VM_NCLBUTTONDOWN, HTCAPTION, 0);
             this.miniFrmBtn.Location = new Point(this.miniFrmBtn.Location.X + 2, this.miniFrmBtn.Location.Y + 2);
             n = n + 1;
             label1.Text = n.ToString();
@@ -133,13 +132,16 @@ namespace Chat2021.Frm
             this.Show();
             this.miniFrmBtn.Show(this);
             //this.miniFrmBtn.TopMost = true;
-            this.pictureBox1.Location = new Point(0, 0);
-            this.pictureBox1.Size = new Size(this.Width, this.searchBoxUserControl11.Location.Y);
+            //this.pictureBox1.Location = new Point(0, 0);
+            //this.pictureBox1.Size = new Size(this.Width, this.searchBoxUserControl11.Location.Y);
             //this.miniFrmBtn.TopLevel = false;
             
             //this.miniFrmBtn.Parent = this;
             SetWindowPos(this.Handle, this.miniFrmBtn.Handle, 0, 0, 0, 0, 0x0001 | 0x0002 | 0x0010 | 0x0080);
             this.Invalidate();
+            Thread t = new Thread(SetWindowTopMost);
+            t.IsBackground = true;
+            t.Start();
             //int order1, order2;
             //GetWindowZOrder(this.Handle);
             //GetWindowZOrder(this.miniFrmBtn.Handle);
@@ -150,6 +152,11 @@ namespace Chat2021.Frm
             base.OnSizeChanged(e);
             this.frmSwitchUserControl1.Size = new Size(this.Width, 41);
             this.frmSwitchUserControl1.Location = new Point(0, this.splitContainer1.Location.Y - 41);
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -170,9 +177,9 @@ namespace Chat2021.Frm
             graphics.DrawImage(bitmap, new Rectangle(0, 0, cropRegion.Width, cropRegion.Height), cropRegion, GraphicsUnit.Pixel);
             //Graphics g1 = pictureBox1.CreateGraphics();
             //g1.DrawImage(result, new Point(0, 0));
-            this.pictureBox1.Image = result;
+            //this.pictureBox1.Image = result;
             //这个时候裁剪区域图片就被填充进result对象中去了，可以对其进行保存
-            //g.DrawImage(result, new Point(0, 0));
+            g.DrawImage(result, new Point(0, 0));
 
             g.DrawImage(Resource1.mm, new Rectangle(14, 43, 70, 70));
 
@@ -192,6 +199,11 @@ namespace Chat2021.Frm
             Point p = e.Location;
             this.textBox1.Visible = false;
             this.label1.Visible = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

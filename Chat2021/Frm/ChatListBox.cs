@@ -22,7 +22,6 @@ namespace Chat2021.Frm
             chatItemCollection = new ChatIemCollection();
             this.BackColor = Color.White;
             ChatItem.Width = this.Width;
-            ChatItem.Height = 50;
             ChatItem.UserNamePos = new Point(30, 0);
             ChatItem.ExtraMsgPos = new Point(30, 15);
             ChatItem chatItem = new ChatItem("niao",Resource1._11,"hello", "ff");
@@ -40,7 +39,7 @@ namespace Chat2021.Frm
                 chatItemCollection[i] = new ChatItem("niao", Resource1._11, "hello", "ff");
             }
 
-            ChatItem.Height = 30;
+            ChatItem.Height = 75;
 
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.FormMouseWheel);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(SliderMouseDown);

@@ -93,6 +93,26 @@ namespace Chat2021.Frm {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap halfOpcaty {
+            get {
+                object obj = ResourceManager.GetObject("halfOpcaty", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap MainFrmUnderly {
+            get {
+                object obj = ResourceManager.GetObject("MainFrmUnderly", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap MiniBtn {
             get {
                 object obj = ResourceManager.GetObject("MiniBtn", resourceCulture);

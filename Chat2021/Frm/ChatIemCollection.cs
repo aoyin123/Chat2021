@@ -9,7 +9,7 @@ namespace Chat2021.Frm
     class ChatIemCollection
     {
         #region 变量
-        private ChatItem[] chatItems;
+        private ChatSubItem[] chatItems;
         private int count;
         public int Count
         {
@@ -33,10 +33,10 @@ namespace Chat2021.Frm
         /// 增加用户
         /// </summary>
         /// <param name="chatItem">chatItem</param>
-        private void AddItem(ChatItem chatItem)
+        private void AddItem(ChatSubItem chatItem)
         {
 
-            ChatItem[] chatItem_copy = new ChatItem[count + 1];
+            ChatSubItem[] chatItem_copy = new ChatSubItem[count + 1];
             chatItems.CopyTo(chatItem_copy, 0);
             chatItems = chatItem_copy;
             count++;
@@ -47,12 +47,12 @@ namespace Chat2021.Frm
         {
             if(chatItems == null)
             {
-                chatItems = new ChatItem[40];
+                chatItems = new ChatSubItem[40];
                 count = 40;
             }
             else
             {
-                ChatItem[] arrTemp = new ChatItem[chatItems.Length * 2];
+                ChatSubItem[] arrTemp = new ChatSubItem[chatItems.Length * 2];
                 chatItems.CopyTo(arrTemp, 0);
                 chatItems = arrTemp;
             }
@@ -63,7 +63,7 @@ namespace Chat2021.Frm
         /// </summary>
         /// <param name="chatItem"></param>
         /// <returns></returns>
-        private int IndexOf(ChatItem chatItem)
+        private int IndexOf(ChatSubItem chatItem)
         {
             for(int i = 0; i < count; i++)
             {
@@ -80,10 +80,10 @@ namespace Chat2021.Frm
         /// </summary>
         /// <param name="chatItem"></param>
         /// <returns></returns>
-        private ChatItem[] RemoveItem(ChatItem chatItem)
+        private ChatSubItem[] RemoveItem(ChatSubItem chatItem)
         {
             int index = IndexOf(chatItem);
-            ChatItem[] chatItem_cp = new ChatItem[count - 1];
+            ChatSubItem[] chatItem_cp = new ChatSubItem[count - 1];
             if(index != -1)
             {
                 for(int i = 0; i < index; i++)
@@ -107,7 +107,7 @@ namespace Chat2021.Frm
             }
         }
 
-        public ChatItem this[int index]
+        public ChatSubItem this[int index]
         {
             get
             {

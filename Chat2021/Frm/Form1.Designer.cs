@@ -29,37 +29,30 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.chatListBox1 = new Chat2021.Frm.ChatListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.ToolBox = new System.Windows.Forms.PictureBox();
             this.searchBoxUserControl11 = new Chat2021.Frm.searchBoxUserControl1();
             this.frmSwitchUserControl1 = new Chat2021.Frm.FrmSwitchUserControl();
+            this.chatListBox1 = new Chat2021.Frm.ChatListBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ToolBox)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.splitContainer1.Location = new System.Drawing.Point(0, 242);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.chatListBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(342, 447);
+            this.splitContainer1.Size = new System.Drawing.Size(342, 382);
             this.splitContainer1.SplitterDistance = 114;
             this.splitContainer1.TabIndex = 3;
-            // 
-            // chatListBox1
-            // 
-            this.chatListBox1.BackColor = System.Drawing.Color.White;
-            this.chatListBox1.Location = new System.Drawing.Point(3, -12);
-            this.chatListBox1.Name = "chatListBox1";
-            this.chatListBox1.Size = new System.Drawing.Size(160, 456);
-            this.chatListBox1.TabIndex = 0;
-            this.chatListBox1.Text = "chatListBox1";
             // 
             // label1
             // 
@@ -79,6 +72,24 @@
             this.textBox1.TabIndex = 7;
             this.textBox1.Visible = false;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // ToolBox
+            // 
+            this.ToolBox.Location = new System.Drawing.Point(0, 625);
+            this.ToolBox.Name = "ToolBox";
+            this.ToolBox.Size = new System.Drawing.Size(341, 61);
+            this.ToolBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.ToolBox.TabIndex = 1;
+            this.ToolBox.TabStop = false;
+            // 
             // searchBoxUserControl11
             // 
             this.searchBoxUserControl11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(157)))), ((int)(((byte)(212)))));
@@ -94,11 +105,22 @@
             this.frmSwitchUserControl1.Size = new System.Drawing.Size(342, 41);
             this.frmSwitchUserControl1.TabIndex = 4;
             // 
+            // chatListBox1
+            // 
+            this.chatListBox1.BackColor = System.Drawing.Color.White;
+            this.chatListBox1.Location = new System.Drawing.Point(3, -12);
+            this.chatListBox1.Name = "chatListBox1";
+            this.chatListBox1.Size = new System.Drawing.Size(160, 456);
+            this.chatListBox1.TabIndex = 0;
+            this.chatListBox1.Text = "chatListBox1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(342, 689);
+            this.Controls.Add(this.ToolBox);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.searchBoxUserControl11);
@@ -112,6 +134,7 @@
             this.splitContainer1.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ToolBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -124,5 +147,7 @@
         private searchBoxUserControl1 searchBoxUserControl11;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox ToolBox;
     }
 }

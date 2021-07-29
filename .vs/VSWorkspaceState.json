@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Chat2021",
+    "\\Chat2021\\Frm",
+    "\\Chat2021\\LogFrm"
   ],
+  "SelectedNode": "\\Chat2021\\Chat2021.csproj",
   "PreviewInSolutionExplorer": false
 }

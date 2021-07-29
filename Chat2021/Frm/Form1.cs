@@ -30,7 +30,9 @@ namespace Chat2021.Frm
         private const int VM_NCLBUTTONDOWN = 0XA1;//定义鼠标左键按下
         private const int HTCAPTION = 2;
         private MiniFrmBtn miniFrmBtn;
+        private Form2 form2;
         public delegate void myDelegate();
+        private ChatItem chatItem = new ChatItem();
         private Rectangle iconRect = new Rectangle(14, 43, 70, 70);
 
         public Form1()
@@ -41,16 +43,21 @@ namespace Chat2021.Frm
             this.splitContainer1.Panel2Collapsed = true;
             this.chatListBox1.Width = this.Width;
             this.chatListBox1.Location = new Point(0, 0);
-            this.MouseDown += MoveFrm;
-            this.MouseMove += ChangeMouseStyle;
+            //this.MouseDown += MoveFrm;
+            //this.MouseMove += ChangeMouseStyle;
             this.label1.Location = new Point(102, 85);
             this.label1.BackColor = Color.Transparent;
             this.textBox1.Location = this.label1.Location;
-            this.miniFrmBtn = new MiniFrmBtn();
-            this.LocationChanged += MoveMiniFrmBtn;
+            this.miniFrmBtn = new MiniFrmBtn(this);
+            this.form2 = new Form2();
+            form2.Location = new Point(this.Location.X + 285, this.Location.Y + 40);
+            form2.Show();
+            //this.LocationChanged += MoveMiniFrmBtn;
             SetStyle(ControlStyles.UserPaint, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
             SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
+
+            
         }
 
         private void DrawAperture()
@@ -64,7 +71,6 @@ namespace Chat2021.Frm
         private void ChangeMouseStyle(object sender, MouseEventArgs e)
         {
             Point p = e.Location;
-            bool isRecover = false;
             Point center = new Point(iconRect.Location.X + iconRect.Width / 2,
                                      iconRect.Location.Y + iconRect.Height / 2);
             int r = iconRect.Width;
@@ -99,13 +105,18 @@ namespace Chat2021.Frm
                 while ((order1 == GetWindowZOrder(this.Handle)) && (order2 == GetWindowZOrder(this.miniFrmBtn.Handle))) ;
                 this.TopMost = true;
                 this.miniFrmBtn.TopMost = true;
+                //this.miniFrmBtn.BringToFront();
+                //this.TopMost = true;
+                //this.BringToFront();
+                //this.Show();
+                
             }
         }
 
         private void MoveMiniFrmBtn(object sender, EventArgs e)
         {
             Point p = this.Location;
-            miniFrmBtn.Location = new Point(this.Location.X + 200, this.Location.Y + 20);
+            miniFrmBtn.Location = new Point(this.Location.X + 285, this.Location.Y + 20);
         }
 
         /// <summary>
@@ -157,7 +168,7 @@ namespace Chat2021.Frm
         {
             base.OnLoad(e);
             this.searchBoxUserControl11.Location = new Point(0, this.frmSwitchUserControl1.Location.Y - this.searchBoxUserControl11.Size.Height);
-            this.miniFrmBtn.Location = new Point(this.Location.X, this.Location.Y + 20);
+            this.miniFrmBtn.Location = new Point(this.Location.X + 285, this.Location.Y + 20);
             this.miniFrmBtn.Show(this);//不加this,miniFrmBtn所呈现的图像会频闪
             
             SetWindowPos(this.Handle, this.miniFrmBtn.Handle, 0, 0, 0, 0, 0x0001 | 0x0002 | 0x0010 | 0x0080); 
@@ -165,7 +176,21 @@ namespace Chat2021.Frm
             t.IsBackground = true;
             t.Start();
             SetClassLong(this.Handle, GCL_STYLE, GetClassLong(this.Handle, GCL_STYLE) | CS_DropSHADOW);
+
+            this.ToolBox.Location = new Point(0, this.splitContainer1.Location.Y + this.splitContainer1.Height);
+            this.ToolBox.Size = new Size(this.Width, this.Height - this.ToolBox.Location.Y);
+            this.ToolBox.BackColor = Color.White;
+            this.BackColor = Color.White;
+            //this.ToolBox.Image = Resource1.MainFrmUnderly;
+            this.ToolBox.Paint += onDrawImage;
             this.Invalidate();
+        }
+
+        private void onDrawImage(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            g.DrawImage(Resource1.MainFrmUnderly, new Rectangle(0, 5, ToolBox.Width, Resource1.MainFrmUnderly.Height)); ;
         }
 
         protected override void OnSizeChanged(EventArgs e)

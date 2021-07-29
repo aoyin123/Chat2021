@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\repos\Chat2021\Chat2021\obj\Debug\
+D:\repos\Chat2021\Chat2021\obj\Release\
 Chat2021
 none
 false
-DEBUG;TRACE
+TRACE
 
 1-1013985509
 
-59431345569
-1471374970861
+521143951840
+147-2138837830
 LogFrm\AccountInputBox.xaml;
 
-False
+True
 

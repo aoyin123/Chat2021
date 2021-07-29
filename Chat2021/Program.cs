@@ -18,7 +18,7 @@ namespace Chat2021
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Chat2021.LogFrm.LogFrm());
             //Application.Run(new Chat2021.LogFrm.Icon());
-            Application.Run(new Chat2021.Frm.Form1());
+            Application.Run(new Chat2021.Frm.Form3());
         }
     }
 }

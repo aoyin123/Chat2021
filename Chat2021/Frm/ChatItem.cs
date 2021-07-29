@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -8,382 +9,462 @@ using System.Windows.Forms;
 
 namespace Chat2021.Frm
 {
-    class ChatItem
+    struct TitleToItemCollection
     {
-        #region 属性
-        private string userName;
-        /// <summary>
-        /// 设置或获取用户名
-        /// </summary>
-        public string UserName
-        { 
-            get
-            {
-                return userName;
-            }
-            set
-            {
-                userName = value;
-            }
-        }
+        public string title;
+        public ChatIemCollection chatIemCollection;
+        public bool isDrawItem;
+        public Rectangle titleRegion;
+        public Point point1;
+        public Point point2;
+        public Point titlePos;
+        public Point basePos;
+    }
 
-        
+    class ChatItem : Control
+    {
+        private TitleToItemCollection[] titleToItemCollection = new TitleToItemCollection[4];
+        private Slider slider;
+        private int sliderVal = 0;
+        private Font titleFont = new Font("宋体", 10);
+        private int drawBackGround = -1;
+        private int noDrawBackGroundNumber = -1;
 
-        private static Font userNameFont;
         /// <summary>
-        /// 显示用户名所用到的字体
+        /// 获取或设置分组栏的字体
         /// </summary>
-        public static Font UserNameFont
+        public Font TitleFont
         {
             get
             {
-                return userNameFont;
+                return titleFont;
             }
             set
             {
-                userNameFont = value;
+                titleFont = value;
             }
         }
 
-        private static Point userNamePos;
+        private Brush titleBru = Brushes.Black;
         /// <summary>
-        /// 设置或获取用户名显示位置
+        /// 设置或获取画标题的刷子
         /// </summary>
-        public static Point UserNamePos
+        public Brush TitleBru
         {
             get
             {
-                return userNamePos;
+                return titleBru;
             }
             set
             {
-                userNamePos = value;
+                titleBru = value;
             }
         }
 
-        private static Point extraMsgPos;
+        private Size titleSize;
         /// <summary>
-        /// 设置或获取用户名显示位置
+        /// 设置或获取item的大小
         /// </summary>
-        public static Point ExtraMsgPos
+        public Size TitleSize
         {
             get
             {
-                return extraMsgPos;
+                return titleSize;
             }
             set
             {
-                extraMsgPos = value;
+                titleSize = value;
             }
         }
 
-        private static Font extraMsgFont;
-        /// <summary>
-        /// 设置或获取额外信息的字体
-        /// </summary>
-        public static Font ExtraMsgFont
+        public ChatItem()
         {
-            get
-            {
-                return extraMsgFont;
-            }
-            set
-            {
-                extraMsgFont = value;
-            }
+            this.BackColor = Color.White;
+            titleToItemCollection[0].title = "新朋友";
+            titleToItemCollection[0].chatIemCollection = new ChatIemCollection();
+            titleToItemCollection[0].isDrawItem = true;
+            titleToItemCollection[0].basePos = new Point(0, 0);
+       
+
+            titleToItemCollection[1].title = "我的设备";
+            titleToItemCollection[1].chatIemCollection = new ChatIemCollection();
+            titleToItemCollection[1].isDrawItem = false;
+
+            titleToItemCollection[2].title = "朋友";
+            titleToItemCollection[2].chatIemCollection = new ChatIemCollection();
+            titleToItemCollection[2].isDrawItem = false;
+
+            titleToItemCollection[3].title = "公众号";
+            titleToItemCollection[3].chatIemCollection = new ChatIemCollection();
+            titleToItemCollection[3].isDrawItem = false;
+
+            ChatIemCollection chatIemCollection = new ChatIemCollection();
+            ChatSubItem.UserNamePos = new Point(30, 0);
+            
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(SliderMouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(SliderMouseMove);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(ItemMouseDown);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(SliderMouseUp);
+            this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.FormMouseWheel);
+
+            InitItem();
+
+            SetStyle(ControlStyles.ResizeRedraw, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
         }
 
-        private static SolidBrush extraMsgSb;
-        /// <summary>
-        /// 获取或设置额外信息的画笔
-        /// </summary>
-        public static SolidBrush ExtraMsgSb
+        private void SliderMouseUp(object sender, MouseEventArgs e)
         {
-            get
-            {
-                return extraMsgSb;
-            }
-            set
-            {
-                extraMsgSb = value;
-            }
+            isMouseDownOnSlider = false;
         }
 
-        private Bitmap icon;
-        /// <summary>
-        /// 设置或获取用户图标
-        /// </summary>
-        public Bitmap Icon
+        private void SliderMouseMove(object sender, MouseEventArgs e)
         {
-            get
+            double diffY, slideSpace, distance;
+            if (isMouseDownOnSlider == true)
             {
-                return icon;
-            }
-            set
-            {
-                icon = value;
+                diffY = mousePos.Y - e.Location.Y;
+                mousePos = e.Location;
+
+                slideSpace = this.Height - slider.Height;
+                distance = (sumLength - this.Height) / slideSpace * diffY;
+
+                sliderVal -= (int)distance;
+                if (sliderVal < 0)
+                {
+                    sliderVal = 0;
+                }
+                else if (sliderVal > sumLength - this.Height)
+                {
+                    sliderVal = sumLength - Height;
+                }
+                slider.Pos = new Point(slider.Pos.X, (int)(slider.Pos.Y - diffY - distance));//sliderPos决定了滑块的位置，sliderValue决定了ITem以及滑块的位置
+                if (slider.Pos.Y - diffY < sliderVal)
+                {
+                    slider.Pos = new Point(slider.Pos.X, sliderVal);
+                }
+                else if ((slider.Pos.Y - diffY) > (sliderVal + this.Height - slider.Height))
+                {
+                    slider.Pos = new Point(slider.Pos.X, sliderVal + this.Height - slider.Height);
+                }
+                this.Invalidate();
             }
         }
 
-        private static  Size iconSize;
-        /// <summary>
-        /// 设置或获取用户图标的大小
-        /// </summary>
-        public static Size IconSize
+        private void FormMouseWheel(object sender, MouseEventArgs e)
         {
-            get
+            double sumLength = this.sumLength - this.Height;
+            int sliderY = 0;
+            if (e.Delta > 0)
             {
-                return iconSize;
+                for (int i = 0; i < 70; i++)
+                {
+                    sliderVal = sliderVal - 1;
+                    if (sliderVal < 0) //向上滑动
+                    {
+                        sliderVal = 0;
+                    }
+                    sliderY = (int)((sliderVal / sumLength) * (this.Height - slider.Height));
+                    slider.Pos = new Point(this.Width - 10, sliderY + sliderVal);
+                    this.Invalidate();
+                }
             }
-            set
+            else if (e.Delta < 0) // 向下滑动
             {
-                iconSize = value;
+                for (int i = 0; i < 70; i++)
+                {
+                    sliderVal = sliderVal + 1;
+                    if (sliderVal > sumLength)
+                    {
+                        sliderVal = (int)sumLength;
+                    }
+                    sliderY = (int)((sliderVal / sumLength) * (this.Height - slider.Height));
+                    slider.Pos = new Point(this.Width - 10, sliderY + sliderVal);
+                    this.Invalidate();
+                }
             }
         }
 
-        private static Point iconPos;
-        /// <summary>
-        /// 设置用户图标的位置
-        /// </summary>
-        public static Point IconPos
+        protected override void InitLayout()
         {
-            get
-            {
-                return iconPos;
-            }
-            set
-            {
-                iconPos = value;
-            }
+            base.InitLayout();
+            slider = new Slider(new Point(this.Width - 10, 0), new Size(10, 50));
+            slider.OwnerChatListBox = (Control)this;
         }
 
-        private string lastChatTime;
-        /// <summary>
-        /// 最近一次聊天的时间
-        /// </summary>
-        public string LastChattTime
+        protected override void OnPaint(PaintEventArgs e)
         {
-            get 
-            {
-                return lastChatTime;
-            }
-            set
-            {
-                lastChatTime = value;
-            }
+            base.OnPaint(e);
+            Graphics g = e.Graphics;
+            g.TranslateTransform(0, -sliderVal);
+            DrawItemBackGround(g);
+            DrawItem(g);
         }
 
-        private static Font lastChatTimeFont;
-        /// <summary>
-        /// 设置或时间显示的字体
-        /// </summary>
-        public static Font LastChatTimeFont
+        private Point GetPointByModifyHeight(Point p, int height)
         {
-            get
-            {
-                return lastChatTimeFont;
-            }
-            set
-            {
-                lastChatTimeFont = value;
-            }
+            return new Point(p.X, p.Y + height);
         }
 
-        private static Point lastChatTimePos;
-        /// <summary>
-        /// 最近一次聊天时间显示位置
-        /// </summary>
-        public static Point LastChatTimePos
+        bool isMouseDownOnSlider = false;
+        Point mousePos;
+        private void SliderMouseDown(object sender, MouseEventArgs e)
         {
-            get
+            Point sliderToChatListBox = new Point(slider.Pos.X, slider.Pos.Y - sliderVal);
+            Rectangle rect = new Rectangle(sliderToChatListBox, new Size(slider.Width, slider.Height));
+            if (rect.Contains(e.Location))
             {
-                return lastChatTimePos;
-            }
-            set
-            {
-                lastChatTimePos = value;
+                isMouseDownOnSlider = true;
+                mousePos = e.Location;
             }
         }
 
-        private static int width;
-        /// <summary>
-        /// item的宽度
-        /// </summary>
-        public static int Width
+        private void InitItem()
         {
-            get
+            for (int i = 0; i < 4; i++)
             {
-                return width;
-            }
-            set
-            {
-                width = value;
+                ChatIemCollection chatItemCollection = titleToItemCollection[i].chatIemCollection;
+
+                ChatSubItem chatItem = new ChatSubItem("糖", Resource1.mm, "糖", "糖糖");
+                ChatSubItem.UserNameFont = new Font("宋体", 12);
+                ChatSubItem.ExtraMsgFont = new Font("宋体", 9);
+                ChatSubItem.ExtraMsgSb = new SolidBrush(Color.FromArgb(117, 117, 117));
+                chatItemCollection[0] = chatItem;
+
+                ChatSubItem chatItem_1 = new ChatSubItem("糖糖", Resource1.mm, "糖糖", "ff");
+                chatItemCollection[1] = chatItem_1;
+
+                ChatSubItem chatItem_2 = new ChatSubItem("糖糖", Resource1.mm, "糖糖", "ff");
+                chatItemCollection[2] = chatItem_2;
+
+                for (int f = 3; f < 40; f++)
+                {
+                    chatItemCollection[f] = new ChatSubItem("糖糖", Resource1.mm, "糖糖", "ff");
+                }
             }
         }
 
-        private static int height;
-        /// <summary>
-        /// Item的高度
-        /// </summary>
-        public static int Height
+        private int sumLength;
+        private void DrawItem(Graphics g)
         {
-            get
+            int baseHeight = 0;
+            int blankHeight = 15;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            for(int i = 0; i < 4; i++)
             {
-                return height;
+                titleToItemCollection[i].titleRegion = new Rectangle(0, baseHeight, this.Width, 45);
+                baseHeight += blankHeight;
+                string title = titleToItemCollection[i].title;
+                int baseY = 0;
+                ChatIemCollection chatItemCollection = titleToItemCollection[i].chatIemCollection;
+
+                //ChatSubItem chatItem = new ChatSubItem("糖", Resource1.mm, "糖", "糖糖");
+                //ChatSubItem.UserNameFont = new Font("宋体", 12);
+                //ChatSubItem.ExtraMsgFont = new Font("宋体", 9);
+                //ChatSubItem.ExtraMsgSb = new SolidBrush(Color.FromArgb(117, 117, 117));
+                //chatItemCollection[0] = chatItem;
+
+                //ChatSubItem chatItem_1 = new ChatSubItem("糖糖", Resource1.mm, "糖糖", "ff");
+                //chatItemCollection[1] = chatItem_1;
+
+                //ChatSubItem chatItem_2 = new ChatSubItem("糖糖", Resource1.mm, "糖糖", "ff");
+                //chatItemCollection[2] = chatItem_2;
+
+                //for (int f = 3; f < 40; f++)
+                //{
+                //    chatItemCollection[f] = new ChatSubItem("糖糖", Resource1.mm, "糖糖", "ff");
+                //}
+
+
+                Point point = new Point(30,  baseHeight);
+                DrawArrows(g, titleToItemCollection[i].isDrawItem, baseHeight);
+                
+                g.DrawString(title, new Font("宋体", 11), Brushes.Black, point);
+                
+                baseHeight = baseHeight + 10 + blankHeight;
+                if(titleToItemCollection[i].isDrawItem == true)
+                {
+                    for (int j = 0; j < 40; j++)
+                    {
+                        baseY = j * 75 + baseHeight;
+                        if (true == chatItemCollection[j].IsMouseHover)
+                        {
+                            SolidBrush solidBrush = new SolidBrush(chatItemCollection[i].MouseHoverBackColor);
+                            g.FillRectangle(solidBrush, new Rectangle(0, baseY, this.Width, ChatSubItem.Height));
+                        }
+                        if (true == chatItemCollection[j].IsPressed)
+                        {
+                            SolidBrush solidBrush = new SolidBrush(chatItemCollection[i].MousePressedColor);
+                            g.FillRectangle(solidBrush, new Rectangle(0, baseY, this.Width, 75));
+                        }
+
+                        Point imagePos = GetPointByModifyHeight(ChatSubItem.IconPos, baseY);
+                        Point userNamePos = GetPointByModifyHeight(ChatSubItem.UserNamePos, baseY);
+                        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                        g.DrawImage(chatItemCollection[i].Icon, new Rectangle(imagePos.X + 20, imagePos.Y + 10, 50, 50));//GetPointByModifyHeight(ChatItem.IconPos, baseY));
+                        g.DrawString(chatItemCollection[i].UserName, ChatSubItem.UserNameFont, Brushes.Black, new Point(userNamePos.X + 50, userNamePos.Y + 15));
+                        g.DrawString("不好意思，刚才没看到", ChatSubItem.ExtraMsgFont, ChatSubItem.ExtraMsgSb, new Point(userNamePos.X + 50, userNamePos.Y + 44));
+                        g.FillPath(new SolidBrush(slider.BackColor), slider.Path);
+                        g.DrawString(chatItemCollection[i].LastChattTime, ChatSubItem.UserNameFont, Brushes.Black, new Point(userNamePos.X + 50, userNamePos.Y + 30));
+                    }
+                    baseHeight = baseY + 75;   
+                }
             }
-            set
-            {
-                height = value;
-            }
+            sumLength = baseHeight;
         }
 
-        private string extraMsg;
-        /// <summary>
-        /// 获取或设置额外信息(最后一次聊天的类容或者是用户签名)
-        /// </summary>
-        public string ExtraMsg
+        protected override void OnMouseDown(MouseEventArgs e)
         {
-            get
+            base.OnMouseDown(e);
+            Point p = e.Location;
+            Rectangle rect1;
+            int sliderMaxX = this.Width;
+            int sliderMinX = this.Width - slider.Width;
+            if (true == isDrawSlider)
             {
-                return extraMsg;
+                if ((p.X < sliderMaxX) && (p.X > sliderMinX))
+                {
+                    return;
+                }
             }
-            set
+
+
+            for (int i = 0; i < 4; i++)
             {
-                extraMsg = value;
+                if(titleToItemCollection[i].titleRegion.Contains(p))
+                {
+                    titleToItemCollection[i].isDrawItem = !titleToItemCollection[i].isDrawItem;
+                    //isDrawSlider = !isDrawSlider;
+                    noDrawBackGroundNumber = i; 
+                    this.Invalidate();
+                }
             }
         }
 
-        private Color customerBackColor;
-        /// <summary>
-        /// 子项无任何事件响应时的背景颜色
-        /// </summary>
-        public Color CustomerBackColor
+        bool isDrawSlider = true;
+        protected override void OnMouseMove(MouseEventArgs e)
         {
-            get
+            base.OnMouseMove(e);
+            Point p = new Point(e.Location.X, e.Location.Y + sliderVal);
+
+            Rectangle rect1;
+            int sliderMaxX = this.Width;
+            int sliderMinX = this.Width - slider.Width;
+            if(true == isDrawSlider)
             {
-                return customerBackColor;
+                if((p.X < sliderMaxX)&&(p.X > sliderMinX))
+                {
+                    drawBackGround = -1;
+                    this.Invalidate();
+                    return;
+                }
             }
-            set
+            for (int i = 0; i < 4; i++)
             {
-                customerBackColor = value;
+                rect1 = titleToItemCollection[i].titleRegion;
+                if (rect1.Contains(p) && (i != drawBackGround))
+                {
+                    drawBackGround = i;
+                    if (i != noDrawBackGroundNumber)
+                    {
+                        noDrawBackGroundNumber = -1;
+                    }
+                    this.Invalidate();
+                }
             }
         }
 
-        private bool isPressed;
-        /// <summary>
-        /// 子项是否被点击
-        /// </summary>
-        public bool IsPressed
+        protected override void OnMouseLeave(EventArgs e)
         {
-            get
-            {
-                return isPressed;
-            }
-            set
-            {
-                isPressed = value;
-            }
+            base.OnMouseLeave(e);
+            drawBackGround = -1;
+            this.Invalidate();
         }
 
-        private Color pressedBackColor;
-        /// <summary>
-        /// 鼠标点击在子项上子项的背景颜色
-        /// </summary>
-        public Color PressedBackColor
+        private void DrawItemBackGround(Graphics g)
         {
-            get
+            if(drawBackGround == -1)
             {
-                return pressedBackColor;
+                return;
             }
-            set
+            if(drawBackGround == noDrawBackGroundNumber)
             {
-                pressedBackColor = value;
+                return;
             }
+
+            Color color = Color.FromArgb(240, 240, 240);
+            Rectangle rect = titleToItemCollection[drawBackGround].titleRegion;
+            SolidBrush solidBrush = new SolidBrush(color);
+            g.FillRectangle(solidBrush, rect);
         }
 
-        private bool isMouseHover;
-        /// <summary>
-        /// 鼠标是否停留在子项上
-        /// </summary>
-        public bool IsMouseHover
+        private void DrawArrows(Graphics g, bool isDrawItem, int baseHeight)
         {
-            get
+            if(isDrawItem == false)
             {
-                return isMouseHover;
+                g.DrawLine(new Pen(Brushes.Black), new Point(18, baseHeight + 6), new Point(28, baseHeight + 10));
+                g.DrawLine(new Pen(Brushes.Black), new Point(28, baseHeight + 10), new Point(18, baseHeight + 14));
             }
-            set
+            else
             {
-                isMouseHover = value;
+                g.DrawLine(new Pen(Brushes.Black), new Point(18, baseHeight + 6), new Point(25, baseHeight + 12));
+                g.DrawLine(new Pen(Brushes.Black), new Point(25, baseHeight + 12), new Point(32, baseHeight + 6));
             }
         }
 
-        private Color mouseHoverBackColor;
-        /// <summary>
-        /// 鼠标停留在子项上子项的背景颜色1
-        /// </summary>
-        public Color MouseHoverBackColor
+        private ChatSubItem subItem;
+
+        private void ItemMouseDown(object sender, MouseEventArgs e)
         {
-            get
+            Point mousePos = e.Location;
+            int height = mousePos.Y + sliderVal;
+            int titleUpY = 0, titleDownY = 0;
+            int num = -1;
+            for (int i = 0; i < 4; i++)
             {
-                return mouseHoverBackColor;
-            }
-            set
-            {
-                mouseHoverBackColor = value;
-            }
+                titleUpY = titleToItemCollection[i].titleRegion.Y + titleToItemCollection[i].titleRegion.Height;
+                if (i < 3)
+                {
+                    titleDownY = titleToItemCollection[i + 1].titleRegion.Y;
+                    if ((mousePos.Y > titleUpY) && (mousePos.Y < titleDownY) && (i < 3))
+                    {
+                        num = (mousePos.Y - titleUpY) / 75;
+                    }
+                }
+                else
+                {
+                    if((mousePos.Y > titleUpY) && (mousePos.Y < this.Height))
+                    {
+                        num = (mousePos.Y - titleUpY) / 75;
+                    }
+                }
+                if(num == -1)
+                {
+                    continue;
+                }
+                titleToItemCollection[i].chatIemCollection[num].IsPressed = true;
+                if (subItem != null)
+                {
+                    subItem.IsPressed = false;
+                }
+                subItem = titleToItemCollection[i].chatIemCollection[num];
+                this.Invalidate();
+                return;
+                //if ((mousePos.Y > titleUpY) && (mousePos.Y < titleDownY) && (i < 3))
+                //{
+                //    int num = (mousePos.Y - titleUpY) / 75;
+                //    titleToItemCollection[i].chatIemCollection[num].IsPressed = true;
+                //    if(subItem != null)
+                //    {
+                //        subItem.IsPressed = false;
+                //    }
+                //    subItem = titleToItemCollection[i].chatIemCollection[num];
+                //    this.Invalidate();
+                //    return;
+                }
+                
+            
         }
-
-        private Color mousePressedColor;
-        /// <summary>
-        /// 鼠标点击在子项上时子项的颜色
-        /// </summary>
-        public Color MousePressedColor
-        {
-            get
-            {
-                return mousePressedColor;
-            }
-            set
-            {
-                mousePressedColor = value;
-            }
-        }
-
-        private Point itemPos;
-        /// <summary>
-        /// 获取或设置子项的位置
-        /// </summary>
-        public Point ItemPos
-        {
-            get
-            {
-                return itemPos;
-            }
-            set
-            {
-                itemPos = value;
-            }
-        }
-
-
-        #endregion
-
-        #region 初始化控件
-        /// <summary>
-        /// 初始化Item信息
-        /// </summary>
-        /// <param name="userName">用户名</param>
-        /// <param name="bitmap">用户图像</param>
-        public ChatItem(string userName, Bitmap bitmap,string lastChatString, string extraMsg)
-        {
-            this.userName = userName;
-            this.icon = bitmap;
-            this.extraMsg = extraMsg;
-            this.MouseHoverBackColor = Color.FromArgb(242, 242, 242);
-            this.mousePressedColor = Color.FromArgb(235, 235, 235);
-        }
-        #endregion
-
-        
     }
 }

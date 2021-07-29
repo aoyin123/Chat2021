@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace Chat2021.Frm
 {
@@ -180,11 +181,11 @@ namespace Chat2021.Frm
             }
         }
 
-        private ChatListBox ownerChatListBox;
+        private Control ownerChatListBox;
         /// <summary>
         /// 设置或获取slider所属的ChatListBox
         /// </summary>
-        public ChatListBox OwnerChatListBox
+        public Control OwnerChatListBox
         {
             get
             {

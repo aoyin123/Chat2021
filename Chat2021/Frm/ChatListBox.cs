@@ -21,27 +21,27 @@ namespace Chat2021.Frm
         {
             chatItemCollection = new ChatIemCollection();
             this.BackColor = Color.White;
-            ChatItem.Width = this.Width;
-            ChatItem.UserNamePos = new Point(30, 0);
-            ChatItem.ExtraMsgPos = new Point(30, 15);
-            ChatItem chatItem = new ChatItem("糖", Resource1.mm,"糖", "糖糖");
-            ChatItem.UserNameFont = new Font("宋体", 12);
-            ChatItem.ExtraMsgFont = new Font("宋体", 9);
-            ChatItem.ExtraMsgSb = new SolidBrush(Color.FromArgb(117, 117, 117));
+            ChatSubItem.Width = this.Width;
+            ChatSubItem.UserNamePos = new Point(30, 0);
+            ChatSubItem.ExtraMsgPos = new Point(30, 15);
+            ChatSubItem chatItem = new ChatSubItem("糖", Resource1.mm,"糖", "糖糖");
+            ChatSubItem.UserNameFont = new Font("宋体", 12);
+            ChatSubItem.ExtraMsgFont = new Font("宋体", 9);
+            ChatSubItem.ExtraMsgSb = new SolidBrush(Color.FromArgb(117, 117, 117));
             chatItemCollection[0] = chatItem;
 
-            ChatItem chatItem_1 = new ChatItem("糖糖", Resource1.mm, "糖糖", "ff");
+            ChatSubItem chatItem_1 = new ChatSubItem("糖糖", Resource1.mm, "糖糖", "ff");
             chatItemCollection[1] = chatItem_1;
 
-            ChatItem chatItem_2 = new ChatItem("糖糖", Resource1.mm, "糖糖", "ff");
+            ChatSubItem chatItem_2 = new ChatSubItem("糖糖", Resource1.mm, "糖糖", "ff");
             chatItemCollection[2] = chatItem_2;
 
             for(int i = 3; i < 40; i++)
             {
-                chatItemCollection[i] = new ChatItem("糖糖", Resource1.mm, "糖糖", "ff");
+                chatItemCollection[i] = new ChatSubItem("糖糖", Resource1.mm, "糖糖", "ff");
             }
 
-            ChatItem.Height = 75;
+            ChatSubItem.Height = 75;
 
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.FormMouseWheel);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(SliderMouseDown);
@@ -65,7 +65,7 @@ namespace Chat2021.Frm
         private void ItemMouseMove(object sender, MouseEventArgs e)
         {
             Point mousePos = e.Location;
-            int index = (mousePos.Y + sliderVal) / ChatItem.Height;
+            int index = (mousePos.Y + sliderVal) / ChatSubItem.Height;
             chatItemCollection[mouseMoveItemIndex].IsMouseHover = false;
             chatItemCollection[index].IsMouseHover = true;
             mouseMoveItemIndex = index;
@@ -80,7 +80,7 @@ namespace Chat2021.Frm
         private void ItemMouseDown(object sender, MouseEventArgs e)
         {
             Point mousePos = e.Location;
-            int index = (mousePos.Y + sliderVal) / ChatItem.Height;
+            int index = (mousePos.Y + sliderVal) / ChatSubItem.Height;
             chatItemCollection[index].IsPressed = true;
             chatItemCollection[mouseDownItemIndex].IsPressed = false;
             mouseDownItemIndex = index;
@@ -164,25 +164,25 @@ namespace Chat2021.Frm
             int baseY;
             for(int i = 0; i < 40;i++)
             {
-                baseY = i * ChatItem.Height;
+                baseY = i * ChatSubItem.Height;
                 if(true == chatItemCollection[i].IsMouseHover)
                 {
                     SolidBrush solidBrush = new SolidBrush(chatItemCollection[i].MouseHoverBackColor);
-                    g.FillRectangle(solidBrush, new Rectangle(0, baseY, this.Width, ChatItem.Height));
+                    g.FillRectangle(solidBrush, new Rectangle(0, baseY, this.Width, ChatSubItem.Height));
                 }
                 if(true == chatItemCollection[i].IsPressed)
                 {
                     SolidBrush solidBrush = new SolidBrush(chatItemCollection[i].MousePressedColor);
-                    g.FillRectangle(solidBrush, new Rectangle(0, baseY, this.Width, ChatItem.Height));
+                    g.FillRectangle(solidBrush, new Rectangle(0, baseY, this.Width, ChatSubItem.Height));
                 }
 
-                Point imagePos = GetPointByModifyHeight(ChatItem.IconPos, baseY);
-                Point userNamePos = GetPointByModifyHeight(ChatItem.UserNamePos, baseY);
+                Point imagePos = GetPointByModifyHeight(ChatSubItem.IconPos, baseY);
+                Point userNamePos = GetPointByModifyHeight(ChatSubItem.UserNamePos, baseY);
                 g.DrawImage(chatItemCollection[i].Icon, new Rectangle(imagePos.X + 20, imagePos.Y + 10, 50, 50));//GetPointByModifyHeight(ChatItem.IconPos, baseY));
-                g.DrawString(chatItemCollection[i].UserName, ChatItem.UserNameFont,Brushes.Black, new Point(userNamePos.X + 50, userNamePos.Y + 15));
-                g.DrawString("不好意思，刚才没看到", ChatItem.ExtraMsgFont, ChatItem.ExtraMsgSb, new Point(userNamePos.X + 50, userNamePos.Y + 44));
+                g.DrawString(chatItemCollection[i].UserName, ChatSubItem.UserNameFont,Brushes.Black, new Point(userNamePos.X + 50, userNamePos.Y + 15));
+                g.DrawString("不好意思，刚才没看到", ChatSubItem.ExtraMsgFont, ChatSubItem.ExtraMsgSb, new Point(userNamePos.X + 50, userNamePos.Y + 44));
 
-                g.DrawString(chatItemCollection[i].LastChattTime, ChatItem.UserNameFont, Brushes.Black, new Point(userNamePos.X + 50, userNamePos.Y + 30));
+                g.DrawString(chatItemCollection[i].LastChattTime, ChatSubItem.UserNameFont, Brushes.Black, new Point(userNamePos.X + 50, userNamePos.Y + 30));
                 //g.DrawString(i.ToString(), ChatItem.UserNameFont, Brushes.Black, GetPointByModifyHeight(ChatItem.ExtraMsgPos, baseY));
                 g.FillPath(new SolidBrush(slider.BackColor), slider.Path);
             }

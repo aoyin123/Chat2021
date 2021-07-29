@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,56 +11,13 @@ using Chat2021.win32api;
 
 namespace Chat2021.Frm
 {
-    public partial class MiniFrmBtn : Form
+    public partial class Form2 : Form
     {
-        public MiniFrmBtn(Form parentFrm)
+        public Form2()
         {
             InitializeComponent();
-            this.TopMost = true;
-            this.MouseDown += panel1_MouseDown;
-            this.MouseMove += ShowWhiteShadow;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.LocationChanged += ReLocateFrm;
-            this.ownerFrm = parentFrm;
             SetBits(Resource1.halfOpcaty);
-        }
-
-        private void ReLocateFrm(object sender, EventArgs e)
-        {
-            //this.Location = new Point(this.ownerFrm.Location.X + 285, this.ownerFrm.Location.Y + 20);
-        }
-
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            //base.OnPaint(e);
-            //SetBits(Resource1.halfOpcaty);
-        }
-
-        [DllImport("user32.dll")]
-        public static extern bool ReleaseCapture();
-
-        [DllImport("user32.dll")]
-        public static extern bool SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
-
-        private const int VM_NCLBUTTONDOWN = 0XA1;//定义鼠标左键按下
-        private const int HTCAPTION = 2;
-        private Form ownerFrm = null;
-
-        private void panel1_MouseDown(object sender, MouseEventArgs e)
-        {
-            //为当前应用程序释放鼠标捕获
-            //ReleaseCapture();
-            //发送消息 让系统误以为在标题栏上按下鼠标
-            //SendMessage((IntPtr)this.Handle, VM_NCLBUTTONDOWN, HTCAPTION, 0);
-            //this.TopMost = true;
-            //ownerFrm.Close();
-        }
-
-
-        private void ShowWhiteShadow(object sender, MouseEventArgs e)
-        {
-
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
         }
 
         protected override CreateParams CreateParams
@@ -78,7 +34,7 @@ namespace Chat2021.Frm
 
         public void SetBits(Bitmap bitmap)//调用UpdateLayeredWindow（）方法。this.BackgroundImage为你事先准备的带透明图片。
         {
-            
+
             if (!Bitmap.IsCanonicalPixelFormat(bitmap.PixelFormat) || !Bitmap.IsAlphaPixelFormat(bitmap.PixelFormat))
                 throw new ApplicationException("图片必须是32位带Alhpa通道的图片。");
 

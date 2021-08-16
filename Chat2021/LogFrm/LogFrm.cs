@@ -27,8 +27,6 @@ namespace Chat2021.LogFrm
         Rectangle setBtnRect = new Rectangle(new Point(1518, 0), new Size(135, 300));
         //Rectangle minBtnRect , setBtnRect;
         private Rectangle minRect = new Rectangle(new Point(0, 0), new Size(20, 20));
-        private Rectangle closeRect = new Rectangle();
-        private Rectangle setRect = new Rectangle();
         delegate void HandlePicture(Bitmap bitmap);
         HandlePicture handlePicture;
         ControlBtn controlBtn;
@@ -95,7 +93,7 @@ namespace Chat2021.LogFrm
             //PlayVedioPic.MouseDown += MouseDownSetBtn;
         }
 
-        bool IsDrawSetBtnShaodw = false;
+        //bool IsDrawSetBtnShaodw = false;
         private void MouseMoveSetBtn(object sender, MouseEventArgs e)
         {
             Point p = e.Location;
@@ -360,7 +358,7 @@ namespace Chat2021.LogFrm
         }
         #endregion
 
-        KeyboardFrm keyboardFrm;
+        //KeyboardFrm keyboardFrm;
         private void button1_Click(object sender, EventArgs e)
         {
 

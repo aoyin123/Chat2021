@@ -41,7 +41,6 @@ namespace Chat2021.LogFrm
             CheckForIllegalCrossThreadCalls = false;
             ThreadPoolWork.Start(1, 3000);
             InvalidateImage();
-
         }
 
         #endregion

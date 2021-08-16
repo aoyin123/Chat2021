@@ -26,6 +26,7 @@ namespace Chat2021.Mysql
             }
             catch (MySqlException ex)
             {
+                
                 return false;
             }
             

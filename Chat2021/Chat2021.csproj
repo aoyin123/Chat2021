@@ -157,67 +157,72 @@
     <Compile Include="DealImage.cs" />
     <Compile Include="DealVedio\FFmpegBinariesHelper.cs" />
     <Compile Include="DealVedio\tstRtmp.cs" />
-    <Compile Include="Frm\ChatIemCollection.cs" />
-    <Compile Include="Frm\ChatSubItem.cs" />
-    <Compile Include="Frm\ChatListBox.cs">
+    <Compile Include="MainFrm\ChatIemCollection.cs" />
+    <Compile Include="MainFrm\ChatSubItem.cs" />
+    <Compile Include="MainFrm\ChatItem.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Frm\ChatItem.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Frm\ContactPersonFrm.cs">
+    <Compile Include="MainFrm\CloseBtn.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Frm\ContactPersonFrm.Designer.cs">
-      <DependentUpon>ContactPersonFrm.cs</DependentUpon>
+    <Compile Include="MainFrm\CloseBtn.Designer.cs">
+      <DependentUpon>CloseBtn.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frm\Form1.cs">
+    <Compile Include="MainFrm\contactFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Frm\Form1.Designer.cs">
+    <Compile Include="MainFrm\contactFrm.Designer.cs">
+      <DependentUpon>contactFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFrm\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainFrm\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frm\Form2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Frm\Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Frm\Form3.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Frm\Form3.Designer.cs">
-      <DependentUpon>Form3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Frm\FrmSwitchUserControl.cs">
+    <Compile Include="MainFrm\FrmSwitchUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Frm\FrmSwitchUserControl.Designer.cs">
+    <Compile Include="MainFrm\FrmSwitchUserControl.Designer.cs">
       <DependentUpon>FrmSwitchUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frm\MiniFrmBtn.cs">
+    <Compile Include="MainFrm\Group.cs" />
+    <Compile Include="MainFrm\Groups.cs" />
+    <Compile Include="MainFrm\MiniFrmBtn.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Frm\MiniFrmBtn.Designer.cs">
+    <Compile Include="MainFrm\MiniFrmBtn.Designer.cs">
       <DependentUpon>MiniFrmBtn.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frm\Resource1.Designer.cs">
+    <Compile Include="MainFrm\MoreBtn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainFrm\MoreBtn.Designer.cs">
+      <DependentUpon>MoreBtn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFrm\Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
-    <Compile Include="Frm\searchBoxUserControl1.cs">
+    <Compile Include="MainFrm\searchBoxUserControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Frm\searchBoxUserControl1.Designer.cs">
+    <Compile Include="MainFrm\searchBoxUserControl1.Designer.cs">
       <DependentUpon>searchBoxUserControl1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frm\Slider.cs" />
-    <Compile Include="Frm\UserControl1.cs">
+    <Compile Include="MainFrm\Slider.cs" />
+    <Compile Include="MainFrm\UserControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Frm\UserControl1.Designer.cs">
+    <Compile Include="MainFrm\UserControl1.Designer.cs">
       <DependentUpon>UserControl1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFrm\ChatListBox1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFrm\ChatListBox1.Designer.cs">
+      <DependentUpon>ChatListBox1.cs</DependentUpon>
     </Compile>
     <Compile Include="LogFrm\ControlBtn.cs">
       <SubType>Form</SubType>
@@ -281,19 +286,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Frm\ContactPersonFrm.resx">
-      <DependentUpon>ContactPersonFrm.cs</DependentUpon>
+    <EmbeddedResource Include="MainFrm\contactFrm.resx">
+      <DependentUpon>contactFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Frm\Form1.resx">
+    <EmbeddedResource Include="MainFrm\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Frm\Form3.resx">
-      <DependentUpon>Form3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Frm\FrmSwitchUserControl.resx">
+    <EmbeddedResource Include="MainFrm\FrmSwitchUserControl.resx">
       <DependentUpon>FrmSwitchUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Frm\Resource1.resx">
+    <EmbeddedResource Include="MainFrm\Resource1.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -485,6 +487,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\MainFrmUnderly.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShadowCloseBtn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\morebtn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shadowMorebtn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\789.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CloseBtn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\125.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\963.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\morebtn1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

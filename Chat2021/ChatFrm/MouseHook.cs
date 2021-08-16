@@ -5,13 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Drawing;
+using Chat2021.MainFrm;
 
 namespace Chat2021
 {
-    static class MouseEvent
-    {
-
-    }
+    
 
     class MouseHook
     {
@@ -26,6 +25,13 @@ namespace Chat2021
         private const int WM_RBUTTONDBLCLK = 0x206;
         private const int WM_MBUTTONDBLCLK = 0x209;
         public const int WH_MOUSE_LL = 14; // mouse hook constant
+        public int MouseStatus = 0;
+
+        // 关闭按钮点击回调函数
+        public delegate void CloseProc();
+        public CloseProc closeEvent;
+        public delegate void MiniProc();
+        public MiniProc miniEvent;
 
         /// <summary>
         /// 点
@@ -65,7 +71,7 @@ namespace Chat2021
         public static extern int CallNextHookEx(int idHook, int nCode, Int32 wParam, IntPtr lParam);
 
         // 全局的鼠标事件
-        public static event MouseEventHandler OnMouseActivity;
+        //public static event MouseEventHandler OnMouseActivity;
 
 
         // 钩子回调函数
@@ -74,13 +80,14 @@ namespace Chat2021
         // 声明鼠标钩子事件类型
         private HookProc _mouseHookProcedure;
         private static int _hMouseHook = 0; // 鼠标钩子句柄
-
+        public Form form;
         /// <summary>
         /// 构造函数
         /// </summary>
-        public MouseHook()
+        public MouseHook(Form form)
         {
             Start();
+            this.form = form;
         }
 
         /// <summary>
@@ -91,48 +98,107 @@ namespace Chat2021
             Stop();
         }
 
+
+
         private int MouseHookProc(int nCode, Int32 wParam, IntPtr lParam)
         {
-            if ((nCode >= 0) && (OnMouseActivity!=null))
+            MouseHookStruct MyMouseHookStruct = (MouseHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseHookStruct));
+            int x = MyMouseHookStruct.pt.x;
+            int y = MyMouseHookStruct.pt.y;
+            Point mousePos = new Point(x, y);
+
+            //因为透明界面可能有部分区域不响应MouseDown事件，所以用MouseHook来捕捉鼠标按下事件
+            if(MoreBtn.ValidRegion.Contains(mousePos))
+            {
+                MouseStatus = 1;
+                form.Invalidate(); 
+            }
+            else if(CloseBtn.ValidRegion.Contains(mousePos))
+            {
+                MouseStatus = 2;
+                form.Invalidate();
+            }
+            else if(MiniFrmBtn.ValidRegion.Contains(mousePos)) 
+            {
+                MouseStatus = 3;
+                form.Invalidate();
+            }
+            else
+            {
+                MouseStatus = 0;
+                form.Invalidate();
+            }
+            if ((nCode >= 0) /*&& (OnMouseActivity!=null)*/)
             {
                 MouseButtons button = MouseButtons.None;
                 int clickCount = 0;
                 switch (wParam)
                 {
                     case WM_LBUTTONDOWN:
+                        if(MouseStatus == 2)
+                        {
+                            closeEvent();
+                            return 1;
+                        }
+                        else if(MouseStatus == 3)
+                        {
+                            miniEvent();
+                            return 1;
+                        }
+                        else if(MouseStatus == 1)
+                        {
+
+                        }
                         button = MouseButtons.Left;
                         clickCount = 1;
                         break;
                     case WM_LBUTTONUP:
+                        if (MouseStatus != 0)
+                        {
+                            return 1;
+                        }
                         button = MouseButtons.Left;
                         clickCount = 1;
                         break;
                     case WM_LBUTTONDBLCLK:
+                        if (MouseStatus != 0)
+                        {
+                            return 1;
+                        }
                         button = MouseButtons.Left;
                         clickCount = 2;
                         break;
                     case WM_RBUTTONDOWN:
+                        if (MouseStatus != 0)
+                        {
+                            return 1;
+                        }
                         button = MouseButtons.Right;
                         clickCount = 1;
                         break;
                     case WM_RBUTTONUP:
+                        if (MouseStatus != 0)
+                        {
+                            return 1;
+                        }
                         button = MouseButtons.Right;
                         clickCount = 1;
                         break;
                     case WM_RBUTTONDBLCLK:
+                        if (MouseStatus != 0)
+                        {
+                            return 1;
+                        }
                         button = MouseButtons.Right;
                         clickCount = 2;
                         break;
                 }  
   
-                MouseHookStruct MyMouseHookStruct = (MouseHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseHookStruct));
-                int x = MyMouseHookStruct.pt.x;
-                int y = MyMouseHookStruct.pt.y;
+                
                 MouseEventArgs e = new MouseEventArgs(button, clickCount, MyMouseHookStruct.pt.x, MyMouseHookStruct.pt.y, 0);
                 //OnMouseActivity(this, e);  
             }
             return CallNextHookEx(_hMouseHook, nCode, wParam, lParam); 
-            
         }
 
         [DllImport("Kernel32")]

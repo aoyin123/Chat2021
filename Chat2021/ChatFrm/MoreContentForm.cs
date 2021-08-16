@@ -25,7 +25,7 @@ namespace Chat2021
             SetFormStyle(pForm);
             InitEventHanler();
             initChose();
-            MouseHook.OnMouseActivity += ShowItemShadow;
+            //MouseHook.OnMouseActivity += ShowItemShadow;
         }
 
         private void SetFormStyle(Form pForm)

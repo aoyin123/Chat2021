@@ -23,7 +23,7 @@ namespace Chat2021.LogFrm
     /// </summary>
     public partial class UserControl1 : System.Windows.Controls.UserControl
     {
-
+        private Mysql.Mysql mysql = Mysql.Mysql.getInstance();
         private List<string> stringList = new List<string>() { "", "", "" };
         private Color color = Color.FromRgb(0x0a,0xC0,0xFF);
         private System.Windows.Media.SolidColorBrush rr = new System.Windows.Media.SolidColorBrush(Colors.Blue);
@@ -153,7 +153,7 @@ namespace Chat2021.LogFrm
         {
             string userName = userNameTextBox.Text;
             string pwd = pwdTbx.Text;
-            MysqlOperation.Query(userName, pwd);
+            mysql.LoginVerify(userName, pwd);
         }
 
         private void keyboardIcon_PreviewMouseDown(object sender, MouseButtonEventArgs e)

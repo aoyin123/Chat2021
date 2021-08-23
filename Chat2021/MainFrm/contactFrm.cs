@@ -27,6 +27,7 @@ namespace Chat2021.MainFrm
         private Font levelFont = new Font("宋体", 8, FontStyle.Bold);
         private SolidBrush levelBrush = new SolidBrush(Color.Red);
         private Point levelDisPlay = new Point(234, 65);
+        private Thread t;
         #endregion
 
         #region 初始化
@@ -55,6 +56,7 @@ namespace Chat2021.MainFrm
 
         private void CloseFrm()
         {
+            t.Abort();
             this.Close();
         }
 
@@ -103,7 +105,7 @@ namespace Chat2021.MainFrm
 
 
             //保持窗体在最上层
-            Thread t = new Thread(SetWindowTopMost);
+            t = new Thread(SetWindowTopMost);
             t.IsBackground = true;
             t.Start();
 

@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Threading;
 using System.Collections;
-using System.Runtime.InteropServices;
 using System.Drawing.Drawing2D;
-using office = Microsoft.Office.Core;
-using Word = Microsoft.Office.Interop.Word;
+using Chat2021.Mysql;
+using udp_ns;
 
 namespace Chat2021.ChatFrm
 {
@@ -21,23 +13,12 @@ namespace Chat2021.ChatFrm
         #region value
 
         //关闭按钮，最大化按钮，最小化按钮，窗口设置按钮
-        private Button closeBtn = new Button();
-        private Button maxBtn = new Button();
-        private Button minBtn = new Button();
-        private Button setBtn = new Button();
         private Point mousePos = new Point(-1, -1);
-        private Image[] images = new Image[8] { Resource.表情,
-                                                Resource.动图,
-                                                Resource.截屏,
-                                                Resource.上传文件,
-                                                Resource.发送腾讯文档,
-                                                Resource.发送图片,
-                                                Resource.消息接收设置,
-                                                Resource.更多
-                                              };
-        Bitmap maxBtnBackGround;
-        Bitmap minBtnBackGround;
-        Bitmap SetBtnBackGround;
+        private Bitmap maxBtnBackGround;
+        private Bitmap minBtnBackGround;
+        private Bitmap SetBtnBackGround;
+        private Chat2021.Mysql.Mysql mySql = Chat2021.Mysql.Mysql.getInstance();
+        private Udp udp = Udp.GetInstance();
 
         private MoreForm moreForm;
         private enum MouseFlag
@@ -62,114 +43,7 @@ namespace Chat2021.ChatFrm
         public ChatFrm()
         {
             InitializeComponent();
-            InitInterface();
             InitVar();
-            InitEventHandler();
-        }
-
-        private void InitInterface()
-        {
-            InitForm();
-            InitControl();
-        }
-
-        private void InitForm()
-        {
-            this.BackColor = Color.Red;
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.Size = new Size(717, 617);
-            this.StartPosition = FormStartPosition.CenterScreen;
-        }
-
-        private void InitControl()
-        {
-            //关闭按钮
-            closeBtn.Size = new Size(40, 40);
-            closeBtn.BackColor = Color.Red;
-            closeBtn.Visible = false;
-            closeBtn.Location = new Point(675, 1);
-            closeBtn.FlatStyle = FlatStyle.Flat;
-            closeBtn.FlatAppearance.BorderColor = Color.Red;
-
-            //最大化按钮
-            maxBtn.Size = new Size(40, 40);
-            maxBtn.BackColor = Color.Transparent;
-            maxBtn.Visible = false;
-            maxBtn.Location = new Point(635, 1);
-            maxBtn.FlatStyle = FlatStyle.Flat;
-            maxBtn.FlatAppearance.BorderColor = Color.Red;
-
-            //最小化按钮
-            minBtn.Size = new Size(40, 40);
-            minBtn.BackColor = Color.Transparent;
-            minBtn.Visible = false;
-            minBtn.Location = new Point(595, 1);
-            minBtn.FlatStyle = FlatStyle.Flat;
-            minBtn.FlatAppearance.BorderColor = Color.Red;
-
-            //窗口设置按钮
-            setBtn.Size = new Size(40, 40);
-            setBtn.BackColor = Color.Transparent;
-            setBtn.Visible = false;
-            setBtn.Location = new Point(555, 1);
-            setBtn.FlatStyle = FlatStyle.Flat;
-            setBtn.FlatAppearance.BorderColor = Color.Red;
-
-            //menuStrip背景颜色设置
-            this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-
-            //menuStripItem图片，背景颜色设置
-            for (int i = 0; i < menuStrip1.Items.Count; i++)
-            {
-                menuStrip1.Items[i].BackColor = Color.White;
-                menuStrip1.Items[i].ImageScaling = 0;
-                menuStrip1.Items[i].Text = "";
-                menuStrip1.Items[i].AutoSize = false;
-                menuStrip1.Items[i].Size = new Size(32, 32);
-                menuStrip1.Items[i].Image = images[i];
-            }
-            this.menuStrip1.Location = new Point(0, 460);
-            this.menuStrip1.Renderer = new MenuItemRenderer();
-
-            this.Controls.Add(closeBtn);
-            this.Controls.Add(maxBtn);
-            this.Controls.Add(minBtn);
-            this.Controls.Add(setBtn);
-        }
-
-
-
-        private void InitEventHandler()
-        {
-            //窗体随鼠标运动事件
-            this.MouseMove += MouseMoveEventHandler_MoveFrmWithMouse;
-            this.MouseDown += MouseDownEventHandler_MoveFrmWithMouse; 
-            this.MouseUp += MouseUpEventHandler_MoveFrmWithMouse;
-
-            //窗帘
-            this.Paint += DrawCurtain;
-
-            //关闭窗口事件
-            this.MouseMove += MouseMoveEventHandler_CloseFrm;
-            this.closeBtn.MouseLeave += CloseBtnMouseLeaveEventHandler_CloseFrm;
-            this.closeBtn.MouseDown += MouseDownEventHandler_CloseFrm;
-            this.closeBtn.Paint += DrawCloseBtnHandler;
-
-            //最大化窗口事件
-            this.MouseMove += MouseMoveEventHandler_MaxFrm;
-            this.maxBtn.MouseLeave += MaxBtnMouseLeaveEventHandler_MaxFrm;
-            this.maxBtn.MouseDown += MaxBtnMouseDownEventHandler_MaxFrm;
-            this.maxBtn.Paint += DrawMaxBtnHandler;
-
-            //最小化窗口事件
-            this.MouseMove += MouseMoveEventHandler_MinFrm;
-            this.minBtn.MouseLeave += MaxBtnMouseLeaveEventHandler_MinFrm;
-            this.minBtn.MouseDown += MaxBtnMouseDownEventHandler_MinFrm;
-
-            //设置事件
-            this.MouseMove += MouseMoveEventHandler_SetBtn;
-            this.setBtn.MouseLeave += MaxBtnMouseLeaveEventHandler_SetBtn;
-            this.setBtn.MouseDown += MaxBtnMouseDownEventHandler_SetBtn;
         }
 
         private void InitVar()
@@ -211,11 +85,14 @@ namespace Chat2021.ChatFrm
 
         private void DrawChatInfoBackGround(Graphics g, Bitmap backGround, Bitmap icon, string userName)
         {
+            Rectangle rect;
+            StringFormat sf = new StringFormat();
+
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 
-            Rectangle rect = new Rectangle(new Point(0, 0),
+            rect = new Rectangle(new Point(0, 0),
                                            new Size(this.Width, 50));
-            StringFormat sf = new StringFormat();
+
             sf.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
             SizeF sizeF = g.MeasureString(userName, new Font("宋体", 10));
             Size size = new Size((int)sizeF.Width, (int)sizeF.Height);
@@ -225,9 +102,7 @@ namespace Chat2021.ChatFrm
             Rectangle iconRect = new Rectangle(new Point(0, 0),
                                                new Size(50, 50));
 
-            //画背景
             g.DrawImage(backGround, rect);
-            //画用户名
             g.DrawString(userName, new Font("宋体", 10), Brushes.White, point);
             g.DrawRectangle(new Pen(Brushes.Red), point.X, point.Y, size.Width, size.Height);
         }
@@ -388,20 +263,32 @@ namespace Chat2021.ChatFrm
 
         #endregion
 
-        Point p1 = new Point(12, 16);
-        Point p2 = new Point(26, 29);
-        Point p3 = new Point(25, 16);
-        Point p4 = new Point(12, 29);
-        #region debug
-        private void ChatFrm_MouseDown(object sender, MouseEventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            Point s = closeBtn.Location;
-            Point p = e.Location;
-            int x = p.X - s.X;
-            int y = p.Y - s.Y;
+            this.Close();
         }
 
-        
-        #endregion
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string msg, time, head;
+
+            msg = inputTextBox.Text;
+
+            if (null == msg)
+            {
+                return;
+            }
+
+            time = DateTime.Now.ToUniversalTime().ToString();
+            head = "刘奇" + " " + time;
+
+            bool result = mySql.addMsg(msg, head);
+
+            if(true == result)
+            {
+                inputTextBox.Text = "";
+                msgBox1.SetSliderBottom();
+            }
+        }
     }
 }

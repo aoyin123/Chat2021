@@ -57,3 +57,4 @@ D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.MainFrm.contactFrm.resources
 D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.MainFrm.Form1.resources
 D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.MainFrm.FrmSwitchUserControl.resources
 D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.MainFrm.Resource1.resources
+D:\repos\Chat2021\Chat2021\obj\Debug\Chat2021.Network.Resource.resources

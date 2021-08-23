@@ -31,6 +31,7 @@ namespace Chat2021.LogFrm
         HandlePicture handlePicture;
         ControlBtn controlBtn;
         UserIcon icon;
+        private Mysql.Mysql mysql = Mysql.Mysql.getInstance();
         #endregion
 
         #region Init
@@ -49,7 +50,7 @@ namespace Chat2021.LogFrm
             icon.Show();
             icon.TopMost = true;
             icon.Location = new Point(800, 400);
-            bool isOk = MysqlOperation.Connect();
+            bool isOk = mysql.Connect();
         }
 
         private void FrmInit()

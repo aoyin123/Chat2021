@@ -519,9 +519,6 @@
     <None Include="Resources\shadowMorebtn.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\789.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\CloseBtn.png" />
   </ItemGroup>
   <ItemGroup>
@@ -532,6 +529,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\morebtn1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\789.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\miniBtnShadow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

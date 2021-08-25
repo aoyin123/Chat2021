@@ -21,14 +21,8 @@ namespace Chat2021.MainFrm
         /// </summary>
         public static Rectangle ValidRegion
         {
-            get
-            {
-                return validRegion;
-            }
-            set
-            {
-                validRegion = value;
-            }
+            get => validRegion;
+            set => validRegion = value;
         }
 
         private Bitmap image;
@@ -51,6 +45,7 @@ namespace Chat2021.MainFrm
             this.TopMost = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             SetBits(Resource1.morebtn);
+
         }
 
         protected override void OnLoad(EventArgs e)

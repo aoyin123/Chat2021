@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Chat2021.win32api;
+using HookSpace;
 
 namespace Chat2021.MainFrm
 {
@@ -17,7 +18,7 @@ namespace Chat2021.MainFrm
     {
         #region value
         private Rectangle iconRect = new Rectangle(14, 43, 70, 70);
-        private MouseHook mouseHook;
+        private MouseHook mouseHook = MouseHook.GetInstance();
         private bool isCursorsStyleIsHand = false;
         private string userName = "IIIIIIIIIIII";
         private string level = "Lv57";
@@ -45,7 +46,6 @@ namespace Chat2021.MainFrm
             SetStyle(ControlStyles.DoubleBuffer, true);
 
             //启动钩子程序，禁止minFrmBtn接收鼠标消息
-            mouseHook = new MouseHook(this);
             mouseHook.Start();
             mouseHook.closeEvent += CloseFrm;
             mouseHook.miniEvent += HideFrm;
@@ -165,12 +165,12 @@ namespace Chat2021.MainFrm
         {
             Point p = this.Location;
 
-            miniFrmBtn.Location = new Point(this.Location.X + 275, this.Location.Y + 20);
-            MiniFrmBtn.ValidRegion = new Rectangle(new Point(this.miniFrmBtn.Location.X, this.miniFrmBtn.Location.Y - 20),
+            miniFrmBtn.Location = new Point(this.Location.X + 265, this.Location.Y);
+            miniFrmBtn.ValidRegion = new Rectangle(new Point(this.miniFrmBtn.Location.X, this.miniFrmBtn.Location.Y),
                                                    new Size(35, 38));
 
             closeBtn.Location = new Point(Location.X + 305, Location.Y );
-            CloseBtn.ValidRegion = new Rectangle(closeBtn.Location, new Size(38, 39));
+            closeBtn.ValidRegion = new Rectangle(closeBtn.Location, new Size(38, 39));
         }
 
         /// <summary>
@@ -239,26 +239,46 @@ namespace Chat2021.MainFrm
             g.DrawImage(Resource1.MainFrmUnderly, new Rectangle(0, 5, ToolBox.Width, Resource1.MainFrmUnderly.Height)); ;
         }
 
+        private void CloseFrm(MousePosEventArgs e)
+        {
+            if (closeBtn.ValidRegion.Contains(e.mousePos))
+            {
+                this.Close();
+                this.closeBtn.Close();
+                this.miniFrmBtn.Close();
+            }
+        }
+
+        private void MiniFrm(MousePosEventArgs e)
+        {
+            if (miniFrmBtn.ValidRegion.Contains(e.mousePos))
+            {
+                this.Hide();
+                this.closeBtn.Hide();
+                this.miniFrmBtn.Hide();
+            }
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (mouseHook.MouseStatus == 2)
-            {
-                closeBtn.SetBits(Resource1.CloseBtnShadow);
-                miniFrmBtn.SetBits(Resource1.MiniBtn);
-                miniFrmBtn.Location = new Point(this.Location.X + 275, this.Location.Y + 20);
-            }
-            else if (mouseHook.MouseStatus == 3)
-            {
-                miniFrmBtn.Location = new Point(this.Location.X + 267, this.Location.Y);
-                closeBtn.SetBits(Resource1.CloseBtn);
-                miniFrmBtn.SetBits(Resource1._963);
-            }
-            else
-            {
-                miniFrmBtn.Location = new Point(this.Location.X + 275, this.Location.Y + 20);
-                closeBtn.SetBits(Resource1.CloseBtn);
-                miniFrmBtn.SetBits(Resource1.MiniBtn);
-            }
+            //if (mouseHook.MouseStatus == 2)
+            //{
+            //    closeBtn.SetBits(Resource1.CloseBtnShadow);
+            //    miniFrmBtn.SetBits(Resource1.MiniBtn);
+            //    miniFrmBtn.Location = new Point(this.Location.X + 275, this.Location.Y + 20);
+            //}
+            //else if (mouseHook.MouseStatus == 3)
+            //{
+            //    miniFrmBtn.Location = new Point(this.Location.X + 267, this.Location.Y);
+            //    closeBtn.SetBits(Resource1.CloseBtn);
+            //    miniFrmBtn.SetBits(Resource1._963);
+            //}
+            //else
+            //{
+            //    miniFrmBtn.Location = new Point(this.Location.X + 275, this.Location.Y + 20);
+            //    closeBtn.SetBits(Resource1.CloseBtn);
+            //    miniFrmBtn.SetBits(Resource1.MiniBtn);
+            //}
             Graphics g = e.Graphics;
             int resultBitmapWidth = this.Width;
             int resultBitmapHeight = this.searchBoxUserControl11.Location.Y;

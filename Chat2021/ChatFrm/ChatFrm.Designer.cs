@@ -40,15 +40,13 @@ namespace Chat2021.ChatFrm
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeBtn = new System.Windows.Forms.Button();
-            this.maxBtn = new System.Windows.Forms.Button();
-            this.minBtn = new System.Windows.Forms.Button();
-            this.setBtn = new System.Windows.Forms.Button();
             this.inputTextBox = new System.Windows.Forms.TextBox();
-            this.msgBox1 = new WindowsFormsApp3.MsgBox();
             this.closeFrmBtn = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.msgBox1 = new WindowsFormsApp3.MsgBox();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -143,54 +141,6 @@ namespace Chat2021.ChatFrm
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
             this.toolStripMenuItem8.Size = new System.Drawing.Size(32, 32);
             // 
-            // closeBtn
-            // 
-            this.closeBtn.BackColor = System.Drawing.Color.Red;
-            this.closeBtn.FlatAppearance.BorderColor = System.Drawing.Color.Red;
-            this.closeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.closeBtn.Location = new System.Drawing.Point(675, 1);
-            this.closeBtn.Name = "closeBtn";
-            this.closeBtn.Size = new System.Drawing.Size(40, 40);
-            this.closeBtn.TabIndex = 2;
-            this.closeBtn.UseVisualStyleBackColor = false;
-            this.closeBtn.Visible = false;
-            // 
-            // maxBtn
-            // 
-            this.maxBtn.BackColor = System.Drawing.Color.Transparent;
-            this.maxBtn.FlatAppearance.BorderColor = System.Drawing.Color.Red;
-            this.maxBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.maxBtn.Location = new System.Drawing.Point(635, 1);
-            this.maxBtn.Name = "maxBtn";
-            this.maxBtn.Size = new System.Drawing.Size(40, 40);
-            this.maxBtn.TabIndex = 3;
-            this.maxBtn.UseVisualStyleBackColor = false;
-            this.maxBtn.Visible = false;
-            // 
-            // minBtn
-            // 
-            this.minBtn.BackColor = System.Drawing.Color.Transparent;
-            this.minBtn.FlatAppearance.BorderColor = System.Drawing.Color.Red;
-            this.minBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.minBtn.Location = new System.Drawing.Point(595, 1);
-            this.minBtn.Name = "minBtn";
-            this.minBtn.Size = new System.Drawing.Size(40, 40);
-            this.minBtn.TabIndex = 4;
-            this.minBtn.UseVisualStyleBackColor = false;
-            this.minBtn.Visible = false;
-            // 
-            // setBtn
-            // 
-            this.setBtn.BackColor = System.Drawing.Color.Transparent;
-            this.setBtn.FlatAppearance.BorderColor = System.Drawing.Color.Red;
-            this.setBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.setBtn.Location = new System.Drawing.Point(555, 1);
-            this.setBtn.Name = "setBtn";
-            this.setBtn.Size = new System.Drawing.Size(40, 40);
-            this.setBtn.TabIndex = 5;
-            this.setBtn.UseVisualStyleBackColor = false;
-            this.setBtn.Visible = false;
-            // 
             // inputTextBox
             // 
             this.inputTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -199,15 +149,6 @@ namespace Chat2021.ChatFrm
             this.inputTextBox.Name = "inputTextBox";
             this.inputTextBox.Size = new System.Drawing.Size(687, 42);
             this.inputTextBox.TabIndex = 6;
-            // 
-            // msgBox1
-            // 
-            this.msgBox1.BackColor = System.Drawing.Color.White;
-            this.msgBox1.Location = new System.Drawing.Point(0, 50);
-            this.msgBox1.Name = "msgBox1";
-            this.msgBox1.Size = new System.Drawing.Size(699, 410);
-            this.msgBox1.TabIndex = 1;
-            this.msgBox1.Text = "msgBox1";
             // 
             // closeFrmBtn
             // 
@@ -231,28 +172,44 @@ namespace Chat2021.ChatFrm
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(699, 50);
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
+            // 
+            // msgBox1
+            // 
+            this.msgBox1.BackColor = System.Drawing.Color.White;
+            this.msgBox1.Location = new System.Drawing.Point(0, 50);
+            this.msgBox1.Name = "msgBox1";
+            this.msgBox1.Size = new System.Drawing.Size(699, 410);
+            this.msgBox1.TabIndex = 1;
+            this.msgBox1.Text = "msgBox1";
+            // 
             // ChatFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(699, 583);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.closeFrmBtn);
             this.Controls.Add(this.inputTextBox);
             this.Controls.Add(this.msgBox1);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.closeBtn);
-            this.Controls.Add(this.maxBtn);
-            this.Controls.Add(this.minBtn);
-            this.Controls.Add(this.setBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ChatFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ChatForm";
+            this.SizeChanged += new System.EventHandler(this.ChatFrm_SizeChanged);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,13 +226,10 @@ namespace Chat2021.ChatFrm
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
-        private System.Windows.Forms.Button closeBtn;
-        private System.Windows.Forms.Button maxBtn;
-        private System.Windows.Forms.Button minBtn;
-        private System.Windows.Forms.Button setBtn;
         private WindowsFormsApp3.MsgBox msgBox1;
         private TextBox inputTextBox;
         private Button closeFrmBtn;
         private Button button2;
+        private PictureBox pictureBox1;
     }
 }

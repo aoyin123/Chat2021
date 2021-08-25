@@ -153,9 +153,9 @@ namespace Chat2021.MainFrm {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap MiniBtn {
+        internal static System.Drawing.Bitmap miniBtn {
             get {
-                object obj = ResourceManager.GetObject("MiniBtn", resourceCulture);
+                object obj = ResourceManager.GetObject("miniBtn", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

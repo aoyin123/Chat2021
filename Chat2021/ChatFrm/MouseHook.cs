@@ -8,9 +8,19 @@ using System.Windows.Forms;
 using System.Drawing;
 using Chat2021.MainFrm;
 
-namespace Chat2021
+namespace HookSpace
 {
-    
+    public class MousePosEventArgs
+    {
+        public Point mousePos;
+        public MousePosEventArgs(Point mousePos)
+        {
+            this.mousePos = mousePos;
+        }
+    }
+
+    public delegate void MouseClickHandler(MousePosEventArgs mousePos);
+    public delegate void MouseMoveHandler(MousePosEventArgs mousePos);
 
     class MouseHook
     {
@@ -26,6 +36,9 @@ namespace Chat2021
         private const int WM_MBUTTONDBLCLK = 0x209;
         public const int WH_MOUSE_LL = 14; // mouse hook constant
         public int MouseStatus = 0;
+        private static MouseHook mouseHook;
+        public MouseMoveHandler mouseMoveEvent;
+        public MouseClickHandler mouseClickEvent;
 
         // 关闭按钮点击回调函数
         public delegate void CloseProc();
@@ -42,6 +55,8 @@ namespace Chat2021
             public int x;
             public int y;
         }
+
+        
 
         /// <summary>
         /// 钩子结构体
@@ -80,14 +95,23 @@ namespace Chat2021
         // 声明鼠标钩子事件类型
         private HookProc _mouseHookProcedure;
         private static int _hMouseHook = 0; // 鼠标钩子句柄
-        public Form form;
+        
         /// <summary>
         /// 构造函数
         /// </summary>
-        public MouseHook(Form form)
+        private MouseHook()
         {
             Start();
-            this.form = form;
+            //this.form = form;
+        }
+
+        public static MouseHook GetInstance()
+        {
+            if(null == mouseHook)
+            {
+                mouseHook = new MouseHook();
+            }
+            return mouseHook;
         }
 
         /// <summary>
@@ -108,47 +132,49 @@ namespace Chat2021
             Point mousePos = new Point(x, y);
 
             //因为透明界面可能有部分区域不响应MouseDown事件，所以用MouseHook来捕捉鼠标按下事件
-            if(MoreBtn.ValidRegion.Contains(mousePos))
-            {
-                MouseStatus = 1;
-                form.Invalidate(); 
-            }
-            else if(CloseBtn.ValidRegion.Contains(mousePos))
-            {
-                MouseStatus = 2;
-                form.Invalidate();
-            }
-            else if(MiniFrmBtn.ValidRegion.Contains(mousePos)) 
-            {
-                MouseStatus = 3;
-                form.Invalidate();
-            }
-            else
-            {
-                MouseStatus = 0;
-                form.Invalidate();
-            }
-            if ((nCode >= 0) /*&& (OnMouseActivity!=null)*/)
+            //if(MoreBtn.ValidRegion.Contains(mousePos))
+            //{
+            //    MouseStatus = 1;
+            //    //form.Invalidate(); 
+            //}
+            //else if(CloseBtn.ValidRegion.Contains(mousePos))
+            //{
+            //    MouseStatus = 2;
+            //    //form.Invalidate();
+            //}
+            //else if(MiniFrmBtn.ValidRegion.Contains(mousePos)) 
+            //{
+            //    MouseStatus = 3;
+            //    //form.Invalidate();
+            //}
+            //else
+            //{
+            //    MouseStatus = 0;
+            //    //form.Invalidate();
+            //}
+            mouseMoveEvent(new MousePosEventArgs(mousePos));
+            if ((nCode >= 0))
             {
                 MouseButtons button = MouseButtons.None;
                 int clickCount = 0;
                 switch (wParam)
                 {
                     case WM_LBUTTONDOWN:
-                        if(MouseStatus == 2)
-                        {
-                            closeEvent();
-                            return 1;
-                        }
-                        else if(MouseStatus == 3)
-                        {
-                            miniEvent();
-                            return 1;
-                        }
-                        else if(MouseStatus == 1)
-                        {
+                        //if(MouseStatus == 2)
+                        //{
+                        //    closeEvent();
+                        //    return 1;
+                        //}
+                        //else if(MouseStatus == 3)
+                        //{
+                        //    miniEvent();
+                        //    return 1;
+                        //}
+                        //else if(MouseStatus == 1)
+                        //{
 
-                        }
+                        //}
+                        mouseClickEvent(new MousePosEventArgs(mousePos));
                         button = MouseButtons.Left;
                         clickCount = 1;
                         break;
@@ -196,7 +222,6 @@ namespace Chat2021
   
                 
                 MouseEventArgs e = new MouseEventArgs(button, clickCount, MyMouseHookStruct.pt.x, MyMouseHookStruct.pt.y, 0);
-                //OnMouseActivity(this, e);  
             }
             return CallNextHookEx(_hMouseHook, nCode, wParam, lParam); 
         }

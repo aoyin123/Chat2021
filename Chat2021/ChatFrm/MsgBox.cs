@@ -69,8 +69,8 @@ namespace WindowsFormsApp3
             string msg = e.modifyStruct.msg;
             LayoutItem layoutItem = new LayoutItem(head, msg);
             chatHistory.Add(layoutItem);
+
             slider.DisplayContentLength = GetStretchLength();
-            //DisplayMsg();
             slider.SetSliderOnBottom();
             DisplayMsg();
         }

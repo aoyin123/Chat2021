@@ -44,6 +44,8 @@ namespace Chat2021.ChatFrm
         {
             InitializeComponent();
             InitVar();
+
+            this.pictureBox1.Paint += displayUserName;
         }
 
         private void InitVar()
@@ -56,22 +58,6 @@ namespace Chat2021.ChatFrm
             hashtable.Add(MouseFlag.onMenuItem6, "");
             hashtable.Add(MouseFlag.onMenuItem7, "向好友发送窗口抖动");
 
-            rects[0] = new Rectangle(setBtn.Location, setBtn.Size);
-            rects[1] = new Rectangle(minBtn.Location, minBtn.Size);
-            rects[2] = new Rectangle(maxBtn.Location, maxBtn.Size);
-            rects[3] = new Rectangle(closeBtn.Location, closeBtn.Size);
-
-            maxBtnBackGround = DealImage.GetPartOfImage(Resource.Curtain, maxBtn.Width, maxBtn.Height, maxBtn.Location.X, maxBtn.Location.Y);
-            maxBtnBackGround = DealImage.MakePicDarken(maxBtnBackGround);
-            
-
-            minBtnBackGround = DealImage.GetPartOfImage(Resource.Curtain, minBtn.Width, minBtn.Height, minBtn.Location.X, minBtn.Location.Y);
-            minBtnBackGround = DealImage.MakePicDarken(minBtnBackGround);
-            
-
-            SetBtnBackGround = DealImage.GetPartOfImage(Resource.Curtain, setBtn.Width, setBtn.Height, setBtn.Location.X, setBtn.Location.Y);
-            SetBtnBackGround = DealImage.MakePicDarken(SetBtnBackGround);
-            
         }
         #endregion
 
@@ -152,13 +138,13 @@ namespace Chat2021.ChatFrm
             Point p = e.Location;
             if(rects[3].Contains(p))
             {
-                closeBtn.Visible = true;
+                
             }
         }
 
         private void CloseBtnMouseLeaveEventHandler_CloseFrm(object sender, EventArgs e)
         {
-            closeBtn.Visible = false;
+            
         }
 
         private void MouseDownEventHandler_CloseFrm(object sender, MouseEventArgs e)
@@ -191,14 +177,13 @@ namespace Chat2021.ChatFrm
             Point p = e.Location;
             if(rects[2].Contains(p))
             {
-                maxBtn.Visible = true;
-                maxBtn.Paint += DrawMaxBtnBackGround;
+                
             }
         }
 
         private void MaxBtnMouseLeaveEventHandler_MaxFrm(object sender, EventArgs e)
         {
-            maxBtn.Visible = false;
+            
         }
 
         private void MaxBtnMouseDownEventHandler_MaxFrm(object sender, MouseEventArgs e)
@@ -222,14 +207,13 @@ namespace Chat2021.ChatFrm
             Point p = e.Location;
             if(rects[1].Contains(p))
             {
-                minBtn.Visible = true;
-                minBtn.BackgroundImage = minBtnBackGround;
+                
             }
         }
 
         private void MaxBtnMouseLeaveEventHandler_MinFrm(object sender, EventArgs e)
         {
-            minBtn.Visible = false;
+            
         }
 
         private void MaxBtnMouseDownEventHandler_MinFrm(object sender, MouseEventArgs e)
@@ -242,16 +226,12 @@ namespace Chat2021.ChatFrm
         private void MouseMoveEventHandler_SetBtn(object sender, MouseEventArgs e)
         {
             Point p = e.Location;
-            if(rects[0].Contains(p))
-            {
-                setBtn.Visible = true;
-                setBtn.BackgroundImage = SetBtnBackGround;
-            }
+            
         }
 
         private void MaxBtnMouseLeaveEventHandler_SetBtn(object sender, EventArgs e)
         {
-            setBtn.Visible = false;
+            
         }
         private void MaxBtnMouseDownEventHandler_SetBtn(object sender, MouseEventArgs e)
         {
@@ -289,6 +269,20 @@ namespace Chat2021.ChatFrm
                 inputTextBox.Text = "";
                 msgBox1.SetSliderBottom();
             }
+        }
+
+        private void displayUserName(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.DrawString("王莹莹", new Font("宋体", 10), Brushes.Black, new Point(10, 10));
+        }
+
+
+
+        private void ChatFrm_SizeChanged(object sender, EventArgs e)
+        {
+            this.pictureBox1.Size = new Size(this.Width, 50);
+            this.pictureBox1.BackColor = Color.Red;
         }
     }
 }

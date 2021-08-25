@@ -8,26 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Chat2021.win32api;
-
+using HookSpace;
 namespace Chat2021.MainFrm
 {
     public partial class CloseBtn : Form
     {
         #region value
-        private static Rectangle validRegion;
+        private Rectangle validRegion;
+        private MouseHook mouseHook = MouseHook.GetInstance();
+        private Bitmap mouseLeaveBackGround;
+        private Bitmap mouseHoverBackGround;
         /// <summary>
         /// 获取MiniFrm的有效区域
         /// </summary>
-        public static Rectangle ValidRegion
+        public Rectangle ValidRegion
         {
-            get
-            {
-                return validRegion;
-            }
-            set
-            {
-                validRegion = value;
-            }
+            get => validRegion;
+            set => validRegion = value;
         }
 
         private Bitmap image;
@@ -43,12 +40,56 @@ namespace Chat2021.MainFrm
             }
         }
         #endregion
-        public CloseBtn()
+        public CloseBtn(Bitmap mouseLeaveBackGround, Bitmap mouseHoverBackGround, MouseClickHandler mouseClickHandler)
         {
             InitializeComponent();
             this.TopMost = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            SetBits(Resource1.CloseBtn);
+            SetBits(mouseLeaveBackGround);
+
+            this.mouseLeaveBackGround = mouseLeaveBackGround;
+            this.mouseHoverBackGround = mouseHoverBackGround;
+             
+            mouseHook.mouseMoveEvent += new MouseMoveHandler(ChangeBackGround);
+            mouseHook.mouseClickEvent += mouseClickHandler;
+        }
+
+        private Bitmap nowBackGround;
+
+        private void ChangeBackGround(MousePosEventArgs e)
+        {
+            if(null == validRegion)
+            {
+                return;
+            }
+
+            Point p = e.mousePos;
+            if(validRegion.Contains(p))
+            {
+                if(nowBackGround == mouseHoverBackGround)
+                {
+                    return;
+                }
+
+                SetBits(mouseHoverBackGround);
+                nowBackGround = mouseHoverBackGround;
+            }
+            else
+            {
+                if(nowBackGround == mouseLeaveBackGround)
+                {
+                    return;
+                }
+
+                SetBits(mouseLeaveBackGround);
+                nowBackGround = mouseLeaveBackGround;
+            }
+            
+        }
+
+        private new void Click(MousePosEventArgs e)
+        {
+            this.Close();
         }
 
         protected override void OnLoad(EventArgs e)
@@ -56,7 +97,7 @@ namespace Chat2021.MainFrm
             base.OnLoad(e);
             int width = Resource1.CloseBtn.Width;
             int height = Resource1.CloseBtn.Height;
-            validRegion = new Rectangle(Location.X, Location.Y, width, height);
+            validRegion = new Rectangle (Location.X, Location.Y, width, height);
         }
 
         protected override CreateParams CreateParams
@@ -96,6 +137,10 @@ namespace Chat2021.MainFrm
                 blendFunc.SourceConstantAlpha = 255; //设定bitmap的透明度
                 blendFunc.AlphaFormat = Win32.AC_SRC_ALPHA;
                 blendFunc.BlendFlags = 1;
+                if(Handle == null)
+                {
+                    return;
+                }
 
                 Win32.UpdateLayeredWindow(Handle, screenDC, ref topLoc, ref bitMapSize, memDc, ref srcLoc, 0, ref blendFunc, Win32.ULW_ALPHA);
             }

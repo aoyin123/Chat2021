@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Chat2021.win32api;
 
@@ -50,7 +43,7 @@ namespace Chat2021.MainFrm
             InitializeComponent();
             this.TopMost = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            SetBits(Resource1.MiniBtn);
+            SetBits(Resource1.miniBtn);
         }
 
         protected override void OnLoad(EventArgs e)

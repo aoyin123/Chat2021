@@ -40,8 +40,8 @@ namespace Chat2021.MainFrm
             this.frmSwitchUserControl1 = new Chat2021.MainFrm.FrmSwitchUserControl();
             this.chatListBox = new Chat2021.MainFrm.ChatListBox1();
             this.chatItem = new Chat2021.MainFrm.ChatItem();
-            this.miniFrmBtn = new MiniFrmBtn();
-            this.closeBtn = new CloseBtn();
+            this.miniFrmBtn = new CloseBtn(Resource1.miniBtn, Resource1.miniBtnShadow, new HookSpace.MouseClickHandler(MiniFrm));
+            this.closeBtn = new CloseBtn(Resource1.CloseBtn, Resource1.CloseBtnShadow, new HookSpace.MouseClickHandler(CloseFrm));
             ((System.ComponentModel.ISupportInitialize)(this.FrmChanged)).BeginInit();
             this.FrmChanged.Panel1.SuspendLayout();
             this.FrmChanged.SuspendLayout();
@@ -147,7 +147,7 @@ namespace Chat2021.MainFrm
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(MoveFrm);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(ChangeMouseStyle);
             this.LocationChanged += new System.EventHandler(MoveMiniFrmBtn);
-            this.miniFrmBtn.Location = new Point(Location.X + 285, Location.Y + 20);
+            //this.miniFrmBtn.Location = new Point(Location.X + 265, Location.Y + 20);
             this.closeBtn.Location = new Point(Location.X + 305, Location.Y + 20);
             
             this.FrmChanged.Panel1.ResumeLayout(false);
@@ -170,8 +170,7 @@ namespace Chat2021.MainFrm
         private System.Windows.Forms.Label userNameLabe;
         private System.Windows.Forms.TextBox signTextBox;
         private System.Windows.Forms.PictureBox ToolBox;
-        private MiniFrmBtn miniFrmBtn;
-        private MoreBtn moreBtn;
+        private CloseBtn miniFrmBtn;
         private CloseBtn closeBtn;
         private ChatItem chatItem;
     }

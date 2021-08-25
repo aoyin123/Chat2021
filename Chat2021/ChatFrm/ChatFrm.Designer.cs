@@ -41,8 +41,8 @@ namespace Chat2021.ChatFrm
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.inputTextBox = new System.Windows.Forms.TextBox();
-            this.closeFrmBtn = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.closeBtn = new System.Windows.Forms.Button();
+            this.sendBtn = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.msgBox1 = new WindowsFormsApp3.MsgBox();
             this.menuStrip1.SuspendLayout();
@@ -150,27 +150,27 @@ namespace Chat2021.ChatFrm
             this.inputTextBox.Size = new System.Drawing.Size(687, 42);
             this.inputTextBox.TabIndex = 6;
             // 
-            // closeFrmBtn
+            // closeBtn
             // 
-            this.closeFrmBtn.BackColor = System.Drawing.Color.White;
-            this.closeFrmBtn.Location = new System.Drawing.Point(505, 548);
-            this.closeFrmBtn.Name = "closeFrmBtn";
-            this.closeFrmBtn.Size = new System.Drawing.Size(75, 32);
-            this.closeFrmBtn.TabIndex = 7;
-            this.closeFrmBtn.Text = "关闭";
-            this.closeFrmBtn.UseVisualStyleBackColor = false;
-            this.closeFrmBtn.Click += new System.EventHandler(this.button1_Click);
+            this.closeBtn.BackColor = System.Drawing.Color.White;
+            this.closeBtn.Location = new System.Drawing.Point(505, 548);
+            this.closeBtn.Name = "closeBtn";
+            this.closeBtn.Size = new System.Drawing.Size(75, 32);
+            this.closeBtn.TabIndex = 7;
+            this.closeBtn.Text = "关闭";
+            this.closeBtn.UseVisualStyleBackColor = false;
+            this.closeBtn.Click += new System.EventHandler(this.Close_Click);
             // 
-            // button2
+            // sendBtn
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.Window;
-            this.button2.Location = new System.Drawing.Point(600, 548);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 32);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "发送";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.sendBtn.BackColor = System.Drawing.SystemColors.Window;
+            this.sendBtn.Location = new System.Drawing.Point(600, 548);
+            this.sendBtn.Name = "sendBtn";
+            this.sendBtn.Size = new System.Drawing.Size(75, 32);
+            this.sendBtn.TabIndex = 8;
+            this.sendBtn.Text = "发送";
+            this.sendBtn.UseVisualStyleBackColor = false;
+            this.sendBtn.Click += new System.EventHandler(this.SendMsg_Click);
             // 
             // pictureBox1
             // 
@@ -179,6 +179,7 @@ namespace Chat2021.ChatFrm
             this.pictureBox1.Size = new System.Drawing.Size(699, 50);
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             // 
             // msgBox1
             // 
@@ -196,8 +197,8 @@ namespace Chat2021.ChatFrm
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(699, 583);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.closeFrmBtn);
+            this.Controls.Add(this.sendBtn);
+            this.Controls.Add(this.closeBtn);
             this.Controls.Add(this.inputTextBox);
             this.Controls.Add(this.msgBox1);
             this.Controls.Add(this.menuStrip1);
@@ -228,8 +229,8 @@ namespace Chat2021.ChatFrm
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem8;
         private WindowsFormsApp3.MsgBox msgBox1;
         private TextBox inputTextBox;
-        private Button closeFrmBtn;
-        private Button button2;
+        private Button closeBtn;
+        private Button sendBtn;
         private PictureBox pictureBox1;
     }
 }
